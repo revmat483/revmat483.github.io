@@ -32,7 +32,7 @@
             align-items: center;
             padding: 20px 0;
             border-bottom: 2px solid #25D366;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         
         .logo {
@@ -91,41 +91,68 @@
             color: #90EE90;
         }
         
-        /* Основной контент */
-        .main-content {
-            text-align: center;
-            margin-bottom: 50px;
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
         
-        .main-content h2 {
-            font-size: 36px;
-            color: #DCF8C6;
-            margin-bottom: 15px;
-        }
-        
-        .main-content p {
+        .tab-btn {
+            background: rgba(30, 58, 30, 0.8);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
             color: #B0E6B0;
-            font-size: 18px;
-            max-width: 800px;
-            margin: 0 auto 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* Файлы */
-        .files-section {
-            margin-bottom: 60px;
+        .tab-btn:hover {
+            background: rgba(37, 211, 102, 0.2);
+            transform: translateY(-2px);
         }
         
+        .tab-btn.active {
+            background: linear-gradient(45deg, #25D366, #2ECC71);
+            color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        /* Контент вкладок */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Заголовок секции */
         .section-title {
-            font-size: 28px;
-            color: #25D366;
+            font-size: 32px;
+            color: #DCF8C6;
             margin-bottom: 30px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
         }
         
+        /* Файлы */
         .files-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -265,6 +292,32 @@
             box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
         }
         
+        /* Страница "Скоро будет" */
+        .coming-soon {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .coming-soon-icon {
+            font-size: 80px;
+            color: #25D366;
+            margin-bottom: 30px;
+        }
+        
+        .coming-soon h2 {
+            font-size: 36px;
+            color: #DCF8C6;
+            margin-bottom: 20px;
+        }
+        
+        .coming-soon p {
+            color: #B0E6B0;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
         /* Футер */
         .footer {
             text-align: center;
@@ -323,15 +376,28 @@
                 justify-content: space-around;
             }
             
+            .tabs {
+                justify-content: center;
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
             .files-grid {
                 grid-template-columns: 1fr;
             }
             
-            .main-content h2 {
+            .section-title {
                 font-size: 28px;
             }
             
-            .main-content p {
+            .coming-soon h2 {
+                font-size: 28px;
+            }
+            
+            .coming-soon p {
                 font-size: 16px;
                 padding: 0 15px;
             }
@@ -352,6 +418,11 @@
             
             .file-desc {
                 font-size: 15px;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 13px;
             }
         }
     </style>
@@ -384,19 +455,74 @@
             </div>
         </header>
         
-        <!-- Основной контент -->
-        <main class="main-content">
-            <h2>📁 Скачивайте скрипты для Standoff 2</h2>
-            <p>Все скрипты готовы к использованию. Просто скачайте файл и используйте в PFC (Panda Fly Client) для автоматизации в Standoff 2.</p>
-        </main>
+        <!-- Вкладки -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="scripts">
+                <i class="fas fa-file-code"></i> Скрипты
+            </button>
+            <button class="tab-btn" data-tab="clamsy">
+                <i class="fas fa-fish"></i> Кламси
+            </button>
+            <button class="tab-btn" data-tab="tutorials">
+                <i class="fas fa-graduation-cap"></i> Туторы
+            </button>
+            <button class="tab-btn" data-tab="software">
+                <i class="fas fa-laptop-code"></i> Софт
+            </button>
+        </div>
         
-        <!-- Секция файлов -->
-        <section class="files-section">
-            <h2 class="section-title"><i class="fas fa-file-code"></i> Доступные скрипты</h2>
-            <div class="files-grid" id="filesGrid">
+        <!-- Контент вкладки Скрипты -->
+        <div class="tab-content active" id="scripts-content">
+            <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
+            <p style="text-align: center; color: #B0E6B0; margin-bottom: 30px; font-size: 18px;">
+                Автоматизация для Standoff 2. Безопасные и проверенные скрипты для заработка.
+            </p>
+            <div class="files-grid" id="scriptsGrid">
                 <!-- Файлы будут добавлены через JavaScript -->
             </div>
-        </section>
+        </div>
+        
+        <!-- Контент вкладки Кламси -->
+        <div class="tab-content" id="clamsy-content">
+            <div class="coming-soon">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <h2>Кламси</h2>
+                <p>Скрипты для заработка на кламси пока в разработке. Мы работаем над новыми скриптами.</p>
+                <p style="margin-top: 20px; color: #25D366;">
+                    <i class="fas fa-clock"></i> Скоро здесь появятся новые скрипты
+                </p>
+            </div>
+        </div>
+        
+        <!-- Контент вкладки Туторы -->
+        <div class="tab-content" id="tutorials-content">
+            <div class="coming-soon">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h2>Туторы</h2>
+                <p>Видео-инструкции и руководства по использованию скриптов. Подробные объяснения и настройки.</p>
+                <p style="margin-top: 20px; color: #25D366;">
+                    <i class="fas fa-clock"></i> Готовим полезные материалы для вас
+                </p>
+            </div>
+        </div>
+        
+        <!-- Контент вкладки Софт -->
+        <div class="tab-content" id="software-content">
+            <div class="coming-soon">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h2>Софт</h2>
+                <p>Полезные программы и утилиты для улучшения игрового процесса и автоматизации.</p>
+                <p style="margin-top: 20px; color: #25D366;">
+                    <i class="fas fa-clock"></i> Скоро здесь будут доступны программы
+                </p>
+            </div>
+        </div>
         
         <!-- Футер -->
         <footer class="footer">
@@ -413,7 +539,7 @@
     </div>
 
     <script>
-        // Ваши файлы
+        // Ваши файлы (скрипты)
         const files = [
             {
                 id: 1,
@@ -732,7 +858,7 @@ pfc.log("- Неудачных покупок: " + счетчик_неудачн�
 pfc.log("- Общее время работы: " + время_работы + " секунд");`,
                 size: "8.2 KB",
                 date: "20.01.2024",
-                badges: ["Новый", "Популярный"],
+                badges: ["OPR", "Популярный"],
                 icon: "fa-code"
             },
             {
@@ -1054,7 +1180,7 @@ try {
 }`,
                 size: "11.5 KB",
                 date: "20.01.2024",
-                badges: ["Новый", "Скрипт"],
+                badges: ["0.03", "Telegram"],
                 icon: "fa-robot"
             }
         ];
@@ -1065,12 +1191,34 @@ try {
         document.addEventListener('DOMContentLoaded', function() {
             displayFiles();
             updateStats();
+            setupTabs();
         });
+        
+        // Настройка вкладок
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Убираем активный класс у всех кнопок и контента
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Добавляем активный класс нажатой кнопке
+                    btn.classList.add('active');
+                    
+                    // Показываем соответствующий контент
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+        }
         
         // Отображение файлов
         function displayFiles() {
-            const filesGrid = document.getElementById('filesGrid');
-            filesGrid.innerHTML = '';
+            const scriptsGrid = document.getElementById('scriptsGrid');
+            scriptsGrid.innerHTML = '';
             
             files.forEach(file => {
                 const fileCard = document.createElement('div');
@@ -1102,7 +1250,7 @@ try {
                         </button>
                     </div>
                 `;
-                filesGrid.appendChild(fileCard);
+                scriptsGrid.appendChild(fileCard);
             });
         }
         
@@ -1138,10 +1286,10 @@ try {
         // Получение класса для бейджа
         function getBadgeClass(badge) {
             switch(badge.toLowerCase()) {
-                case 'новый': return 'badge-new';
+                case 'opr': return 'badge-new';
                 case 'популярный': return 'badge-popular';
+                case '0.03': return 'badge-script';
                 case 'telegram': return 'badge-script';
-                case 'скрипт': return 'badge-script';
                 default: return 'badge-new';
             }
         }
