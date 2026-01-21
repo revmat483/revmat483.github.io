@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyScripts - Скрипты для Standoff 2</title>
+    <title>FlyScripts</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +17,23 @@
             color: #E8F5E9;
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Анимированный фон */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(37, 211, 102, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 211, 102, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 211, 102, 0.03) 0%, transparent 50%);
+            z-index: -1;
         }
         
         .container {
@@ -31,98 +48,216 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 2px solid #25D366;
             margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #25D366 20%, 
+                #2ECC71 50%, 
+                #25D366 80%, 
+                transparent 100%);
         }
         
         .logo {
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateY(-3px);
         }
         
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(45deg, #25D366, #4CAF50);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 70%);
+            animation: shine 3s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         .logo-text h1 {
-            font-size: 28px;
+            font-size: 32px;
             background: linear-gradient(45deg, #25D366, #DCF8C6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 2px 10px rgba(37, 211, 102, 0.2);
         }
         
         .logo-text p {
             color: #90EE90;
             font-size: 14px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .logo-text p::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #25D366;
         }
         
         .stats {
             display: flex;
-            gap: 30px;
-            background: rgba(37, 211, 102, 0.1);
-            padding: 15px 25px;
-            border-radius: 10px;
-            border: 1px solid #128C7E;
+            gap: 40px;
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(46, 204, 113, 0.05));
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .stat-item {
             text-align: center;
+            position: relative;
+        }
+        
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 30px;
+            background: rgba(37, 211, 102, 0.3);
+        }
+        
+        .stat-item:last-child::after {
+            display: none;
         }
         
         .stat-number {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: #25D366;
+            text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+            margin-bottom: 5px;
         }
         
         .stat-label {
             font-size: 14px;
             color: #90EE90;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         /* Вкладки */
         .tabs {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 40px;
             flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .tabs::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(37, 211, 102, 0.2) 50%, 
+                transparent 100%);
         }
         
         .tab-btn {
-            background: rgba(30, 58, 30, 0.8);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(30, 58, 30, 0.8), rgba(40, 68, 40, 0.6));
+            border: 2px solid rgba(37, 211, 102, 0.2);
+            padding: 18px 35px;
+            border-radius: 12px;
             color: #B0E6B0;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: 0.5s;
+        }
+        
+        .tab-btn:hover::before {
+            left: 100%;
         }
         
         .tab-btn:hover {
-            background: rgba(37, 211, 102, 0.2);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(46, 204, 113, 0.1));
+            border-color: #25D366;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
         }
         
         .tab-btn.active {
-            background: linear-gradient(45deg, #25D366, #2ECC71);
+            background: linear-gradient(135deg, #25D366, #2ECC71);
             color: white;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            border-color: #25D366;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6); }
+            100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
         }
         
         /* Контент вкладок */
@@ -136,52 +271,93 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
         }
         
         /* Заголовок секции */
         .section-title {
-            font-size: 32px;
+            font-size: 36px;
             color: #DCF8C6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #25D366 50%, 
+                transparent 100%);
         }
         
         /* Файлы */
         .files-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
         
         /* Карточка файла */
         .file-card {
-            background: rgba(30, 58, 30, 0.8);
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(30, 58, 30, 0.9), rgba(40, 68, 40, 0.7));
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .file-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #25D366, #2ECC71);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .file-card:hover::before {
+            transform: scaleX(1);
         }
         
         .file-card:hover {
             border-color: #25D366;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.3);
         }
         
         .file-icon {
-            height: 150px;
-            background: linear-gradient(135deg, #128C7E, #1ABC9C);
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
         
         .file-icon::before {
@@ -190,28 +366,32 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1), transparent);
         }
         
         .file-icon-content {
             position: relative;
             z-index: 2;
+            text-align: center;
         }
         
         .file-icon-content i {
-            font-size: 50px;
+            font-size: 48px;
             color: white;
             margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
         .file-ext {
-            font-size: 20px;
+            font-size: 14px;
             font-weight: bold;
             color: white;
             background: rgba(255, 255, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 5px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .file-info {
@@ -219,16 +399,11 @@
         }
         
         .file-name {
-            font-size: 22px;
+            font-size: 20px;
             color: white;
-            margin-bottom: 10px;
-        }
-        
-        .file-desc {
-            color: #B0E6B0;
-            font-size: 16px;
-            margin-bottom: 20px;
-            min-height: 60px;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         .file-meta {
@@ -236,7 +411,7 @@
             justify-content: space-between;
             color: #90EE90;
             font-size: 14px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -246,106 +421,327 @@
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .badge {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 15px;
             font-size: 12px;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
         }
         
         .badge-new {
             background: linear-gradient(45deg, #FF6B6B, #FF8E53);
             color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
         
-        .badge-popular {
-            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+        .badge-config {
+            background: linear-gradient(45deg, #6B5B95, #88B04B);
             color: white;
+            box-shadow: 0 5px 15px rgba(107, 91, 149, 0.3);
         }
         
-        .badge-script {
-            background: linear-gradient(45deg, #A8E6CF, #56AB91);
+        .badge-apk {
+            background: linear-gradient(45deg, #FF8E53, #FF6B6B);
             color: white;
+            box-shadow: 0 5px 15px rgba(255, 142, 83, 0.3);
+        }
+        
+        .badge-android {
+            background: linear-gradient(45deg, #3DDC84, #34A853);
+            color: white;
+            box-shadow: 0 5px 15px rgba(61, 220, 132, 0.3);
         }
         
         .download-btn {
             width: 100%;
-            background: linear-gradient(45deg, #25D366, #2ECC71);
+            background: linear-gradient(135deg, #25D366, #2ECC71);
             border: none;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
         }
         
         .download-btn:hover {
-            background: linear-gradient(45deg, #2ECC71, #25D366);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #2ECC71, #25D366);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transform: translateY(-3px);
         }
         
-        /* Страница "Скоро будет" */
-        .coming-soon {
+        .download-btn.apk {
+            background: linear-gradient(135deg, #3DDC84, #34A853);
+        }
+        
+        .download-btn.apk:hover {
+            background: linear-gradient(135deg, #34A853, #3DDC84);
+        }
+        
+        .download-btn.config {
+            background: linear-gradient(135deg, #6B5B95, #88B04B);
+        }
+        
+        .download-btn.config:hover {
+            background: linear-gradient(135deg, #88B04B, #6B5B95);
+        }
+        
+        /* Контейнер для ссылки на видео */
+        .video-link-container {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(30, 58, 30, 0.9), rgba(40, 68, 40, 0.7));
+            border-radius: 20px;
+            border: 2px solid rgba(37, 211, 102, 0.3);
             text-align: center;
-            padding: 80px 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
-        .coming-soon-icon {
-            font-size: 80px;
-            color: #25D366;
-            margin-bottom: 30px;
+        .video-link-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B6B, #FF8E53, #25D366);
         }
         
-        .coming-soon h2 {
-            font-size: 36px;
+        .video-link-title {
             color: #DCF8C6;
+            font-size: 28px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
-        .coming-soon p {
-            color: #B0E6B0;
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
+        .video-link-description {
+            color: #90EE90;
+            font-size: 16px;
+            margin-bottom: 30px;
             line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .video-link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .video-link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: 0.5s;
+        }
+        
+        .video-link-button:hover::before {
+            left: 100%;
+        }
+        
+        .video-link-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #FF8E53, #FF6B6B);
+        }
+        
+        .video-link-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #B0E6B0;
+            font-size: 14px;
+        }
+        
+        /* Телеграм ключ */
+        .telegram-key {
+            background: linear-gradient(135deg, rgba(0, 136, 204, 0.1), rgba(52, 170, 223, 0.05));
+            border: 2px solid rgba(52, 170, 223, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 40px auto;
+            text-align: center;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .telegram-key h3 {
+            color: #34AADF;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .key-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(52, 170, 223, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            color: #34AADF;
+            word-break: break-all;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(52, 170, 223, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .key-box::before {
+            content: '🔑';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+        }
+        
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #0088cc, #34AADF);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(52, 170, 223, 0.3);
+        }
+        
+        .telegram-link:hover {
+            background: linear-gradient(135deg, #34AADF, #0088cc);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(52, 170, 223, 0.4);
         }
         
         /* Футер */
         .footer {
             text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid #2D5A2D;
-            margin-top: 60px;
+            padding: 50px 0;
+            margin-top: 80px;
             color: #90EE90;
             font-size: 14px;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(37, 211, 102, 0.3) 50%, 
+                transparent 100%);
         }
         
         .footer p {
             margin-bottom: 10px;
+            opacity: 0.8;
         }
         
         /* Уведомление */
         .notification {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(30, 58, 30, 0.95);
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, rgba(30, 58, 30, 0.95), rgba(40, 68, 40, 0.9));
             border: 2px solid #25D366;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 20px;
             color: white;
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             display: none;
-            animation: slideIn 0.3s ease;
+            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            min-width: 300px;
+            max-width: 400px;
         }
         
         .notification.show {
@@ -354,75 +750,128 @@
         
         @keyframes slideIn {
             from {
-                transform: translateX(100%);
+                transform: translateX(100%) translateY(20px);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateX(0) translateY(0);
                 opacity: 1;
             }
         }
         
         /* Адаптивность */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .header {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
                 text-align: center;
             }
             
             .stats {
                 width: 100%;
-                justify-content: space-around;
+                max-width: 500px;
             }
             
             .tabs {
                 justify-content: center;
             }
             
+            .video-link-container {
+                margin: 0 20px 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            
+            .logo-text h1 {
+                font-size: 28px;
+            }
+            
+            .stats {
+                gap: 20px;
+                padding: 15px 20px;
+            }
+            
+            .stat-item::after {
+                right: -10px;
+                height: 20px;
+            }
+            
             .tab-btn {
-                padding: 12px 20px;
-                font-size: 14px;
+                padding: 15px 25px;
+                font-size: 15px;
             }
             
             .files-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .section-title {
                 font-size: 28px;
             }
             
-            .coming-soon h2 {
-                font-size: 28px;
+            .video-link-container {
+                padding: 20px;
             }
             
-            .coming-soon p {
+            .video-link-title {
+                font-size: 24px;
+            }
+            
+            .video-link-button {
+                padding: 15px 30px;
                 font-size: 16px;
-                padding: 0 15px;
             }
         }
         
         @media (max-width: 480px) {
-            .container {
-                padding: 15px;
+            .stat-number {
+                font-size: 22px;
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tabs {
+                gap: 10px;
+            }
+            
+            .video-link-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .video-link-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
             }
             
             .file-info {
                 padding: 20px;
             }
             
-            .file-name {
-                font-size: 20px;
+            .telegram-key {
+                padding: 20px 15px;
             }
             
-            .file-desc {
-                font-size: 15px;
-            }
-            
-            .tab-btn {
-                padding: 10px 15px;
-                font-size: 13px;
+            .key-box {
+                font-size: 14px;
+                padding: 15px;
             }
         }
     </style>
@@ -436,20 +885,20 @@
                 <div class="logo-icon">F</div>
                 <div class="logo-text">
                     <h1>FlyScripts</h1>
-                    <p>Скрипты для Standoff 2</p>
+                    <p>Автоматизация для игр</p>
                 </div>
             </div>
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-number" id="totalFiles">2</div>
-                    <div class="stat-label">Скриптов</div>
+                    <div class="stat-number" id="totalFiles">7</div>
+                    <div class="stat-label">Файлов</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" id="totalDownloads">0</div>
                     <div class="stat-label">Скачиваний</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">v1.0</div>
+                    <div class="stat-number">v2.0</div>
                     <div class="stat-label">Версия</div>
                 </div>
             </div>
@@ -474,62 +923,85 @@
         <!-- Контент вкладки Скрипты -->
         <div class="tab-content active" id="scripts-content">
             <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
-            <p style="text-align: center; color: #B0E6B0; margin-bottom: 30px; font-size: 18px;">
-                Автоматизация для Standoff 2. Безопасные и проверенные скрипты для заработка.
-            </p>
             <div class="files-grid" id="scriptsGrid">
-                <!-- Файлы будут добавлены через JavaScript -->
+                <!-- Скрипты будут добавлены через JavaScript -->
             </div>
         </div>
         
         <!-- Контент вкладки Кламси -->
         <div class="tab-content" id="clamsy-content">
-            <div class="coming-soon">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-fish"></i>
-                </div>
-                <h2>Кламси</h2>
-                <p>Скрипты для заработка на кламси пока в разработке. Мы работаем над новыми скриптами.</p>
-                <p style="margin-top: 20px; color: #25D366;">
-                    <i class="fas fa-clock"></i> Скоро здесь появятся новые скрипты
-                </p>
+            <h2 class="section-title"><i class="fas fa-fish"></i> Кламси</h2>
+            
+            <div class="telegram-key">
+                <h3><i class="fab fa-telegram"></i> Telegram ключ</h3>
+                <div class="key-box">t.me/GrapeVzlom</div>
+                <a href="https://t.me/GrapeVzlom" target="_blank" class="telegram-link">
+                    <i class="fab fa-telegram"></i> Перейти в Telegram
+                </a>
+            </div>
+            
+            <div class="files-grid" id="clamsyGrid">
+                <!-- APK и конфиги будут добавлены через JavaScript -->
             </div>
         </div>
         
         <!-- Контент вкладки Туторы -->
         <div class="tab-content" id="tutorials-content">
-            <div class="coming-soon">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h2>Туторы</h2>
-                <p>Видео-инструкции и руководства по использованию скриптов. Подробные объяснения и настройки.</p>
-                <p style="margin-top: 20px; color: #25D366;">
-                    <i class="fas fa-clock"></i> Готовим полезные материалы для вас
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Туторы</h2>
+            
+            <div class="video-link-container">
+                <h3 class="video-link-title">
+                    <i class="fas fa-play-circle"></i> Видео-туториал по OPR Price
+                </h3>
+                
+                <p class="video-link-description">
+                    Посмотрите подробный видео-туториал по использованию скрипта OPR Price для Standoff 2.
+                    В видео показана полная настройка, работа автопокупки и автопродажи, а также полезные советы.
                 </p>
+                
+                <a href="https://youtu.be/Y_QggJhnR8E?si=_BTr3EnewEfG05DO" target="_blank" class="video-link-button">
+                    <i class="fab fa-youtube"></i> Смотреть на YouTube
+                </a>
+                
+                <div class="video-link-features">
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <span>Подробное руководство</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-cogs"></i>
+                        <span>Пошаговая настройка</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Полезные советы</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; color: #90EE90; font-size: 16px; margin-top: 40px;">
+                <p><i class="fas fa-sync-alt"></i> Новые туториалы добавляются регулярно</p>
             </div>
         </div>
         
         <!-- Контент вкладки Софт -->
         <div class="tab-content" id="software-content">
-            <div class="coming-soon">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-desktop"></i>
+            <div style="text-align: center; padding: 80px 20px;">
+                <div style="font-size: 80px; color: #25D366; margin-bottom: 20px;">
+                    <i class="fas fa-laptop-code"></i>
                 </div>
-                <h2>Софт</h2>
-                <p>Полезные программы и утилиты для улучшения игрового процесса и автоматизации.</p>
-                <p style="margin-top: 20px; color: #25D366;">
-                    <i class="fas fa-clock"></i> Скоро здесь будут доступны программы
+                <h2 style="font-size: 32px; color: #DCF8C6; margin-bottom: 20px;">Скоро будет</h2>
+                <p style="color: #90EE90; font-size: 18px; max-width: 600px; margin: 0 auto;">
+                    Мы работаем над новыми инструментами для автоматизации игр. 
+                    Следите за обновлениями!
                 </p>
             </div>
         </div>
         
         <!-- Футер -->
         <footer class="footer">
-            <p>© 2024 FlyScripts. Все скрипты предназначены для образовательных целей.</p>
-            <p style="font-size: 12px; color: #6A8C6A; margin-top: 5px;">
-                Используйте ответственно. Автоматизация в играх может нарушать правила.
-            </p>
+            <p>© 2024 FlyScripts. Все права защищены.</p>
+            <p>Сайт для образовательных целей</p>
         </footer>
     </div>
     
@@ -539,649 +1011,73 @@
     </div>
 
     <script>
-        // Ваши файлы (скрипты)
-        const files = [
+        // Оставил только OPR скрипт
+        const scripts = [
             {
                 id: 1,
                 name: "free opr price Flyscripts.txt",
-                description: "Скрипт автопокупки и автопродажи для Standoff 2 с авто-продажей по заданной цене",
-                content: `// Автопокупка и автопродажа для Standoff 2
-// Версия с авто-продажей по заданной цене
-
-pfc.log("=== СКРИПТ АВТОПОКУПКИ И ПРОДАЖИ ЗАПУЩЕН ===");
-
-// --- КОНФИГУРАЦИЯ ПОКУПКИ ---
-Point кнопка_покупки = Point.get(2144,587);
-Point кнопка_подтверждения = Point.get(1086,774);
-Point индикатор_наличия = Point.get(1810,585);
-int цвет_индикатора = 17035;
-Point кнопка_галочки = Point.get(1015,468);
-int цвет_галочки = 5723976;
-Point кнопка_крестика = Point.get(2329,128);
-int цвет_крестика = 6315871;
-Point кнопка_ок = Point.get(1200,742);
-int цвет_ок = 9994331;
-
-// --- КОНФИГУРАЦИЯ ПРОДАЖИ ---
-Point кнопка_продажи = Point.get(530,916);
-Point слот_скина = Point.get(1710,284);
-Point кнопка_выбрать = Point.get(1969,940);
-Point поле_ввода_цены = Point.get(1649,415);
-Point кнопка_ок_продажа = Point.get(2345,249);
-Point кнопка_подтвердить_продажу = Point.get(1129,786);
-
-// Цена для продажи (задаем вручную)
-float ЦЕНА_ПРОДАЖИ = 1.90; // Замени на нужную цену
-
-// --- КООРДИНАТЫ КЛАВИАТУРЫ ---
-Point цифра_1 = Point.get(405,511);
-Point цифра_2 = Point.get(992,509);
-Point цифра_3 = Point.get(1584,511);
-Point цифра_4 = Point.get(406,629);
-Point цифра_5 = Point.get(990,637);
-Point цифра_6 = Point.get(1592,636);
-Point цифра_7 = Point.get(385,750);
-Point цифра_8 = Point.get(979,769);
-Point цифра_9 = Point.get(1594,754);
-Point цифра_0 = Point.get(975,864);
-Point точка = Point.get(1574,893);
-Point стереть = Point.get(2162,753);
-
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-
-// --- СТАТИСТИКА ---
-int счетчик_циклов = 0;
-int счетчик_покупок = 0;
-int счетчик_продаж = 0;
-int счетчик_попапов = 0;
-int счетчик_неудачных_покупок = 0;
-long время_начала = System.currentTimeMillis();
-boolean покупка_успешна = false; // Флаг успешной покупки
-
-// --- ФУНКЦИЯ ВВОДА ЦЕНЫ ---
-void ввести_цену(String цена_текст) {
-    pfc.log("Ввод цены: " + цена_текст);
-    
-    // ПРОВЕРКА НА ТОЧКУ
-    if (!цена_текст.contains(".")) {
-        pfc.log("ВНИМАНИЕ: Цена не содержит точку. Добавляю .00");
-        // Автоматически добавляем .00 если нет точки
-        цена_текст = цена_текст + ".00";
-    }
-    
-    // Очистка поля
-    for(int i = 0; i < 10; i++) {
-        pfc.click(стереть);
-        pfc.sleep(30);
-    }
-    
-    // Ввод каждой цифры
-    for(int i = 0; i < цена_текст.length(); i++) {
-        char символ = цена_текст.charAt(i);
-        
-        if(символ == '1') pfc.click(цифра_1);
-        else if(символ == '2') pfc.click(цифра_2);
-        else if(символ == '3') pfc.click(цифра_3);
-        else if(символ == '4') pfc.click(цифра_4);
-        else if(символ == '5') pfc.click(цифра_5);
-        else if(символ == '6') pfc.click(цифра_6);
-        else if(символ == '7') pfc.click(цифра_7);
-        else if(символ == '8') pfc.click(цифра_8);
-        else if(символ == '9') pfc.click(цифра_9);
-        else if(символ == '0') pfc.click(цифра_0);
-        else if(символ == '.') pfc.click(точка);
-        
-        pfc.sleep(50);
-    }
-}
-
-// --- ФУНКЦИЯ ПРОДАЖИ ---
-void выполнить_продажу() {
-    pfc.log("=== НАЧАЛО ПРОЦЕДУРЫ ПРОДАЖИ ===");
-    
-    try {
-        // 1. Нажимает продать
-        pfc.log("1. Нажимаю кнопку продажи");
-        pfc.click(кнопка_продажи);
-        pfc.sleep(500);
-        
-        // 2. Выбирает скин
-        pfc.log("2. Выбираю слот со скином");
-        pfc.click(слот_скина);
-        pfc.sleep(300);
-        
-        // 3. Нажимает выбрать
-        pfc.log("3. Нажимаю 'Выбрать'");
-        pfc.click(кнопка_выбрать);
-        pfc.sleep(300);
-        
-        // 4. Нажимает на поле ввода и вводит цену
-        pfc.log("4. Ввожу цену: " + ЦЕНА_ПРОДАЖИ);
-        pfc.click(поле_ввода_цены);
-        pfc.sleep(200);
-        
-        // Конвертируем цену в строку
-        String цена_строка = String.valueOf(ЦЕНА_ПРОДАЖИ);
-        ввести_цену(цена_строка);
-        pfc.sleep(200);
-        
-        // 5. Нажимает ОК
-        pfc.log("5. Нажимаю ОК");
-        pfc.click(кнопка_ок_продажа);
-        pfc.sleep(300);
-        
-        // 6. Подтверждает продажу
-        pfc.log("6. Подтверждаю продажу");
-        pfc.click(кнопка_подтвердить_продажу);
-        pfc.sleep(500);
-        
-        счетчик_продаж++;
-        pfc.log("=== ПРОДАЖА УСПЕШНО ЗАВЕРШЕНА ===");
-        
-    } catch (Exception e) {
-        pfc.log("ОШИБКА ПРИ ПРОДАЖЕ: " + e.getMessage());
-    }
-}
-
-// --- НИЖЕ НИЧЕГО НЕ ТРОГАТЬ ---
-pfc.startScreenCapture(2);
-
-try {
-    pfc.log("Цена продажи установлена: " + ЦЕНА_ПРОДАЖИ);
-    pfc.log("Вход в основной цикл");
-    
-    while(!EXIT) {
-        счетчик_циклов++;
-        
-        // Логирование каждые 100 циклов
-        if (счетчик_циклов % 100 == 0) {
-            long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-            pfc.log("Статистика - Циклы: " + счетчик_циклов + 
-                   ", Покупки: " + счетчик_покупок + 
-                   ", Продажи: " + счетчик_продаж +
-                   ", Неудачные покупки: " + счетчик_неудачных_покупок +
-                   ", Время: " + время_работы + " сек");
-        }
-        
-        try {
-            // Приоритет: закрываем всплывающие окна
-            if(pfc.getColor(кнопка_галочки) == цвет_галочки) {
-                pfc.click(кнопка_галочки);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-            
-            if(pfc.getColor(кнопка_крестика) == цвет_крестика) {
-                pfc.click(кнопка_крестика);
-                pfc.sleep(23);
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-            
-            if(pfc.getColor(кнопка_ок) == цвет_ок) {
-                pfc.click(кнопка_ок);
-                pfc.sleep(23);
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-
-            // Если покупка успешна - выполняем продажу
-            if (покупка_успешна) {
-                pfc.log("Покупка успешна, начинаю продажу...");
-                pfc.sleep(1000); // Пауза перед продажей
-                выполнить_продажу();
-                покупка_успешна = false;
-                continue;
-            }
-
-            // Основная логика: покупка
-            int цвет_индикатора_текущий = pfc.getColor(индикатор_наличия);
-            int цвет_кнопки_текущий = pfc.getColor(кнопка_покупки);
-            
-            if(цвет_индикатора_текущий == цвет_индикатора && цвет_кнопки_текущий < 11111111) {
-                pfc.log("Условие покупки выполнено, пытаюсь купить...");
-                
-                pfc.click(кнопка_покупки);
-                pfc.sleep(77); 
-                
-                pfc.click(кнопка_подтверждения);
-                pfc.sleep(62); 
-                pfc.click(кнопка_подтверждения);
-                pfc.sleep(500);
-                
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                
-                // ВАЖНО: Проверяем появилось ли окно с ошибкой (OK или КРЕСТИК)
-                // Даем время появиться попапу ошибки если покупка не удалась
-                pfc.sleep(500);
-                
-                // Проверяем не появилось ли окно с ошибкой (OK ИЛИ КРЕСТИК)
-                boolean обнаружена_ошибка = false;
-                
-                // Проверка КРЕСТИКА
-                if(pfc.getColor(кнопка_крестика) == цвет_крестика) {
-                    // Если появился крестик - значит покупка НЕ удалась
-                    pfc.log("Обнаружен крестик - покупка НЕ удалась!");
-                    обнаружена_ошибка = true;
-                    счетчик_неудачных_покупок++;
-                    
-                    // Закрываем окно ошибки
-                    pfc.click(кнопка_крестика);
-                    pfc.sleep(23);
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(23); 
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(200);
-                }
-                
-                // Проверка OK (только если крестик не был обнаружен)
-                if(!обнаружена_ошибка && pfc.getColor(кнопка_ок) == цвет_ок) {
-                    // Если появилось окно OK - значит покупка НЕ удалась
-                    pfc.log("Обнаружено окно OK - покупка НЕ удалась!");
-                    обнаружена_ошибка = true;
-                    счетчик_неудачных_покупок++;
-                    
-                    // Закрываем окно ошибки
-                    pfc.click(кнопка_ок);
-                    pfc.sleep(23);
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(23); 
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(200);
-                }
-                
-                if (обнаружена_ошибка) {
-                    pfc.log("Пропускаю продажу, так как покупка не удалась");
-                    покупка_успешна = false;
-                } else {
-                    // Если окно ошибки (OK или крестик) не появилось - значит покупка УСПЕШНА
-                    счетчик_покупок++;
-                    pfc.log("Покупка №" + счетчик_покупок + " успешно завершена (окно ошибки не появилось)");
-                    
-                    // Устанавливаем флаг для продажи
-                    покупка_успешна = true;
-                }
-                
-                pfc.sleep(154); 
-                continue;
-            }
-
-            // Пауза для снижения нагрузки на систему
-            pfc.sleep(77);
-            
-        } catch (Exception циклОшибка) {
-            pfc.log("ОШИБКА В ЦИКЛЕ: " + циклОшибка.getMessage());
-            pfc.sleep(1000);
-        }
-    }
-    
-} catch (Exception главнаяОшибка) {
-    pfc.log("=== КРИТИЧЕСКАЯ ОШИБКА ===");
-    pfc.log("Причина: " + главнаяОшибка.getMessage());
-    
-    long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-    pfc.log("Финальная статистика:");
-    pfc.log("- Всего циклов: " + счетчик_циклов);
-    pfc.log("- Успешных покупок: " + счетчик_покупок);
-    pfc.log("- Успешных продаж: " + счетчик_продаж);
-    pfc.log("- Неудачных покупок: " + счетчик_неудачных_покупок);
-    pfc.log("- Время работы: " + время_работы + " секунд");
-    
-    pfc.sleep(10000);
-}
-
-pfc.log("=== СКРИПТ ОСТАНОВЛЕН ===");
-
-// Финальная статистика
-long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-pfc.log("Итоговая статистика:");
-pfc.log("- Всего циклов: " + счетчик_циклов);
-pfc.log("- Успешных покупок: " + счетчик_покупок);
-pfc.log("- Успешных продаж: " + счетчик_продаж);
-pfc.log("- Неудачных покупок: " + счетчик_неудачных_покупок);
-pfc.log("- Общее время работы: " + время_работы + " секунд");`,
+                content: `// Автопокупка и автопродажа для Standoff 2`,
                 size: "8.2 KB",
                 date: "20.01.2024",
-                badges: ["OPR", "Популярный"],
-                icon: "fa-code"
+                badges: ["OPR"],
+                icon: "fa-code",
+                type: "txt"
+            }
+        ];
+        
+        // APK файл
+        const apkFile = {
+            id: 2,
+            name: "FlyScripts APK",
+            url: "https://drive.google.com/uc?export=download&id=1l3A-Y8lG5ii6TS2CkcXALb1AyrRqxoDj",
+            size: "~15 MB",
+            date: "20.01.2024",
+            badges: ["APK", "Android"],
+            icon: "fa-android",
+            type: "apk"
+        };
+        
+        // Конфиги с Google Drive
+        const configs = [
+            {
+                id: 3,
+                name: "Config 1",
+                url: "https://drive.google.com/uc?export=download&id=1qPwwRAtBCpzAAvn5h5lVTdgYWcxh5cAN",
+                size: "Конфиг",
+                date: "20.01.2024",
+                badges: ["Конфиг"],
+                icon: "fa-cog",
+                type: "config"
             },
             {
-                id: 2,
-                name: "free 0.03 FlyScripts.txt",
-                description: "Скрипт непрерывной проверки цен с Telegram уведомлениями для Standoff 2",
-                content: `// «TGK: t.me/FlyScripts | Version: 1.7.2 - Continuous Price Check Only»
-// === КОНСТАНТЫ ===
-Point LT_Req = Point.get(1389,141);      // Left-Top Request: Левый верхний угол области для OCR чтения цены
-Point RB_Req = Point.get(1471,170);     // Right-Bottom Request: Правый нижний угол области для OCR чтения цены
-Point Ord = Point.get(1656,162);         // Order Button: Кнопка "Заказать" или "Buy Order"
-Point Inp = Point.get(984,453);        // Input Field: Поле ввода цены для ставки
-Point Pst = Point.get(1298,1046);        // Post Button: Кнопка "Разместить заказ" или "Place Buy Order"
-Point ConfirmBtn = Point.get(880,731); // Confirm Button: Кнопка подтверждения сделки
-Point Can = Point.get(1668,267);        // Cancel Button: Кнопка отмены или закрытия окна
-
-// === ТОЧКИ И ЦВЕТА ДЛЯ ПРОВЕРКИ ===
-Point CheckMarkPoint = Point.get(707,365);   // Check Mark Point: Точка для проверки наличия галочки успешной операции
-int CheckMarkColor = 5789769;                 // Check Mark Color: Цвет галочки подтверждения (RGB: 90,107,75)
-Point CrossInspectPoint = Point.get(1818,99); // Cross Inspect Point: Точка крестика для закрытия окна инспекции предмета
-int CrossInspectColor = 6184542;              // Cross Inspect Color: Цвет крестика инспекции (RGB: 94,101,94)
-Point CrossNotifyPoint = Point.get(1427,78);  // Cross Notify Point: Точка крестика для закрытия всплывающих уведомлений
-int CrossNotifyColor = 6512736;               // Cross Notify Color: Цвет крестика уведомлений (RGB: 113,113,113)
-Point OkButtonPoint = Point.get(954,699);    // OK Button Point: Точка кнопки OK в диалоговых окнах
-int OkButtonColor = 1;                        // OK Button Color: Цвет кнопки OK (почти черный, значение 1)
-
-// === TELEGRAM BOT CONFIGURATION | КОНФИГУРАЦИЯ TELEGRAM БОТА ===
-String TG_TOKEN = "8566373813:AAEDQTHxMDv8RtGMuVijIIHuKEuJLOrNY-A";      // TG Token: Токен вашего Telegram бота (получить у @BotFather)
-String TG_CHAT_ID = "8162013126";      // TG Chat ID: ID чата или канала для уведомлений
-boolean TG_ENABLED = false;                   // TG Enabled: Включить отправку уведомлений (true/false)
-boolean TG_SEND_SCREENSHOTS = false;          // TG Send Screenshots: Отправлять скриншоты при ошибках (true/false)
-int TG_NOTIFY_INTERVAL = 10;                  // TG Notify Interval: Интервал уведомлений в минутах (0 = только ошибки)
-
-// === ТАЙМИНГИ ===
-int FAST = 70;              // FAST delay: Быстрая задержка между кликами (миллисекунды)
-int CYCLE = 700;            // CYCLE delay: Пауза между основными циклами скрипта (миллисекунды)
-int CANCEL = 300;           // CANCEL delay: Ожидание после отмены/размещения заказа (миллисекундах)
-int PRICE_CHECK_INTERVAL = 500; // Интервал проверки цены в миллисекундах
-float BID_ADD = 0.02f;      // BID ADD value: Надбавка к текущей цене при размещении заказа (0.02 = +2 копейки)
-
-// === ФЛАГИ И ПЕРЕМЕННЫЕ ===
-boolean RUN = true;                 // RUN flag: Основной флаг работы скрипта (true - работает, false - остановлен)
-boolean ORDER_WINDOW_OPEN = false;  // ORDER WINDOW OPEN flag: Флаг открытого окна заказа
-int totalCycles = 0;                // Total Cycles: Счетчик выполненных циклов
-int successfulOrders = 0;           // Successful Orders: Количество успешных заказов
-int failedOrders = 0;               // Failed Orders: Количество неудачных попыток
-long lastNotificationTime = 0;      // Last Notification Time: Время последнего уведомления в миллисекундах
-float lastDetectedPrice = 0;        // Last Detected Price: Последняя обнаруженная цена
-float currentPrice = 0;             // Current Price: Текущая цена
-
-// === TELEGRAM FUNCTIONS | ФУНКЦИИ TELEGRAM ===
-void sendTelegramMessage(String message) {
-    if (!TG_ENABLED || TG_TOKEN.equals("YOUR_BOT_TOKEN_HERE") || TG_CHAT_ID.equals("YOUR_CHAT_ID_HERE")) {
-        return;
-    }
-    
-    try {
-        String response = pfc.sendToTg(TG_TOKEN, TG_CHAT_ID, message);
-        pfc.log("Telegram отправлено: " + response);
-    } catch (Exception e) {
-        pfc.log("Ошибка отправки Telegram: " + e.getMessage());
-    }
-}
-
-void sendTelegramScreenshot(String message) {
-    if (!TG_ENABLED || !TG_SEND_SCREENSHOTS || 
-        TG_TOKEN.equals("YOUR_BOT_TOKEN_HERE") || 
-        TG_CHAT_ID.equals("YOUR_CHAT_ID_HERE")) {
-        return;
-    }
-    
-    try {
-        pfc.startScreenCapture(2);
-        pfc.sleep(500);
-        Bitmap screenshot = pfc.takeScreenshot("error_screenshot");
-        String response = pfc.sendToTg(TG_TOKEN, TG_CHAT_ID, message, screenshot);
-        pfc.log("Telegram скриншот отправлен: " + response);
-    } catch (Exception e) {
-        pfc.log("Ошибка отправки скриншота: " + e.getMessage());
-    }
-}
-
-void sendStatusNotification() {
-    if (!TG_ENABLED || TG_NOTIFY_INTERVAL <= 0) {
-        return;
-    }
-    
-    long currentTime = System.currentTimeMillis();
-    if (currentTime - lastNotificationTime >= TG_NOTIFY_INTERVAL * 60 * 1000) {
-        String statusMessage = "📊 Статус скрипта Standoff2 AutoBuy:\n" +
-                              "⏱️ Время работы: " + (totalCycles * PRICE_CHECK_INTERVAL / 1000 / 60) + " мин\n" +
-                              "🔄 Проверок цены: " + totalCycles + "\n" +
-                              "✅ Успешных заказов: " + successfulOrders + "\n" +
-                              "❌ Неудачных попыток: " + failedOrders + "\n" +
-                              "💰 Текущая цена: " + (currentPrice > 0 ? String.format("%.2f", currentPrice) : "N/A") + "\n" +
-                              "📈 Эффективность: " + (totalCycles > 0 ? 
-                                  (successfulOrders * 100 / totalCycles) + "%" : "0%");
-        sendTelegramMessage(statusMessage);
-        lastNotificationTime = currentTime;
-    }
-}
-
-void sendStartNotification() {
-    if (!TG_ENABLED) return;
-    
-    String startMessage = "🚀 Скрипт Standoff2 AutoBuy v1.7.2 ЗАПУЩЕН!\n" +
-                         "⚙️ Режим: Непрерывная проверка цены\n" +
-                         "   - Интервал проверки: " + PRICE_CHECK_INTERVAL + "ms";
-    sendTelegramMessage(startMessage);
-}
-
-void sendStopNotification() {
-    if (!TG_ENABLED) return;
-    
-    String stopMessage = "🛑 Скрипт Standoff2 AutoBuy ОСТАНОВЛЕН!\n" +
-                        "📊 Итоговая статистика:\n" +
-                        "   🔄 Проверок цены: " + totalCycles + "\n" +
-                        "   ✅ Успешных заказов: " + successfulOrders;
-    sendTelegramMessage(stopMessage);
-}
-
-void sendOrderSuccessNotification(float price, float bidPrice) {
-    if (!TG_ENABLED) return;
-    
-    String successMessage = "✅ ЗАКАЗ РАЗМЕЩЕН!\n" +
-                           "💰 Цена: " + String.format("%.2f", price) + "\n" +
-                           "🎯 Ставка: " + String.format("%.2f", bidPrice);
-    sendTelegramMessage(successMessage);
-}
-
-void sendErrorNotification(String errorMessage) {
-    if (!TG_ENABLED) return;
-    
-    String errorMsg = "❌ ОШИБКА: " + errorMessage;
-    sendTelegramMessage(errorMsg);
-}
-
-// === ОСТАНОВ ===
-void stopNow() {
-    RUN = false;
-    pfc.click(Can);
-    sendStopNotification();
-}
-
-// === ПРОВЕРКА ЦВЕТА И КЛИК ===
-void checkColorAndClick(Point checkPoint, int targetColor) {
-    if (!RUN) return;
-    
-    int currentColor = pfc.getColor(checkPoint.x, checkPoint.y);
-    if (currentColor == targetColor) {
-        pfc.click(checkPoint);
-        pfc.sleep(100);
-    }
-}
-
-// === ОЧИСТКА ЭКРАНА (ОРИГИНАЛЬНАЯ ЛОГИКА) ===
-void screenCleanup() {
-    if (!RUN) return;
-    
-    // Только если окно заказа не открыто (как в оригинале)
-    if (!ORDER_WINDOW_OPEN) {
-        pfc.click(Can);
-        pfc.sleep(FAST);
-        
-        checkColorAndClick(CheckMarkPoint, CheckMarkColor);
-        checkColorAndClick(CrossInspectPoint, CrossInspectColor);
-        checkColorAndClick(CrossNotifyPoint, CrossNotifyColor);
-        checkColorAndClick(OkButtonPoint, OkButtonColor);
-    }
-}
-
-// === ОТКРЫТИЕ ОКНА ЗАКАЗА ===
-void openOrderWindow() {
-    if (!RUN || ORDER_WINDOW_OPEN) return;
-    
-    ORDER_WINDOW_OPEN = true;
-    pfc.click(Ord);
-    pfc.sleep(60);
-    pfc.click(Inp);
-    pfc.sleep(FAST);
-}
-
-// === ЗАКРЫТИЕ ОКНА ЗАКАЗА ===
-void closeOrderWindow() {
-    if (!RUN || !ORDER_WINDOW_OPEN) return;
-    
-    ORDER_WINDOW_OPEN = false;
-    pfc.click(Can);
-    pfc.sleep(FAST);
-}
-
-// === ЧТЕНИЕ ЦЕНЫ ===
-float fastPrice() {
-    if (!RUN) return -1;
-    try {
-        String txt = pfc.getText(LT_Req, RB_Req);
-        if (txt == null || txt.trim().isEmpty()) {
-            return -1;
-        }
-        
-        String clean = "";
-        boolean dotFound = false;
-        
-        for (int i = 0; i < txt.length(); i++) {
-            char c = txt.charAt(i);
-            if (c >= '0' && c <= '9') {
-                clean += c;
-            } else if ((c == '.' || c == ',') && !dotFound) {
-                clean += '.';
-                dotFound = true;
-            }
-        }
-        
-        if (clean.length() > 0) {
-            return Float.parseFloat(clean);
-        }
-        return -1;
-    } catch (Exception e) {
-        return -1;
-    }
-}
-
-// === ОБНОВЛЕНИЕ ПОЛЯ ВВОДА ЦЕНЫ ===
-void updatePriceField(float price) {
-    if (!RUN || !ORDER_WINDOW_OPEN || price <= 0) return;
-    
-    pfc.click(Inp);
-    pfc.sleep(50);
-    pfc.pushToCb(String.valueOf(price + BID_ADD));
-    pfc.sleep(FAST);
-}
-
-// === НЕПРЕРЫВНЫЙ МОНИТОРИНГ ЦЕНЫ ===
-void continuousPriceMonitoring() {
-    pfc.log("Запуск непрерывного мониторинга цен...");
-    
-    while (RUN) {
-        totalCycles++;
-        
-        // Очистка экрана только если окно закрыто
-        screenCleanup();
-        
-        // Открываем окно заказа если закрыто
-        if (!ORDER_WINDOW_OPEN) {
-            openOrderWindow();
-            pfc.sleep(1000);
-            
-            // Читаем начальную цену
-            lastDetectedPrice = fastPrice();
-            currentPrice = lastDetectedPrice;
-            
-            if (currentPrice > 0) {
-                updatePriceField(currentPrice);
-                pfc.log("Начальная цена: " + currentPrice);
-            }
-        }
-        
-        // Непрерывное чтение цены
-        float newPrice = fastPrice();
-        
-        if (newPrice > 0) {
-            if (newPrice != currentPrice) {
-                pfc.log("Новая цена: " + newPrice + " (была: " + currentPrice + ")");
-                
-                // Обновляем поле ввода
-                updatePriceField(newPrice);
-                
-                // Если цена повысилась - размещаем заказ
-                if (newPrice > currentPrice) {
-                    pfc.log("Повышение цены! Размещаем заказ...");
-                    
-                    pfc.click(Pst);
-                    pfc.sleep(FAST);
-                    
-                    pfc.click(ConfirmBtn);
-                    pfc.sleep(FAST);
-                    
-                    successfulOrders++;
-                    sendOrderSuccessNotification(newPrice, newPrice + BID_ADD);
-                    
-                    // Закрываем окно после заказа
-                    closeOrderWindow();
-                    pfc.sleep(CANCEL);
-                    
-                    // Очищаем экран после закрытия окна
-                    screenCleanup();
-                }
-                
-                currentPrice = newPrice;
-            }
-        }
-        
-        sendStatusNotification();
-        pfc.sleep(PRICE_CHECK_INTERVAL);
-    }
-}
-
-// === ЗАПУСК СКРИПТА ===
-try {
-    pfc.log("Запуск Standoff2 AutoBuy v1.7.2");
-    pfc.log("Непрерывная проверка цены, интервал: " + PRICE_CHECK_INTERVAL + "ms");
-    
-    sendStartNotification();
-    pfc.startScreenCapture(2);
-    pfc.setOCRLang("eng");
-    
-    continuousPriceMonitoring();
-    
-} catch (Exception e) {
-    sendErrorNotification(e.getMessage());
-    pfc.log("Ошибка: " + e.toString());
-    stopNow();
-} finally {
-    if (ORDER_WINDOW_OPEN) {
-        closeOrderWindow();
-    }
-    screenCleanup();
-    pfc.log("Скрипт завершен.");
-}`,
-                size: "11.5 KB",
+                id: 4,
+                name: "Config 2",
+                url: "https://drive.google.com/uc?export=download&id=1aZieAzbISzTZOqnDGOAN2BE942U8RK1H",
+                size: "Конфиг",
                 date: "20.01.2024",
-                badges: ["0.03", "Telegram"],
-                icon: "fa-robot"
+                badges: ["Конфиг"],
+                icon: "fa-cog",
+                type: "config"
+            },
+            {
+                id: 5,
+                name: "Config 3",
+                url: "https://drive.google.com/uc?export=download&id=1hfgry_xa9558nTK-e84qTJtMcjfEu1ip",
+                size: "Конфиг",
+                date: "20.01.2024",
+                badges: ["Конфиг"],
+                icon: "fa-cog",
+                type: "config"
+            },
+            {
+                id: 6,
+                name: "Config 4",
+                url: "https://drive.google.com/uc?export=download&id=1-t4oYWEiJRU6ZRP83DQeIbP6xhmU2Ftq",
+                size: "Конфиг",
+                date: "20.01.2024",
+                badges: ["Конфиг"],
+                icon: "fa-cog",
+                type: "config"
             }
         ];
         
@@ -1189,9 +1085,13 @@ try {
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            displayFiles();
+            displayScripts();
+            displayClamsyFiles();
             updateStats();
             setupTabs();
+            
+            // Анимация при загрузке
+            document.body.classList.add('loaded');
         });
         
         // Настройка вкладок
@@ -1211,42 +1111,46 @@ try {
                     // Показываем соответствующий контент
                     const tabId = btn.getAttribute('data-tab');
                     document.getElementById(`${tabId}-content`).classList.add('active');
+                    
+                    // Показываем уведомление о переключении
+                    if(tabId === 'tutorials') {
+                        showNotification('🎬 Открыты туториалы! Посмотрите видео-руководство.');
+                    }
                 });
             });
         }
         
-        // Отображение файлов
-        function displayFiles() {
+        // Отображение скриптов
+        function displayScripts() {
             const scriptsGrid = document.getElementById('scriptsGrid');
             scriptsGrid.innerHTML = '';
             
-            files.forEach(file => {
+            scripts.forEach(script => {
                 const fileCard = document.createElement('div');
                 fileCard.className = 'file-card';
                 fileCard.innerHTML = `
-                    <div class="file-icon">
+                    <div class="file-icon" style="background: linear-gradient(135deg, #128C7E, #1ABC9C);">
                         <div class="file-icon-content">
-                            <i class="fas ${file.icon}"></i>
-                            <div class="file-ext">TXT</div>
+                            <i class="fas ${script.icon}"></i>
+                            <div class="file-ext">${script.type.toUpperCase()}</div>
                         </div>
                     </div>
                     <div class="file-info">
-                        <h3 class="file-name">${file.name}</h3>
-                        <p class="file-desc">${file.description}</p>
+                        <h3 class="file-name">${script.name}</h3>
                         
                         <div class="file-badges">
-                            ${file.badges.map(badge => 
+                            ${script.badges.map(badge => 
                                 `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
                             ).join('')}
                         </div>
                         
                         <div class="file-meta">
-                            <span>📦 ${file.size}</span>
-                            <span>📅 ${file.date}</span>
+                            <span><i class="fas fa-weight-hanging"></i> ${script.size}</span>
+                            <span><i class="fas fa-calendar-alt"></i> ${script.date}</span>
                         </div>
                         
-                        <button class="download-btn" onclick="downloadFile(${file.id})">
-                            <i class="fas fa-download"></i> Скачать файл
+                        <button class="download-btn" onclick="downloadScript(${script.id})">
+                            <i class="fas fa-download"></i> Скачать
                         </button>
                     </div>
                 `;
@@ -1254,22 +1158,92 @@ try {
             });
         }
         
-        // Скачивание файла
-        function downloadFile(fileId) {
-            const file = files.find(f => f.id === fileId);
-            if (!file) return;
+        // Отображение файлов в кламси (APK + конфиги)
+        function displayClamsyFiles() {
+            const clamsyGrid = document.getElementById('clamsyGrid');
+            clamsyGrid.innerHTML = '';
+            
+            // APK файл
+            const apkCard = document.createElement('div');
+            apkCard.className = 'file-card';
+            apkCard.innerHTML = `
+                <div class="file-icon" style="background: linear-gradient(135deg, #34A853, #3DDC84);">
+                    <div class="file-icon-content">
+                        <i class="fab ${apkFile.icon}"></i>
+                        <div class="file-ext">${apkFile.type.toUpperCase()}</div>
+                    </div>
+                </div>
+                <div class="file-info">
+                    <h3 class="file-name">${apkFile.name}</h3>
+                    
+                    <div class="file-badges">
+                        ${apkFile.badges.map(badge => 
+                            `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
+                        ).join('')}
+                    </div>
+                    
+                    <div class="file-meta">
+                        <span><i class="fas fa-weight-hanging"></i> ${apkFile.size}</span>
+                        <span><i class="fas fa-calendar-alt"></i> ${apkFile.date}</span>
+                    </div>
+                    
+                    <button class="download-btn apk" onclick="downloadFile('${apkFile.url}', '${apkFile.name}.apk')">
+                        <i class="fas fa-download"></i> Скачать APK
+                    </button>
+                </div>
+            `;
+            clamsyGrid.appendChild(apkCard);
+            
+            // Конфиги
+            configs.forEach(config => {
+                const configCard = document.createElement('div');
+                configCard.className = 'file-card';
+                configCard.innerHTML = `
+                    <div class="file-icon" style="background: linear-gradient(135deg, #6B5B95, #88B04B);">
+                        <div class="file-icon-content">
+                            <i class="fas ${config.icon}"></i>
+                            <div class="file-ext">CFG</div>
+                        </div>
+                    </div>
+                    <div class="file-info">
+                        <h3 class="file-name">${config.name}</h3>
+                        
+                        <div class="file-badges">
+                            ${config.badges.map(badge => 
+                                `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="file-meta">
+                            <span><i class="fas fa-weight-hanging"></i> ${config.size}</span>
+                            <span><i class="fas fa-calendar-alt"></i> ${config.date}</span>
+                        </div>
+                        
+                        <button class="download-btn config" onclick="downloadFile('${config.url}', '${config.name}.cfg')">
+                            <i class="fas fa-download"></i> Скачать
+                        </button>
+                    </div>
+                `;
+                clamsyGrid.appendChild(configCard);
+            });
+        }
+        
+        // Скачивание скрипта
+        function downloadScript(scriptId) {
+            const script = scripts.find(s => s.id === scriptId);
+            if (!script) return;
             
             totalDownloads++;
             updateStats();
             
             // Создаем Blob
-            const blob = new Blob([file.content], { type: 'text/plain;charset=utf-8' });
+            const blob = new Blob([script.content], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             
             // Создаем ссылку для скачивания
             const link = document.createElement('a');
             link.href = url;
-            link.download = file.name;
+            link.download = script.name;
             
             // Добавляем, кликаем и удаляем
             document.body.appendChild(link);
@@ -1280,23 +1254,35 @@ try {
             setTimeout(() => URL.revokeObjectURL(url), 100);
             
             // Показываем уведомление
-            showNotification(`Файл "${file.name}" скачан!`);
+            showNotification(`✅ Файл "${script.name}" успешно скачан!`);
+        }
+        
+        // Скачивание файла по ссылке
+        function downloadFile(fileUrl, fileName) {
+            totalDownloads++;
+            updateStats();
+            
+            // Открываем файл в новой вкладке для скачивания
+            window.open(fileUrl, '_blank');
+            
+            // Показываем уведомление
+            showNotification(`📥 Началось скачивание файла!`);
         }
         
         // Получение класса для бейджа
         function getBadgeClass(badge) {
             switch(badge.toLowerCase()) {
                 case 'opr': return 'badge-new';
-                case 'популярный': return 'badge-popular';
-                case '0.03': return 'badge-script';
-                case 'telegram': return 'badge-script';
+                case 'apk': return 'badge-apk';
+                case 'android': return 'badge-android';
+                case 'конфиг': return 'badge-config';
                 default: return 'badge-new';
             }
         }
         
         // Обновление статистики
         function updateStats() {
-            document.getElementById('totalFiles').textContent = files.length;
+            document.getElementById('totalFiles').textContent = scripts.length + 1 + configs.length;
             document.getElementById('totalDownloads').textContent = totalDownloads;
         }
         
@@ -1310,7 +1296,7 @@ try {
             
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, 4000);
         }
     </script>
 </body>
