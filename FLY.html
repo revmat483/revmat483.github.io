@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
         
-        /* Анимированный фон */
+        /* Анимированный фон с частицами */
         body::before {
             content: '';
             position: fixed;
@@ -30,16 +30,134 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(37, 211, 102, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(37, 211, 102, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(37, 211, 102, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(37, 211, 102, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 211, 102, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 211, 102, 0.08) 0%, transparent 50%);
             z-index: -1;
+        }
+        
+        /* Анимированные частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #25D366, #2ECC71);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+        
+        /* Главный заголовок */
+        .main-title {
+            text-align: center;
+            margin: 40px 0 60px;
+            position: relative;
+        }
+        
+        .title-gradient {
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, 
+                #FF6B6B 0%, 
+                #FF8E53 15%, 
+                #FFD93D 30%, 
+                #6BCF7F 45%, 
+                #4D96FF 60%, 
+                #9D4BFF 75%, 
+                #FF6B6B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+            letter-spacing: 2px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .title-gradient::before {
+            content: 'FLYSCRIPTS';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: linear-gradient(45deg, #000, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: -1;
+            filter: blur(2px);
+            opacity: 0.7;
+        }
+        
+        .title-gradient::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 107, 107, 0.1) 25%, 
+                rgba(255, 142, 83, 0.1) 50%, 
+                rgba(255, 217, 61, 0.1) 75%, 
+                transparent 100%);
+            filter: blur(15px);
+            z-index: -1;
+            border-radius: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #B0E6B0;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+            padding: 5px 20px;
+            background: rgba(37, 211, 102, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            animation: pulseSubtitle 3s infinite;
+        }
+        
+        @keyframes pulseSubtitle {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
+                transform: scale(1.02);
+            }
         }
         
         /* Шапка */
@@ -114,7 +232,7 @@
         }
         
         .logo-text h1 {
-            font-size: 32px;
+            font-size: 24px;
             background: linear-gradient(45deg, #25D366, #DCF8C6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -124,9 +242,9 @@
         
         .logo-text p {
             color: #90EE90;
-            font-size: 14px;
+            font-size: 12px;
             position: relative;
-            padding-left: 20px;
+            padding-left: 15px;
         }
         
         .logo-text p::before {
@@ -139,12 +257,12 @@
         .stats {
             display: flex;
             gap: 40px;
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(46, 204, 113, 0.05));
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(46, 204, 113, 0.08));
             padding: 20px 30px;
             border-radius: 15px;
             border: 1px solid rgba(37, 211, 102, 0.3);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
         }
         
         .stat-item {
@@ -160,7 +278,7 @@
             transform: translateY(-50%);
             width: 1px;
             height: 30px;
-            background: rgba(37, 211, 102, 0.3);
+            background: linear-gradient(to bottom, transparent, #25D366, transparent);
         }
         
         .stat-item:last-child::after {
@@ -168,47 +286,55 @@
         }
         
         .stat-number {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #25D366;
-            text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+            text-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
             margin-bottom: 5px;
+            background: linear-gradient(45deg, #25D366, #2ECC71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stat-label {
             font-size: 14px;
             color: #90EE90;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
         
         /* Вкладки */
         .tabs {
             display: flex;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
             position: relative;
+            justify-content: center;
         }
         
         .tabs::before {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
             height: 1px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(37, 211, 102, 0.2) 50%, 
+                rgba(37, 211, 102, 0.4) 50%, 
                 transparent 100%);
         }
         
         .tab-btn {
-            background: linear-gradient(135deg, rgba(30, 58, 30, 0.8), rgba(40, 68, 40, 0.6));
-            border: 2px solid rgba(37, 211, 102, 0.2);
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.9), 
+                rgba(40, 68, 40, 0.7));
+            border: 2px solid rgba(37, 211, 102, 0.3);
             padding: 18px 35px;
-            border-radius: 12px;
+            border-radius: 15px;
             color: #B0E6B0;
             font-size: 16px;
             font-weight: bold;
@@ -219,6 +345,7 @@
             gap: 12px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         
         .tab-btn::before {
@@ -230,7 +357,7 @@
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(255, 255, 255, 0.1), 
+                rgba(255, 255, 255, 0.15), 
                 transparent);
             transition: 0.5s;
         }
@@ -240,24 +367,26 @@
         }
         
         .tab-btn:hover {
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(46, 204, 113, 0.1));
+            background: linear-gradient(135deg, 
+                rgba(37, 211, 102, 0.25), 
+                rgba(46, 204, 113, 0.15));
             border-color: #25D366;
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
         }
         
         .tab-btn.active {
             background: linear-gradient(135deg, #25D366, #2ECC71);
             color: white;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
             border-color: #25D366;
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
-            50% { box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6); }
-            100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+            0% { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 20px 45px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
         }
         
         /* Контент вкладок */
@@ -281,6 +410,155 @@
             }
         }
         
+        /* Стили для скриптов */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .script-card {
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.95), 
+                rgba(40, 68, 40, 0.85));
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(37, 211, 102, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B6B, #FF8E53, #25D366);
+        }
+        
+        .script-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: #25D366;
+        }
+        
+        .script-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .script-title {
+            font-size: 24px;
+            color: #DCF8C6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .script-badge {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .script-description {
+            color: #90EE90;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .script-features {
+            margin-bottom: 25px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #B0E6B0;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .feature i {
+            color: #25D366;
+        }
+        
+        .script-code {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #E8F5E9;
+            border: 1px solid rgba(37, 211, 102, 0.2);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #25D366, #2ECC71);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .telegram-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0088cc, #24A1DE);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            justify-content: center;
+        }
+        
+        .telegram-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.4);
+        }
+        
+        .telegram-link i {
+            font-size: 16px;
+        }
+        
         /* Заголовок секции */
         .section-title {
             font-size: 36px;
@@ -292,7 +570,6 @@
             justify-content: center;
             gap: 20px;
             position: relative;
-            padding-bottom: 20px;
         }
         
         .section-title::after {
@@ -309,230 +586,63 @@
                 transparent 100%);
         }
         
-        /* Файлы */
-        .files-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+        /* Стили для пустых состояний */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.8), 
+                rgba(40, 68, 40, 0.6));
+            border-radius: 20px;
+            border: 2px solid rgba(37, 211, 102, 0.2);
+            backdrop-filter: blur(10px);
             margin-top: 20px;
         }
         
-        /* Карточка файла */
-        .file-card {
-            background: linear-gradient(135deg, rgba(30, 58, 30, 0.9), rgba(40, 68, 40, 0.7));
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            backdrop-filter: blur(10px);
+        .empty-icon {
+            font-size: 80px;
+            color: #25D366;
+            margin-bottom: 20px;
+            opacity: 0.7;
         }
         
-        .file-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #25D366, #2ECC71);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+        .empty-title {
+            font-size: 32px;
+            color: #DCF8C6;
+            margin-bottom: 20px;
         }
         
-        .file-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .file-card:hover {
-            border-color: #25D366;
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.3);
-        }
-        
-        .file-icon {
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .file-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.1), transparent);
-        }
-        
-        .file-icon-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-        
-        .file-icon-content i {
-            font-size: 48px;
-            color: white;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        
-        .file-ext {
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .file-info {
-            padding: 25px;
-        }
-        
-        .file-name {
-            font-size: 20px;
-            color: white;
-            margin-bottom: 15px;
-            text-align: center;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .file-meta {
-            display: flex;
-            justify-content: space-between;
+        .empty-description {
             color: #90EE90;
-            font-size: 14px;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
         }
         
-        .file-badges {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .badge {
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .badge:hover {
-            transform: translateY(-2px);
-        }
-        
-        .badge-new {
-            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-        }
-        
-        .badge-config {
-            background: linear-gradient(45deg, #6B5B95, #88B04B);
-            color: white;
-            box-shadow: 0 5px 15px rgba(107, 91, 149, 0.3);
-        }
-        
-        .badge-apk {
-            background: linear-gradient(45deg, #FF8E53, #FF6B6B);
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 142, 83, 0.3);
-        }
-        
-        .badge-android {
-            background: linear-gradient(45deg, #3DDC84, #34A853);
-            color: white;
-            box-shadow: 0 5px 15px rgba(61, 220, 132, 0.3);
-        }
-        
-        .download-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #25D366, #2ECC71);
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            color: white;
+        .empty-status {
+            color: #B0E6B0;
             font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            transition: 0.5s;
-        }
-        
-        .download-btn:hover::before {
-            left: 100%;
-        }
-        
-        .download-btn:hover {
-            background: linear-gradient(135deg, #2ECC71, #25D366);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            transform: translateY(-3px);
-        }
-        
-        .download-btn.apk {
-            background: linear-gradient(135deg, #3DDC84, #34A853);
-        }
-        
-        .download-btn.apk:hover {
-            background: linear-gradient(135deg, #34A853, #3DDC84);
-        }
-        
-        .download-btn.config {
-            background: linear-gradient(135deg, #6B5B95, #88B04B);
-        }
-        
-        .download-btn.config:hover {
-            background: linear-gradient(135deg, #88B04B, #6B5B95);
+            margin-top: 30px;
         }
         
         /* Контейнер для ссылки на видео */
         .video-link-container {
             max-width: 900px;
             margin: 0 auto 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(30, 58, 30, 0.9), rgba(40, 68, 40, 0.7));
-            border-radius: 20px;
+            padding: 35px;
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.95), 
+                rgba(40, 68, 40, 0.85));
+            border-radius: 25px;
             border: 2px solid rgba(37, 211, 102, 0.3);
             text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -626,76 +736,6 @@
             font-size: 14px;
         }
         
-        /* Телеграм ключ */
-        .telegram-key {
-            background: linear-gradient(135deg, rgba(0, 136, 204, 0.1), rgba(52, 170, 223, 0.05));
-            border: 2px solid rgba(52, 170, 223, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 40px auto;
-            text-align: center;
-            max-width: 800px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .telegram-key h3 {
-            color: #34AADF;
-            margin-bottom: 15px;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-        
-        .key-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(52, 170, 223, 0.5);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            color: #34AADF;
-            word-break: break-all;
-            letter-spacing: 1px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(52, 170, 223, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .key-box::before {
-            content: '🔑';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.3;
-        }
-        
-        .telegram-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #0088cc, #34AADF);
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 25px rgba(52, 170, 223, 0.3);
-        }
-        
-        .telegram-link:hover {
-            background: linear-gradient(135deg, #34AADF, #0088cc);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(52, 170, 223, 0.4);
-        }
-        
         /* Футер */
         .footer {
             text-align: center;
@@ -716,7 +756,7 @@
             height: 1px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(37, 211, 102, 0.3) 50%, 
+                rgba(37, 211, 102, 0.4) 50%, 
                 transparent 100%);
         }
         
@@ -730,7 +770,9 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, rgba(30, 58, 30, 0.95), rgba(40, 68, 40, 0.9));
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.95), 
+                rgba(40, 68, 40, 0.9));
             border: 2px solid #25D366;
             border-radius: 15px;
             padding: 20px;
@@ -739,7 +781,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             display: none;
             animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             min-width: 300px;
             max-width: 400px;
         }
@@ -779,6 +821,14 @@
             .video-link-container {
                 margin: 0 20px 40px;
             }
+            
+            .title-gradient {
+                font-size: 3.5rem;
+            }
+            
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -792,8 +842,12 @@
                 font-size: 24px;
             }
             
+            .title-gradient {
+                font-size: 2.8rem;
+            }
+            
             .logo-text h1 {
-                font-size: 28px;
+                font-size: 20px;
             }
             
             .stats {
@@ -809,11 +863,6 @@
             .tab-btn {
                 padding: 15px 25px;
                 font-size: 15px;
-            }
-            
-            .files-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
             
             .section-title {
@@ -832,9 +881,26 @@
                 padding: 15px 30px;
                 font-size: 16px;
             }
+            
+            .script-card {
+                padding: 20px;
+            }
+            
+            .script-title {
+                font-size: 20px;
+            }
         }
         
         @media (max-width: 480px) {
+            .title-gradient {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                padding: 4px 15px;
+            }
+            
             .stat-number {
                 font-size: 22px;
             }
@@ -861,24 +927,24 @@
                 gap: 15px;
             }
             
-            .file-info {
-                padding: 20px;
-            }
-            
-            .telegram-key {
-                padding: 20px 15px;
-            }
-            
-            .key-box {
-                font-size: 14px;
-                padding: 15px;
+            .scripts-grid {
+                gap: 20px;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Анимированные частицы -->
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
+        <!-- Главный заголовок -->
+        <div class="main-title">
+            <div class="title-gradient">FLYSCRIPTS</div>
+            <div class="subtitle">Автоматизация для игр</div>
+        </div>
+        
         <!-- Шапка -->
         <header class="header">
             <div class="logo">
@@ -890,7 +956,7 @@
             </div>
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-number" id="totalFiles">7</div>
+                    <div class="stat-number" id="totalFiles">2</div>
                     <div class="stat-label">Файлов</div>
                 </div>
                 <div class="stat-item">
@@ -909,39 +975,269 @@
             <button class="tab-btn active" data-tab="scripts">
                 <i class="fas fa-file-code"></i> Скрипты
             </button>
-            <button class="tab-btn" data-tab="clamsy">
-                <i class="fas fa-fish"></i> Кламси
-            </button>
             <button class="tab-btn" data-tab="tutorials">
                 <i class="fas fa-graduation-cap"></i> Туторы
-            </button>
-            <button class="tab-btn" data-tab="software">
-                <i class="fas fa-laptop-code"></i> Софт
             </button>
         </div>
         
         <!-- Контент вкладки Скрипты -->
         <div class="tab-content active" id="scripts-content">
             <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
-            <div class="files-grid" id="scriptsGrid">
-                <!-- Скрипты будут добавлены через JavaScript -->
-            </div>
-        </div>
-        
-        <!-- Контент вкладки Кламси -->
-        <div class="tab-content" id="clamsy-content">
-            <h2 class="section-title"><i class="fas fa-fish"></i> Кламси</h2>
             
-            <div class="telegram-key">
-                <h3><i class="fab fa-telegram"></i> Telegram ключ</h3>
-                <div class="key-box">t.me/GrapeVzlom</div>
-                <a href="https://t.me/GrapeVzlom" target="_blank" class="telegram-link">
-                    <i class="fab fa-telegram"></i> Перейти в Telegram
-                </a>
-            </div>
-            
-            <div class="files-grid" id="clamsyGrid">
-                <!-- APK и конфиги будут добавлены через JavaScript -->
+            <div class="scripts-grid">
+                <!-- Скрипт OPR Price -->
+                <div class="script-card">
+                    <div class="script-header">
+                        <h3 class="script-title">
+                            <i class="fas fa-tag"></i> OPR Price
+                        </h3>
+                        <span class="script-badge">Standoff 2</span>
+                    </div>
+                    
+                    <p class="script-description">
+                        Скрипт определённый прайс покупает скины по настроенной цене в Standoff 2.
+                        Автоматическая покупка по заданной цене с использованием OCR для чтения цен.
+                    </p>
+                    
+                    <div class="script-features">
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Покупка по настроенной цене</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>OCR распознавание цен</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Настраиваемые параметры</span>
+                        </div>
+                    </div>
+                    
+                    <div class="script-code" id="oprPriceCode">
+//Скрипт определённый прайс покупает скины по настроенной цене
+
+pfc.log("OPR price started");
+
+//-----Настрока координат-----
+Point r1 = Point.get(1669,459); //Кнопка купить
+Point r2 = Point.get(833,718); //кнопка потвердить
+Point r3 = Point.get(709,362); //Галочка только мои запросы
+Point r4 = Point.get(1815,101); //Крестик в осмотре
+Point r5 = Point.get(927,699); //Кнопка ок
+Point r6 = Point.get(1388,440); //Левый верхний угол цены
+Point r7 = Point.get(1493,473); //Правый нижний угол цены
+
+//-----Настройка цветов-----
+int t1 = 5460804; //Цвет галочки только мои запросы
+int t2 = 7499887; //Цвет крестика в осмотре
+int t3 = 9994331; //Цвет кнопки ок
+int t4 = 17035; //Цвет проверки цены скорее всего 17035
+
+//-----Настройко скорости-----
+int d1 = 15; //Скорость клика настрой под свой телефон
+int d2 = 100; //задержка для оптимальной работы
+int d3 = 0; //задержка скрипта для оптимальной работы
+int d4 = 3; //задержка проверки цены
+
+//-----Настройка цены-----
+float g1 = 32.10f; //Цена покупки
+
+pfc.startScreenCapture(2);
+pfc.setOCRLang("uzb");
+
+float g2 = 999999.99f;
+
+while(!EXIT){
+try{
+
+if(pfc.getColor(r4) == t2){
+click(r4);
+sleep(d2);
+click(r3);
+sleep(d2);
+click(r3);
+sleep(d2);
+}
+
+if(pfc.getColor(r5) == t3){
+click(r5);  
+sleep(d2);
+click(r3);
+sleep(d2);
+click(r3);
+sleep(d2);
+pfc.log("А не кто быстрее купил");
+} 
+
+if(pfc.getColor(r3) == t1){
+click(r3);   
+sleep(d2);
+}
+
+String txt = pfc.getText(r6, r7);
+String ct = txt.replaceAll("[^0-9.,]", "").replace(",", ".");
+       
+if (ct.length() > 0 && ct.indexOf(".") == ct.lastIndexOf(".")) {
+g2 = Float.parseFloat(ct);
+} else {
+g2 = 999999.99f; 
+}
+} catch (Exception e) {
+g2 = 999999.99f;
+}
+sleep(d4);
+
+if(g2 <= g1 && g2 > 0){
+click(r1);
+sleep(d1);
+click(r2);
+sleep(d1);
+click(r2);
+sleep(d1);
+click(r2);
+sleep(d1);
+click(r3);
+sleep(d1);
+click(r3);
+pfc.log("Халява купил скинчик"); 
+}
+continue;
+
+sleep(d3);
+}
+}
+                    </div>
+                    
+                    <button class="copy-btn" onclick="copyCode('oprPriceCode')">
+                        <i class="far fa-copy"></i> Копировать код
+                    </button>
+                </div>
+                
+                <!-- Скрипт 2 в 1 S&F -->
+                <div class="script-card">
+                    <div class="script-header">
+                        <h3 class="script-title">
+                            <i class="fas fa-layer-group"></i> 2 в 1 S&F
+                        </h3>
+                        <span class="script-badge">Standoff 2</span>
+                    </div>
+                    
+                    <p class="script-description">
+                        Скрипт 2-в-1 для автопокупки скинов и с наклейками. 
+                        Поддерживает несколько слотов и имеет оптимизацию для разных устройств.
+                    </p>
+                    
+                    <div class="script-features">
+                        <div class="feature">
+                            <i class="fas fa-boxes"></i>
+                            <span>Мульти-слотовая покупка</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-sticky-note"></i>
+                            <span>Работа с наклейками</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Оптимизация скорости</span>
+                        </div>
+                    </div>
+                    
+                    <div class="script-code" id="twoInOneCode">
+pfc.log("aftor scriptich & flyscript");
+//кнопка купить
+Point p1 = Point.get(1664,462);
+//кнопка подтвердить 
+Point p2 = Point.get(840,723);
+//Галочка 
+Point p3 = Point.get(709,363);
+//крестик
+Point p4 = Point.get(1819,99);
+//ок
+Point p5 = Point.get(933,701);
+//наклейки 
+Point n1 = Point.get(1247,437);
+Point n2 = Point.get(1278,476);
+//цена по цвету и кординатам 0.03 - 0.99
+Point s1 = Point.get(1413,456);
+int s2 = 17035;
+//цвета
+int c1 = 5592389; //цвет галочки
+int c2 = 6184542; //цвет крестика
+int c3 = 9994074;   //цвет ок
+//настройки 
+int slot = 4; //кол-во слотов
+int slots = 115;  //высота слотов
+int speed = 8; //скорость покупки ставить зависимо от устройства 
+int ping = 80; //ставить зависимо от пинга(влияет на скорость)
+int CPU = 0; //повышайте если устройства сильно нагревается 
+int refresh = 7000; //скорость обновления галочки
+//дополнительный функция
+Point k1 = Point.get(1278,476); //крестик в меню покупик (очень сильно влияет на скорость покупки)
+
+//настройки завершились ниже не трогай 
+//авторы scriptich & flyscript
+
+long negr = Time.getMillis();
+
+pfc.startScreenCapture(2);
+while(!EXIT){
+
+    if(pfc.getColor(p3) == c1){
+        pfc.click(p3); pfc.sleep(100);
+    }
+    if(pfc.getColor(p4) == c2){
+        pfc.click(p4); pfc.sleep(100);
+    }
+    if(pfc.getColor(p5) == c3){
+        pfc.click(p5); pfc.sleep(100);
+    }
+
+    
+    if(pfc.getColor(s1) == s2){
+        pfc.click(p1); pfc.sleep(speed);
+        pfc.click(p2); pfc.click(p2); pfc.click(p2); pfc.click(p2); pfc.sleep(speed);
+        pfc.click(k1);
+    }
+
+    
+    for(int sukaizaebalsadelat = 0; sukaizaebalsadelat < slot; sukaizaebalsadelat++){
+        Point left  = Point.get(n1.x, n1.y + sukaizaebalsadelat * slots);
+        Point right = Point.get(n2.x, n2.y + sukaizaebalsadelat * slots);
+
+        if(pfc.getContoursCount(left, right) > 2 &&
+           pfc.getColor(p1.x, p1.y + sukaizaebalsadelat * slots) < 100000000){
+            pfc.click(p1.x, p1.y + sukaizaebalsadelat * slots);
+            pfc.sleep(speed);
+            pfc.click(p2.x, p2.y); pfc.click(p2.x, p2.y);
+            pfc.click(p2.x, p2.y); pfc.click(p2.x, p2.y);
+            pfc.sleep(ping);
+        }
+    }
+
+    if((Time.getMillis() - negr) >= refresh){
+        pfc.click(p3); pfc.sleep(5);
+        pfc.click(p3);  
+        negr = Time.getMillis(); 
+    }
+    continue;
+    pfc.sleep(CPU);
+}
+                    </div>
+                    
+                    <button class="copy-btn" onclick="copyCode('twoInOneCode')">
+                        <i class="far fa-copy"></i> Копировать код
+                    </button>
+                    
+                    <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
+                        <i class="fab fa-telegram"></i> 
+                        <span>Помощник скрипта: @Scriptich</span>
+                    </a>
+                    
+                    <div style="text-align: center; color: #90EE90; font-size: 14px; margin-top: 15px; font-style: italic;">
+                        Спасибо за скрипт! Сильно помог! ❤️
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -949,52 +1245,18 @@
         <div class="tab-content" id="tutorials-content">
             <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Туторы</h2>
             
-            <div class="video-link-container">
-                <h3 class="video-link-title">
-                    <i class="fas fa-play-circle"></i> Видео-туториал по OPR Price
-                </h3>
-                
-                <p class="video-link-description">
-                    Посмотрите подробный видео-туториал по использованию скрипта OPR Price для Standoff 2.
-                    В видео показана полная настройка, работа автопокупки и автопродажи, а также полезные советы.
-                </p>
-                
-                <a href="https://youtu.be/Y_QggJhnR8E?si=_BTr3EnewEfG05DO" target="_blank" class="video-link-button">
-                    <i class="fab fa-youtube"></i> Смотреть на YouTube
-                </a>
-                
-                <div class="video-link-features">
-                    <div class="feature">
-                        <i class="fas fa-clock"></i>
-                        <span>Подробное руководство</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-cogs"></i>
-                        <span>Пошаговая настройка</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-lightbulb"></i>
-                        <span>Полезные советы</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; color: #90EE90; font-size: 16px; margin-top: 40px;">
-                <p><i class="fas fa-sync-alt"></i> Новые туториалы добавляются регулярно</p>
-            </div>
-        </div>
-        
-        <!-- Контент вкладки Софт -->
-        <div class="tab-content" id="software-content">
             <div style="text-align: center; padding: 80px 20px;">
-                <div style="font-size: 80px; color: #25D366; margin-bottom: 20px;">
-                    <i class="fas fa-laptop-code"></i>
+                <div class="empty-icon">
+                    <i class="fas fa-video-slash"></i>
                 </div>
-                <h2 style="font-size: 32px; color: #DCF8C6; margin-bottom: 20px;">Скоро будет</h2>
-                <p style="color: #90EE90; font-size: 18px; max-width: 600px; margin: 0 auto;">
-                    Мы работаем над новыми инструментами для автоматизации игр. 
-                    Следите за обновлениями!
+                <h3 class="empty-title">Пока нету</h3>
+                <p class="empty-description">
+                    Туториалы в разработке. Скоро здесь появятся подробные видео-руководства по использованию скриптов.
                 </p>
+                <div class="empty-status">
+                    <i class="fas fa-sync-alt fa-spin"></i>
+                    <span>Следите за обновлениями</span>
+                </div>
             </div>
         </div>
         
@@ -1011,392 +1273,39 @@
     </div>
 
     <script>
-        // Обновленный скрипт OPR Price
-        const scripts = [
-            {
-                id: 1,
-                name: "free opr price Flyscripts.txt",
-                content: `// Автопокупка и автопродажа для Standoff 2
-// Версия с авто-продажей по заданной цене
-
-pfc.log("=== СКРИПТ АВТОПОКУПКИ И ПРОДАЖИ ЗАПУЩЕН ===");
-
-// --- КОНФИГУРАЦИЯ ПОКУПКИ ---
-Point кнопка_покупки = Point.get(2144,587);
-Point кнопка_подтверждения = Point.get(1086,774);
-Point индикатор_наличия = Point.get(1810,585);
-int цвет_индикатора = 17035;
-Point кнопка_галочки = Point.get(1015,468);
-int цвет_галочки = 5723976;
-Point кнопка_крестика = Point.get(2329,128);
-int цвет_крестика = 6315871;
-Point кнопка_ок = Point.get(1200,742);
-int цвет_ок = 9994331;
-
-// --- КОНФИГУРАЦИЯ ПРОДАЖИ ---
-Point кнопка_продажи = Point.get(530,916);
-Point слот_скина = Point.get(1710,284);
-Point кнопка_выбрать = Point.get(1969,940);
-Point поле_ввода_цены = Point.get(1649,415);
-Point кнопка_ок_продажа = Point.get(2345,249);
-Point кнопка_подтвердить_продажу = Point.get(1129,786);
-
-// Цена для продажи (задаем вручную)
-float ЦЕНА_ПРОДАЖИ = 1.50; // Замени на нужную цену
-
-// --- КООРДИНАТЫ КЛАВИАТУРЫ ---
-Point цифра_1 = Point.get(405,511);
-Point цифра_2 = Point.get(992,509);
-Point цифра_3 = Point.get(1584,511);
-Point цифра_4 = Point.get(406,629);
-Point цифра_5 = Point.get(990,637);
-Point цифра_6 = Point.get(1592,636);
-Point цифра_7 = Point.get(385,750);
-Point цифра_8 = Point.get(979,769);
-Point цифра_9 = Point.get(1594,754);
-Point цифра_0 = Point.get(975,864);
-Point точка = Point.get(1574,893);
-Point стереть = Point.get(2162,753);
-
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-//НИЖЕ НИЧЕГО НЕ ТРОГАТЬ
-
-// --- СТАТИСТИКА ---
-int счетчик_циклов = 0;
-int счетчик_покупок = 0;
-int счетчик_продаж = 0;
-int счетчик_попапов = 0;
-int счетчик_неудачных_покупок = 0;
-long время_начала = System.currentTimeMillis();
-boolean покупка_успешна = false; // Флаг успешной покупки
-
-// --- ФУНКЦИЯ ВВОДА ЦЕНЫ ---
-void ввести_цену(String цена_текст) {
-    pfc.log("Ввод цены: " + цена_текст);
-    
-    // ПРОВЕРКА НА ТОЧКУ
-    if (!цена_текст.contains(".")) {
-        pfc.log("ВНИМАНИЕ: Цена не содержит точку. Добавляю .00");
-        // Автоматически добавляем .00 если нет точки
-        цена_текст = цена_текст + ".00";
-    }
-    
-    // Очистка поля
-    for(int i = 0; i < 10; i++) {
-        pfc.click(стереть);
-        pfc.sleep(30);
-    }
-    
-    // Ввод каждой цифры
-    for(int i = 0; i < цена_текст.length(); i++) {
-        char символ = цена_текст.charAt(i);
-        
-        if(символ == '1') pfc.click(цифра_1);
-        else if(символ == '2') pfc.click(цифра_2);
-        else if(символ == '3') pfc.click(цифра_3);
-        else if(символ == '4') pfc.click(цифра_4);
-        else if(символ == '5') pfc.click(цифра_5);
-        else if(символ == '6') pfc.click(цифра_6);
-        else if(символ == '7') pfc.click(цифра_7);
-        else if(символ == '8') pfc.click(цифра_8);
-        else if(символ == '9') pfc.click(цифра_9);
-        else if(символ == '0') pfc.click(цифра_0);
-        else if(символ == '.') pfc.click(точка);
-        
-        pfc.sleep(50);
-    }
-}
-
-// --- ФУНКЦИЯ ПРОДАЖИ ---
-void выполнить_продажу() {
-    pfc.log("=== НАЧАЛО ПРОЦЕДУРЫ ПРОДАЖИ ===");
-    
-    try {
-        // 1. Нажимает продать
-        pfc.log("1. Нажимаю кнопку продажи");
-        pfc.click(кнопка_продажи);
-        pfc.sleep(500);
-        
-        // 2. Выбирает скин
-        pfc.log("2. Выбираю слот со скином");
-        pfc.click(слот_скина);
-        pfc.sleep(300);
-        
-        // 3. Нажимает выбрать
-        pfc.log("3. Нажимаю 'Выбрать'");
-        pfc.click(кнопка_выбрать);
-        pfc.sleep(300);
-        
-        // 4. Нажимает на поле ввода и вводит цену
-        pfc.log("4. Ввожу цену: " + ЦЕНА_ПРОДАЖИ);
-        pfc.click(поле_ввода_цены);
-        pfc.sleep(200);
-        
-        // Конвертируем цену в строку
-        String цена_строка = String.valueOf(ЦЕНА_ПРОДАЖИ);
-        ввести_цену(цена_строка);
-        pfc.sleep(200);
-        
-        // 5. Нажимает ОК
-        pfc.log("5. Нажимаю ОК");
-        pfc.click(кнопка_ок_продажа);
-        pfc.sleep(300);
-        
-        // 6. Подтверждает продажу
-        pfc.log("6. Подтверждаю продажу");
-        pfc.click(кнопка_подтвердить_продажу);
-        pfc.sleep(500);
-        
-        счетчик_продаж++;
-        pfc.log("=== ПРОДАЖА УСПЕШНО ЗАВЕРШЕНА ===");
-        
-    } catch (Exception e) {
-        pfc.log("ОШИБКА ПРИ ПРОДАЖЕ: " + e.getMessage());
-    }
-}
-
-// --- НИЖЕ НИЧЕГО НЕ ТРОГАТЬ ---
-pfc.startScreenCapture(2);
-
-try {
-    pfc.log("Цена продажи установлена: " + ЦЕНА_ПРОДАЖИ);
-    pfc.log("Вход в основной цикл");
-    
-    while(!EXIT) {
-        счетчик_циклов++;
-        
-        // Логирование каждые 100 циклов
-        if (счетчик_циклов % 100 == 0) {
-            long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-            pfc.log("Статистика - Циклы: " + счетчик_циклов + 
-                   ", Покупки: " + счетчик_покупок + 
-                   ", Продажи: " + счетчик_продаж +
-                   ", Неудачные покупки: " + счетчик_неудачных_покупок +
-                   ", Время: " + время_работы + " сек");
+        // Создание анимированных частиц
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Случайные размеры и позиции
+                const size = Math.random() * 10 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.opacity = Math.random() * 0.1 + 0.05;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
-        
-        try {
-            // Приоритет: закрываем всплывающие окна
-            if(pfc.getColor(кнопка_галочки) == цвет_галочки) {
-                pfc.click(кнопка_галочки);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-            
-            if(pfc.getColor(кнопка_крестика) == цвет_крестика) {
-                pfc.click(кнопка_крестика);
-                pfc.sleep(23);
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-            
-            if(pfc.getColor(кнопка_ок) == цвет_ок) {
-                pfc.click(кнопка_ок);
-                pfc.sleep(23);
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                счетчик_попапов++;
-                pfc.sleep(38);
-                continue;
-            }
-
-            // Если покупка успешна - выполняем продажу
-            if (покупка_успешна) {
-                pfc.log("Покупка успешна, начинаю продажу...");
-                pfc.sleep(1000); // Пауза перед продажей
-                выполнить_продажу();
-                покупка_успешна = false;
-                continue;
-            }
-
-            // Основная логика: покупка
-            int цвет_индикатора_текущий = pfc.getColor(индикатор_наличия);
-            int цвет_кнопки_текущий = pfc.getColor(кнопка_покупки);
-            
-            if(цвет_индикатора_текущий == цвет_индикатора && цвет_кнопки_текущий < 11111111) {
-                pfc.log("Условие покупки выполнено, пытаюсь купить...");
-                
-                pfc.click(кнопка_покупки);
-                pfc.sleep(10); 
-                
-                pfc.click(кнопка_подтверждения);
-                pfc.sleep(10); 
-                pfc.click(кнопка_подтверждения);
-                pfc.sleep(500);
-                
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23); 
-                pfc.click(кнопка_галочки);
-                pfc.sleep(23);
-                
-                // ВАЖНО: Проверяем появилось ли окно с ошибкой (OK или КРЕСТИК)
-                // Даем время появиться попапу ошибки если покупка не удалась
-                pfc.sleep(500);
-                
-                // Проверяем не появилось ли окно с ошибкой (OK ИЛИ КРЕСТИК)
-                boolean обнаружена_ошибка = false;
-                
-                // Проверка КРЕСТИКА
-                if(pfc.getColor(кнопка_крестика) == цвет_крестика) {
-                    // Если появился крестик - значит покупка НЕ удалась
-                    pfc.log("Обнаружен крестик - покупка НЕ удалась!");
-                    обнаружена_ошибка = true;
-                    счетчик_неудачных_покупок++;
-                    
-                    // Закрываем окно ошибки
-                    pfc.click(кнопка_крестика);
-                    pfc.sleep(23);
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(23); 
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(200);
-                }
-                
-                // Проверка OK (только если крестик не был обнаружен)
-                if(!обнаружена_ошибка && pfc.getColor(кнопка_ок) == цвет_ок) {
-                    // Если появилось окно OK - значит покупка НЕ удалась
-                    pfc.log("Обнаружено окно OK - покупка НЕ удалась!");
-                    обнаружена_ошибка = true;
-                    счетчик_неудачных_покупок++;
-                    
-                    // Закрываем окно ошибки
-                    pfc.click(кнопка_ок);
-                    pfc.sleep(23);
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(23); 
-                    pfc.click(кнопка_галочки);
-                    pfc.sleep(200);
-                }
-                
-                if (обнаружена_ошибка) {
-                    pfc.log("Пропускаю продажу, так как покупка не удалась");
-                    покупка_успешна = false;
-                } else {
-                    // Если окно ошибки (OK или крестик) не появилось - значит покупка УСПЕШНА
-                    счетчик_покупок++;
-                    pfc.log("Покупка №" + счетчик_покупок + " успешно завершена (окно ошибки не появилось)");
-                    
-                    // Устанавливаем флаг для продажи
-                    покупка_успешна = true;
-                }
-                
-                pfc.sleep(20); 
-                continue;
-            }
-
-            // Пауза для снижения нагрузки на систему
-            pfc.sleep(10);
-            
-        } catch (Exception циклОшибка) {
-            pfc.log("ОШИБКА В ЦИКЛЕ: " + циклОшибка.getMessage());
-            pfc.sleep(1000);
-        }
-    }
-    
-} catch (Exception главнаяОшибка) {
-    pfc.log("=== КРИТИЧЕСКАЯ ОШИБКА ===");
-    pfc.log("Причина: " + главнаяОшибка.getMessage());
-    
-    long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-    pfc.log("Финальная статистика:");
-    pfc.log("- Всего циклов: " + счетчик_циклов);
-    pfc.log("- Успешных покупок: " + счетчик_покупок);
-    pfc.log("- Успешных продаж: " + счетчик_продаж);
-    pfc.log("- Неудачных покупок: " + счетчик_неудачных_покупок);
-    pfc.log("- Время работы: " + время_работы + " секунд");
-    
-    pfc.sleep(10000);
-}
-
-pfc.log("=== СКРИПТ ОСТАНОВЛЕН ===");
-
-// Финальная статистика
-long время_работы = (System.currentTimeMillis() - время_начала) / 1000;
-pfc.log("Итоговая статистика:");
-pfc.log("- Всего циклов: " + счетчик_циклов);
-pfc.log("- Успешных покупок: " + счетчик_покупок);
-pfc.log("- Успешных продаж: " + счетчик_продаж);
-pfc.log("- Неудачных покупок: " + счетчик_неудачных_покупок);
-pfc.log("- Общее время работы: " + время_работы + " секунд");`,
-                size: "8.2 KB",
-                date: "20.01.2024",
-                badges: ["OPR"],
-                icon: "fa-code",
-                type: "txt"
-            }
-        ];
-        
-        // APK файл
-        const apkFile = {
-            id: 2,
-            name: "FlyScripts APK",
-            url: "https://drive.google.com/uc?export=download&id=1l3A-Y8lG5ii6TS2CkcXALb1AyrRqxoDj",
-            size: "~15 MB",
-            date: "20.01.2024",
-            badges: ["APK", "Android"],
-            icon: "fa-android",
-            type: "apk"
-        };
-        
-        // Конфиги с Google Drive
-        const configs = [
-            {
-                id: 3,
-                name: "Config 1",
-                url: "https://drive.google.com/uc?export=download&id=1qPwwRAtBCpzAAvn5h5lVTdgYWcxh5cAN",
-                size: "Конфиг",
-                date: "20.01.2024",
-                badges: ["Конфиг"],
-                icon: "fa-cog",
-                type: "config"
-            },
-            {
-                id: 4,
-                name: "Config 2",
-                url: "https://drive.google.com/uc?export=download&id=1aZieAzbISzTZOqnDGOAN2BE942U8RK1H",
-                size: "Конфиг",
-                date: "20.01.2024",
-                badges: ["Конфиг"],
-                icon: "fa-cog",
-                type: "config"
-            },
-            {
-                id: 5,
-                name: "Config 3",
-                url: "https://drive.google.com/uc?export=download&id=1hfgry_xa9558nTK-e84qTJtMcjfEu1ip",
-                size: "Конфиг",
-                date: "20.01.2024",
-                badges: ["Конфиг"],
-                icon: "fa-cog",
-                type: "config"
-            },
-            {
-                id: 6,
-                name: "Config 4",
-                url: "https://drive.google.com/uc?export=download&id=1-t4oYWEiJRU6ZRP83DQeIbP6xhmU2Ftq",
-                size: "Конфиг",
-                date: "20.01.2024",
-                badges: ["Конфиг"],
-                icon: "fa-cog",
-                type: "config"
-            }
-        ];
         
         let totalDownloads = 0;
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            displayScripts();
-            displayClamsyFiles();
+            createParticles();
             updateStats();
             setupTabs();
             
@@ -1424,175 +1333,17 @@ pfc.log("- Общее время работы: " + время_работы + " �
                     
                     // Показываем уведомление о переключении
                     if(tabId === 'tutorials') {
-                        showNotification('🎬 Открыты туториалы! Посмотрите видео-руководство.');
+                        showNotification('📹 Туториалы пока в разработке');
+                    } else if(tabId === 'scripts') {
+                        showNotification('🚀 Открыты скрипты! Теперь доступны 2 скрипта для Standoff 2.');
                     }
                 });
             });
         }
         
-        // Отображение скриптов
-        function displayScripts() {
-            const scriptsGrid = document.getElementById('scriptsGrid');
-            scriptsGrid.innerHTML = '';
-            
-            scripts.forEach(script => {
-                const fileCard = document.createElement('div');
-                fileCard.className = 'file-card';
-                fileCard.innerHTML = `
-                    <div class="file-icon" style="background: linear-gradient(135deg, #128C7E, #1ABC9C);">
-                        <div class="file-icon-content">
-                            <i class="fas ${script.icon}"></i>
-                            <div class="file-ext">${script.type.toUpperCase()}</div>
-                        </div>
-                    </div>
-                    <div class="file-info">
-                        <h3 class="file-name">${script.name}</h3>
-                        
-                        <div class="file-badges">
-                            ${script.badges.map(badge => 
-                                `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
-                            ).join('')}
-                        </div>
-                        
-                        <div class="file-meta">
-                            <span><i class="fas fa-weight-hanging"></i> ${script.size}</span>
-                            <span><i class="fas fa-calendar-alt"></i> ${script.date}</span>
-                        </div>
-                        
-                        <button class="download-btn" onclick="downloadScript(${script.id})">
-                            <i class="fas fa-download"></i> Скачать
-                        </button>
-                    </div>
-                `;
-                scriptsGrid.appendChild(fileCard);
-            });
-        }
-        
-        // Отображение файлов в кламси (APK + конфиги)
-        function displayClamsyFiles() {
-            const clamsyGrid = document.getElementById('clamsyGrid');
-            clamsyGrid.innerHTML = '';
-            
-            // APK файл
-            const apkCard = document.createElement('div');
-            apkCard.className = 'file-card';
-            apkCard.innerHTML = `
-                <div class="file-icon" style="background: linear-gradient(135deg, #34A853, #3DDC84);">
-                    <div class="file-icon-content">
-                        <i class="fab ${apkFile.icon}"></i>
-                        <div class="file-ext">${apkFile.type.toUpperCase()}</div>
-                    </div>
-                </div>
-                <div class="file-info">
-                    <h3 class="file-name">${apkFile.name}</h3>
-                    
-                    <div class="file-badges">
-                        ${apkFile.badges.map(badge => 
-                            `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
-                        ).join('')}
-                    </div>
-                    
-                    <div class="file-meta">
-                        <span><i class="fas fa-weight-hanging"></i> ${apkFile.size}</span>
-                        <span><i class="fas fa-calendar-alt"></i> ${apkFile.date}</span>
-                    </div>
-                    
-                    <button class="download-btn apk" onclick="downloadFile('${apkFile.url}', '${apkFile.name}.apk')">
-                        <i class="fas fa-download"></i> Скачать APK
-                    </button>
-                </div>
-            `;
-            clamsyGrid.appendChild(apkCard);
-            
-            // Конфиги
-            configs.forEach(config => {
-                const configCard = document.createElement('div');
-                configCard.className = 'file-card';
-                configCard.innerHTML = `
-                    <div class="file-icon" style="background: linear-gradient(135deg, #6B5B95, #88B04B);">
-                        <div class="file-icon-content">
-                            <i class="fas ${config.icon}"></i>
-                            <div class="file-ext">CFG</div>
-                        </div>
-                    </div>
-                    <div class="file-info">
-                        <h3 class="file-name">${config.name}</h3>
-                        
-                        <div class="file-badges">
-                            ${config.badges.map(badge => 
-                                `<span class="badge ${getBadgeClass(badge)}">${badge}</span>`
-                            ).join('')}
-                        </div>
-                        
-                        <div class="file-meta">
-                            <span><i class="fas fa-weight-hanging"></i> ${config.size}</span>
-                            <span><i class="fas fa-calendar-alt"></i> ${config.date}</span>
-                        </div>
-                        
-                        <button class="download-btn config" onclick="downloadFile('${config.url}', '${config.name}.cfg')">
-                            <i class="fas fa-download"></i> Скачать
-                        </button>
-                    </div>
-                `;
-                clamsyGrid.appendChild(configCard);
-            });
-        }
-        
-        // Скачивание скрипта
-        function downloadScript(scriptId) {
-            const script = scripts.find(s => s.id === scriptId);
-            if (!script) return;
-            
-            totalDownloads++;
-            updateStats();
-            
-            // Создаем Blob
-            const blob = new Blob([script.content], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            
-            // Создаем ссылку для скачивания
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = script.name;
-            
-            // Добавляем, кликаем и удаляем
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Освобождаем URL
-            setTimeout(() => URL.revokeObjectURL(url), 100);
-            
-            // Показываем уведомление
-            showNotification(`✅ Файл "${script.name}" успешно скачан!`);
-        }
-        
-        // Скачивание файла по ссылке
-        function downloadFile(fileUrl, fileName) {
-            totalDownloads++;
-            updateStats();
-            
-            // Открываем файл в новой вкладке для скачивания
-            window.open(fileUrl, '_blank');
-            
-            // Показываем уведомление
-            showNotification(`📥 Началось скачивание файла!`);
-        }
-        
-        // Получение класса для бейджа
-        function getBadgeClass(badge) {
-            switch(badge.toLowerCase()) {
-                case 'opr': return 'badge-new';
-                case 'apk': return 'badge-apk';
-                case 'android': return 'badge-android';
-                case 'конфиг': return 'badge-config';
-                default: return 'badge-new';
-            }
-        }
-        
         // Обновление статистики
         function updateStats() {
-            document.getElementById('totalFiles').textContent = scripts.length + 1 + configs.length;
+            document.getElementById('totalFiles').textContent = 2;
             document.getElementById('totalDownloads').textContent = totalDownloads;
         }
         
@@ -1607,6 +1358,36 @@ pfc.log("- Общее время работы: " + время_работы + " �
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 4000);
+        }
+        
+        // Функция копирования кода
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const codeText = codeElement.innerText;
+            
+            // Создаем временный textarea для копирования
+            const textarea = document.createElement('textarea');
+            textarea.value = codeText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showNotification('✅ Код скопирован в буфер обмена!');
+                    
+                    // Увеличиваем счетчик скачиваний
+                    totalDownloads++;
+                    updateStats();
+                } else {
+                    showNotification('❌ Не удалось скопировать код');
+                }
+            } catch (err) {
+                showNotification('❌ Ошибка при копировании');
+                console.error('Ошибка при копировании:', err);
+            }
+            
+            document.body.removeChild(textarea);
         }
     </script>
 </body>
