@@ -21,7 +21,6 @@
             overflow-x: hidden;
         }
         
-        /* Анимированный фон с частицами */
         body::before {
             content: '';
             position: fixed;
@@ -36,7 +35,6 @@
             z-index: -1;
         }
         
-        /* Анимированные частицы */
         .particles {
             position: fixed;
             top: 0;
@@ -66,7 +64,6 @@
             padding: 20px;
         }
         
-        /* Главный заголовок */
         .main-title {
             text-align: center;
             margin: 40px 0 60px;
@@ -160,7 +157,6 @@
             }
         }
         
-        /* Шапка */
         .header {
             display: flex;
             justify-content: space-between;
@@ -304,8 +300,7 @@
             letter-spacing: 2px;
         }
         
-        /* Вкладки */
-        .tabs {
+        .main-tabs {
             display: flex;
             gap: 15px;
             margin-bottom: 50px;
@@ -314,7 +309,7 @@
             justify-content: center;
         }
         
-        .tabs::before {
+        .main-tabs::before {
             content: '';
             position: absolute;
             bottom: -10px;
@@ -328,7 +323,7 @@
                 transparent 100%);
         }
         
-        .tab-btn {
+        .main-tab-btn {
             background: linear-gradient(135deg, 
                 rgba(30, 58, 30, 0.9), 
                 rgba(40, 68, 40, 0.7));
@@ -348,7 +343,7 @@
             backdrop-filter: blur(10px);
         }
         
-        .tab-btn::before {
+        .main-tab-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -362,11 +357,11 @@
             transition: 0.5s;
         }
         
-        .tab-btn:hover::before {
+        .main-tab-btn:hover::before {
             left: 100%;
         }
         
-        .tab-btn:hover {
+        .main-tab-btn:hover {
             background: linear-gradient(135deg, 
                 rgba(37, 211, 102, 0.25), 
                 rgba(46, 204, 113, 0.15));
@@ -375,12 +370,73 @@
             box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
         }
         
-        .tab-btn.active {
+        .main-tab-btn.active {
             background: linear-gradient(135deg, #25D366, #2ECC71);
             color: white;
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
             border-color: #25D366;
             animation: pulse 2s infinite;
+        }
+        
+        .script-category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab-btn {
+            background: linear-gradient(135deg, 
+                rgba(50, 70, 50, 0.8), 
+                rgba(60, 80, 60, 0.6));
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            padding: 12px 25px;
+            border-radius: 10px;
+            color: #B0E6B0;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .category-tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: 0.3s;
+        }
+        
+        .category-tab-btn:hover::before {
+            left: 100%;
+        }
+        
+        .category-tab-btn:hover {
+            background: linear-gradient(135deg, 
+                rgba(37, 211, 102, 0.2), 
+                rgba(46, 204, 113, 0.1));
+            border-color: #25D366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .category-tab-btn.active {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border-color: #FF6B6B;
         }
         
         @keyframes pulse {
@@ -389,13 +445,21 @@
             100% { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
         }
         
-        /* Контент вкладок */
-        .tab-content {
+        .main-tab-content {
             display: none;
             animation: fadeIn 0.5s ease;
         }
         
-        .tab-content.active {
+        .main-tab-content.active {
+            display: block;
+        }
+        
+        .category-tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .category-tab-content.active {
             display: block;
         }
         
@@ -410,7 +474,6 @@
             }
         }
         
-        /* Стили для скриптов */
         .scripts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -512,26 +575,27 @@
             border: 1px solid rgba(37, 211, 102, 0.2);
         }
         
-        .copy-btn {
+        .download-btn {
             background: linear-gradient(135deg, #25D366, #2ECC71);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px 25px;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: all 0.3s ease;
             width: 100%;
             justify-content: center;
+            margin-top: 10px;
         }
         
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
         }
         
         .telegram-link {
@@ -541,7 +605,7 @@
             background: linear-gradient(135deg, #0088cc, #24A1DE);
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 10px;
             font-size: 14px;
             font-weight: bold;
@@ -559,7 +623,6 @@
             font-size: 16px;
         }
         
-        /* Заголовок секции */
         .section-title {
             font-size: 36px;
             color: #DCF8C6;
@@ -586,7 +649,6 @@
                 transparent 100%);
         }
         
-        /* Стили для пустых состояний */
         .empty-state {
             text-align: center;
             padding: 80px 20px;
@@ -630,113 +692,6 @@
             margin-top: 30px;
         }
         
-        /* Контейнер для ссылки на видео */
-        .video-link-container {
-            max-width: 900px;
-            margin: 0 auto 40px;
-            padding: 35px;
-            background: linear-gradient(135deg, 
-                rgba(30, 58, 30, 0.95), 
-                rgba(40, 68, 40, 0.85));
-            border-radius: 25px;
-            border: 2px solid rgba(37, 211, 102, 0.3);
-            text-align: center;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .video-link-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #FF6B6B, #FF8E53, #25D366);
-        }
-        
-        .video-link-title {
-            color: #DCF8C6;
-            font-size: 28px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .video-link-description {
-            color: #90EE90;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .video-link-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-            color: white;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-        }
-        
-        .video-link-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            transition: 0.5s;
-        }
-        
-        .video-link-button:hover::before {
-            left: 100%;
-        }
-        
-        .video-link-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
-            background: linear-gradient(135deg, #FF8E53, #FF6B6B);
-        }
-        
-        .video-link-features {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #B0E6B0;
-            font-size: 14px;
-        }
-        
-        /* Футер */
         .footer {
             text-align: center;
             padding: 50px 0;
@@ -765,7 +720,6 @@
             opacity: 0.8;
         }
         
-        /* Уведомление */
         .notification {
             position: fixed;
             bottom: 30px;
@@ -801,7 +755,6 @@
             }
         }
         
-        /* Адаптивность */
         @media (max-width: 992px) {
             .header {
                 flex-direction: column;
@@ -814,12 +767,8 @@
                 max-width: 500px;
             }
             
-            .tabs {
+            .main-tabs {
                 justify-content: center;
-            }
-            
-            .video-link-container {
-                margin: 0 20px 40px;
             }
             
             .title-gradient {
@@ -860,26 +809,13 @@
                 height: 20px;
             }
             
-            .tab-btn {
+            .main-tab-btn {
                 padding: 15px 25px;
                 font-size: 15px;
             }
             
             .section-title {
                 font-size: 28px;
-            }
-            
-            .video-link-container {
-                padding: 20px;
-            }
-            
-            .video-link-title {
-                font-size: 24px;
-            }
-            
-            .video-link-button {
-                padding: 15px 30px;
-                font-size: 16px;
             }
             
             .script-card {
@@ -905,26 +841,15 @@
                 font-size: 22px;
             }
             
-            .tab-btn {
+            .main-tab-btn {
                 padding: 12px 20px;
                 font-size: 14px;
                 width: 100%;
                 justify-content: center;
             }
             
-            .tabs {
+            .main-tabs {
                 gap: 10px;
-            }
-            
-            .video-link-button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .video-link-features {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
             }
             
             .scripts-grid {
@@ -935,17 +860,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Анимированные частицы -->
     <div class="particles" id="particles"></div>
     
     <div class="container">
-        <!-- Главный заголовок -->
         <div class="main-title">
             <div class="title-gradient">FLYSCRIPTS</div>
             <div class="subtitle">Автоматизация для игр</div>
         </div>
         
-        <!-- Шапка -->
         <header class="header">
             <div class="logo">
                 <div class="logo-icon">F</div>
@@ -956,7 +878,7 @@
             </div>
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-number" id="totalFiles">2</div>
+                    <div class="stat-number" id="totalFiles">3</div>
                     <div class="stat-label">Файлов</div>
                 </div>
                 <div class="stat-item">
@@ -964,57 +886,65 @@
                     <div class="stat-label">Скачиваний</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">v2.0</div>
+                    <div class="stat-number">v2.3</div>
                     <div class="stat-label">Версия</div>
                 </div>
             </div>
         </header>
         
-        <!-- Вкладки -->
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="scripts">
+        <div class="main-tabs">
+            <button class="main-tab-btn active" data-tab="scripts">
                 <i class="fas fa-file-code"></i> Скрипты
             </button>
-            <button class="tab-btn" data-tab="tutorials">
+            <button class="main-tab-btn" data-tab="tutorials">
                 <i class="fas fa-graduation-cap"></i> Туторы
             </button>
         </div>
         
-        <!-- Контент вкладки Скрипты -->
-        <div class="tab-content active" id="scripts-content">
+        <div class="main-tab-content active" id="scripts-content">
             <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
             
-            <div class="scripts-grid">
-                <!-- Скрипт OPR Price -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <h3 class="script-title">
-                            <i class="fas fa-tag"></i> OPR Price
-                        </h3>
-                        <span class="script-badge">Standoff 2</span>
-                    </div>
-                    
-                    <p class="script-description">
-                        Скрипт определённый прайс покупает скины по настроенной цене в Standoff 2.
-                        Автоматическая покупка по заданной цене с использованием OCR для чтения цен.
-                    </p>
-                    
-                    <div class="script-features">
-                        <div class="feature">
-                            <i class="fas fa-bolt"></i>
-                            <span>Покупка по настроенной цене</span>
+            <div class="script-category-tabs">
+                <button class="category-tab-btn active" data-category="flyscripts">
+                    <i class="fas fa-rocket"></i> FlyScripts
+                </button>
+                <button class="category-tab-btn" data-category="scriptich">
+                    <i class="fab fa-telegram"></i> Scriptich
+                </button>
+            </div>
+            
+            <!-- Контент FlyScripts -->
+            <div class="category-tab-content active" id="flyscripts-content">
+                <div class="scripts-grid">
+                    <div class="script-card">
+                        <div class="script-header">
+                            <h3 class="script-title">
+                                <i class="fas fa-dollar-sign"></i> OPR Price
+                            </h3>
+                            <span class="script-badge">script</span>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-eye"></i>
-                            <span>OCR распознавание цен</span>
+                        
+                        <p class="script-description">
+                            Скрипт определённый прайс - покупает скины по настроенной цене. 
+                            Автоматически проверяет цену и совершает покупку.
+                        </p>
+                        
+                        <div class="script-features">
+                            <div class="feature">
+                                <i class="fas fa-search-dollar"></i>
+                                <span>Проверка цены</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Автоматическая покупка</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-cog"></i>
+                                <span>Настройка скорости</span>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-sliders-h"></i>
-                            <span>Настраиваемые параметры</span>
-                        </div>
-                    </div>
-                    
-                    <div class="script-code" id="oprPriceCode">
+                        
+                        <div class="script-code" id="oprPriceCode">
 //Скрипт определённый прайс покупает скины по настроенной цене
 
 pfc.log("OPR price started");
@@ -1025,8 +955,7 @@ Point r2 = Point.get(833,718); //кнопка потвердить
 Point r3 = Point.get(709,362); //Галочка только мои запросы
 Point r4 = Point.get(1815,101); //Крестик в осмотре
 Point r5 = Point.get(927,699); //Кнопка ок
-Point r6 = Point.get(1388,440); //Левый верхний угол цены
-Point r7 = Point.get(1493,473); //Правый нижний угол цены
+Point r6 = Point.get(1388,440); //цена
 
 //-----Настройка цветов-----
 int t1 = 5460804; //Цвет галочки только мои запросы
@@ -1037,19 +966,15 @@ int t4 = 17035; //Цвет проверки цены скорее всего 170
 //-----Настройко скорости-----
 int d1 = 15; //Скорость клика настрой под свой телефон
 int d2 = 100; //задержка для оптимальной работы
-int d3 = 0; //задержка скрипта для оптимальной работы
-int d4 = 3; //задержка проверки цены
+int d4 = 50; //задержка если проблемы с интернетом
 
-//-----Настройка цены-----
-float g1 = 32.10f; //Цена покупки
+//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
+//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
+//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
 
 pfc.startScreenCapture(2);
-pfc.setOCRLang("uzb");
-
-float g2 = 999999.99f;
 
 while(!EXIT){
-try{
 
 if(pfc.getColor(r4) == t2){
 click(r4);
@@ -1075,20 +1000,7 @@ click(r3);
 sleep(d2);
 }
 
-String txt = pfc.getText(r6, r7);
-String ct = txt.replaceAll("[^0-9.,]", "").replace(",", ".");
-       
-if (ct.length() > 0 && ct.indexOf(".") == ct.lastIndexOf(".")) {
-g2 = Float.parseFloat(ct);
-} else {
-g2 = 999999.99f; 
-}
-} catch (Exception e) {
-g2 = 999999.99f;
-}
-sleep(d4);
-
-if(g2 <= g1 && g2 > 0){
+if(pfc.getColor(r6) == t4){
 click(r1);
 sleep(d1);
 click(r2);
@@ -1096,54 +1008,55 @@ sleep(d1);
 click(r2);
 sleep(d1);
 click(r2);
-sleep(d1);
+sleep(d2);
 click(r3);
-sleep(d1);
+sleep(d2);
 click(r3);
 pfc.log("Халява купил скинчик"); 
 }
-continue;
-
-sleep(d3);
+sleep(0);
 }
-}
+                        </div>
+                        
+                        <button class="download-btn" onclick="downloadScript('OPR_Price.txt', 'oprPriceCode')">
+                            <i class="fas fa-download"></i> Скачать скрипт
+                        </button>
                     </div>
-                    
-                    <button class="copy-btn" onclick="copyCode('oprPriceCode')">
-                        <i class="far fa-copy"></i> Копировать код
-                    </button>
                 </div>
-                
-                <!-- Скрипт 2 в 1 S&F -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <h3 class="script-title">
-                            <i class="fas fa-layer-group"></i> 2 в 1 S&F
-                        </h3>
-                        <span class="script-badge">Standoff 2</span>
-                    </div>
-                    
-                    <p class="script-description">
-                        Скрипт 2-в-1 для автопокупки скинов и с наклейками. 
-                        Поддерживает несколько слотов и имеет оптимизацию для разных устройств.
-                    </p>
-                    
-                    <div class="script-features">
-                        <div class="feature">
-                            <i class="fas fa-boxes"></i>
-                            <span>Мульти-слотовая покупка</span>
+            </div>
+            
+            <!-- Контент Scriptich -->
+            <div class="category-tab-content" id="scriptich-content">
+                <div class="scripts-grid">
+                    <div class="script-card">
+                        <div class="script-header">
+                            <h3 class="script-title">
+                                <i class="fas fa-layer-group"></i> 2 в 1 S&F
+                            </h3>
+                            <span class="script-badge">script</span>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-sticky-note"></i>
-                            <span>Работа с наклейками</span>
+                        
+                        <p class="script-description">
+                            Скрипт 2-в-1 для автопокупки скинов и с наклейками. 
+                            Поддерживает несколько слотов и имеет оптимизацию для разных устройств.
+                        </p>
+                        
+                        <div class="script-features">
+                            <div class="feature">
+                                <i class="fas fa-boxes"></i>
+                                <span>Мульти-слотовая покупка</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-sticky-note"></i>
+                                <span>Работа с наклейками</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Оптимизация скорости</span>
+                            </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Оптимизация скорости</span>
-                        </div>
-                    </div>
-                    
-                    <div class="script-code" id="twoInOneCode">
+                        
+                        <div class="script-code" id="twoInOneCode">
 pfc.log("aftor scriptich & flyscript");
 //кнопка купить
 Point p1 = Point.get(1664,462);
@@ -1223,26 +1136,149 @@ while(!EXIT){
     continue;
     pfc.sleep(CPU);
 }
+                        </div>
+                        
+                        <button class="download-btn" onclick="downloadScript('2in1_SF.txt', 'twoInOneCode')">
+                            <i class="fas fa-download"></i> Скачать скрипт
+                        </button>
+                        
+                        <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
+                            <i class="fab fa-telegram"></i> 
+                            <span>Телеграм: @Scriptich</span>
+                        </a>
                     </div>
                     
-                    <button class="copy-btn" onclick="copyCode('twoInOneCode')">
-                        <i class="far fa-copy"></i> Копировать код
-                    </button>
-                    
-                    <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
-                        <i class="fab fa-telegram"></i> 
-                        <span>Помощник скрипта: @Scriptich</span>
-                    </a>
-                    
-                    <div style="text-align: center; color: #90EE90; font-size: 14px; margin-top: 15px; font-style: italic;">
-                        Спасибо за скрипт! Сильно помог! ❤️
+                    <div class="script-card">
+                        <div class="script-header">
+                            <h3 class="script-title">
+                                <i class="fas fa-shield-alt"></i> Barrier
+                            </h3>
+                            <span class="script-badge">script</span>
+                        </div>
+                        
+                        <p class="script-description">
+                            Скрипт для автоматической покупки скинов с наклейками. Оптимизирован для работы с разными пингами 
+                            и устройствами.
+                        </p>
+                        
+                        <div class="script-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Автопокупка с наклейками</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-cogs"></i>
+                                <span>Настраиваемая скорость</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Защита от разбагов</span>
+                            </div>
+                        </div>
+                        
+                        <div class="script-code" id="barrierCode">
+pfc.log("script sticker hunter & aftor scriptich");
+Point p1 = Point.get(); //кнопка купит()     
+Point p2 = Point.get(); //кнопка подтвердить() 
+Point p3 = Point.get(); //кнопка галочка()
+Point p4 = Point.get(); //кнопка крестик(в осмотре)
+Point p5 = Point.get(); //ок(если кто-то купил скин быстрее)
+Point p6 = Point.get(); //крестик(в меню покупки)
+//наклейки
+Point n1 = Point.get();  //левый верхний угол(наклейки)
+Point n2 = Point.get();  //правый нижний угол(наклейки)
+//цвета
+int a1 = 123; //галачка()
+int a2 = 123; //крестик()                                  
+int a3 = 123; //ок()                                   
+//настройки(скрипта)
+int speed_buy = 9; //скорость покупки(ставить зависимо от устройства)
+int ping_save = 90; //ставить зависимо(от пинга)
+int speed_refresh = 7000; //скорость обновления(галочки)
+int speedfix = 100; //скорость(разбагов)
+int slots = 66; //высота слота(обязательно)
+int slot = 9; //сколько слотов видно(полностью)
+//настройка завершились ниже не трогай 
+//это скрипт самый лучшый TG-scriptich
+
+long suka = Time.getMillis();
+var zaebalsa_ito_delat = Point.get(n1.x, n1.y);
+var blyattttttttt = Point.get(n2.x, n2.y);
+zaebalsa_ito_delat.x = n1.x;  
+blyattttttttt.x = n2.x;
+
+pfc.startScreenCapture(2);
+
+while(!EXIT){
+
+    if(pfc.getColor(p3) == a1){
+        pfc.click(p3); 
+        pfc.sleep(speedfix);
+    }  
+
+    if(pfc.getColor(p4) == a2){
+        pfc.click(p4); 
+        pfc.sleep(speedfix);
+        pfc.click(p3); pfc.sleep(5);
+        pfc.click(p3); pfc.sleep(5);
+    } 
+
+    if(pfc.getColor(p5) == a3){
+        pfc.click(p5); 
+        pfc.sleep(speedfix);
+        pfc.click(p3); pfc.sleep(5);
+        pfc.click(p3); pfc.sleep(5); 
+        pfc.log("кто-то купил скин быстрее");
+    }
+
+    for(var ezzzzz = 0; ezzzzz < slot; ezzzzz++){
+
+        zaebalsa_ito_delat.y = n1.y + (ezzzzz * slots);
+        blyattttttttt.y = n2.y + (ezzzzz * slots);
+
+        var negr = pfc.getContoursCount(zaebalsa_ito_delat, blyattttttttt);
+
+        if(
+            negr > 2 &&
+            pfc.getColor(p1.x, p1.y + (ezzzzz * slots)) < 10000000
+        ){
+            pfc.click(p1.x, p1.y + (ezzzzz * slots)); 
+            pfc.sleep(speed_buy); 
+            pfc.click(p2); 
+            pfc.click(p2); 
+            pfc.click(p2); 
+            pfc.click(p2); 
+            pfc.sleep(ping_save); 
+            pfc.click(p6);       
+        }
+
+        var stalker = speed_refresh;
+        if(Time.getMillis() - suka >= speed_refresh){
+            pfc.click(p3); pfc.sleep(5);
+            pfc.click(p3); pfc.sleep(5);  
+            suka = Time.getMillis(); 
+        }
+
+        continue;
+        //хуй а не sleep
+    }
+}
+                        </div>
+                        
+                        <button class="download-btn" onclick="downloadScript('Barrier.txt', 'barrierCode')">
+                            <i class="fas fa-download"></i> Скачать скрипт
+                        </button>
+                        
+                        <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
+                            <i class="fab fa-telegram"></i> 
+                            <span>Телеграм: @Scriptich</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Контент вкладки Туторы -->
-        <div class="tab-content" id="tutorials-content">
+        <div class="main-tab-content" id="tutorials-content">
             <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Туторы</h2>
             
             <div style="text-align: center; padding: 80px 20px;">
@@ -1260,20 +1296,17 @@ while(!EXIT){
             </div>
         </div>
         
-        <!-- Футер -->
         <footer class="footer">
             <p>© 2024 FlyScripts. Все права защищены.</p>
             <p>Сайт для образовательных целей</p>
         </footer>
     </div>
     
-    <!-- Уведомление -->
     <div class="notification" id="notification">
         <div id="notificationText"></div>
     </div>
 
     <script>
-        // Создание анимированных частиц
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 30;
@@ -1282,7 +1315,6 @@ while(!EXIT){
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                // Случайные размеры и позиции
                 const size = Math.random() * 10 + 5;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
@@ -1303,51 +1335,64 @@ while(!EXIT){
         
         let totalDownloads = 0;
         
-        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
             updateStats();
-            setupTabs();
-            
-            // Анимация при загрузке
-            document.body.classList.add('loaded');
+            setupMainTabs();
+            setupCategoryTabs();
         });
         
-        // Настройка вкладок
-        function setupTabs() {
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
+        function setupMainTabs() {
+            const mainTabBtns = document.querySelectorAll('.main-tab-btn');
+            const mainTabContents = document.querySelectorAll('.main-tab-content');
             
-            tabBtns.forEach(btn => {
+            mainTabBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Убираем активный класс у всех кнопок и контента
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
+                    mainTabBtns.forEach(b => b.classList.remove('active'));
+                    mainTabContents.forEach(c => c.classList.remove('active'));
                     
-                    // Добавляем активный класс нажатой кнопке
                     btn.classList.add('active');
                     
-                    // Показываем соответствующий контент
                     const tabId = btn.getAttribute('data-tab');
                     document.getElementById(`${tabId}-content`).classList.add('active');
                     
-                    // Показываем уведомление о переключении
                     if(tabId === 'tutorials') {
                         showNotification('📹 Туториалы пока в разработке');
                     } else if(tabId === 'scripts') {
-                        showNotification('🚀 Открыты скрипты! Теперь доступны 2 скрипта для Standoff 2.');
+                        showNotification('🚀 Открыты скрипты! Выберите категорию.');
                     }
                 });
             });
         }
         
-        // Обновление статистики
+        function setupCategoryTabs() {
+            const categoryTabBtns = document.querySelectorAll('.category-tab-btn');
+            const categoryTabContents = document.querySelectorAll('.category-tab-content');
+            
+            categoryTabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryTabBtns.forEach(b => b.classList.remove('active'));
+                    categoryTabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    
+                    const category = btn.getAttribute('data-category');
+                    document.getElementById(`${category}-content`).classList.add('active');
+                    
+                    if(category === 'flyscripts') {
+                        showNotification('🚀 FlyScripts: OPR Price - 1 скрипт');
+                    } else if(category === 'scriptich') {
+                        showNotification('📱 Scriptich: 2v1 и Barrier - 2 скрипта');
+                    }
+                });
+            });
+        }
+        
         function updateStats() {
-            document.getElementById('totalFiles').textContent = 2;
+            document.getElementById('totalFiles').textContent = 3;
             document.getElementById('totalDownloads').textContent = totalDownloads;
         }
         
-        // Показ уведомления
         function showNotification(message) {
             const notification = document.getElementById('notification');
             const text = document.getElementById('notificationText');
@@ -1360,34 +1405,25 @@ while(!EXIT){
             }, 4000);
         }
         
-        // Функция копирования кода
-        function copyCode(elementId) {
+        function downloadScript(filename, elementId) {
             const codeElement = document.getElementById(elementId);
             const codeText = codeElement.innerText;
             
-            // Создаем временный textarea для копирования
-            const textarea = document.createElement('textarea');
-            textarea.value = codeText;
-            document.body.appendChild(textarea);
-            textarea.select();
+            const blob = new Blob([codeText], { type: 'text/plain' });
             
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showNotification('✅ Код скопирован в буфер обмена!');
-                    
-                    // Увеличиваем счетчик скачиваний
-                    totalDownloads++;
-                    updateStats();
-                } else {
-                    showNotification('❌ Не удалось скопировать код');
-                }
-            } catch (err) {
-                showNotification('❌ Ошибка при копировании');
-                console.error('Ошибка при копировании:', err);
-            }
+            const downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = filename;
             
-            document.body.removeChild(textarea);
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            
+            document.body.removeChild(downloadLink);
+            
+            totalDownloads++;
+            updateStats();
+            
+            showNotification(`✅ Скрипт "${filename}" скачан!`);
         }
     </script>
 </body>
