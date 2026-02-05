@@ -651,49 +651,6 @@
                 transparent 100%);
         }
         
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, 
-                rgba(30, 58, 30, 0.8), 
-                rgba(40, 68, 40, 0.6));
-            border-radius: 20px;
-            border: 2px solid rgba(37, 211, 102, 0.2);
-            backdrop-filter: blur(10px);
-            margin-top: 20px;
-        }
-        
-        .empty-icon {
-            font-size: 80px;
-            color: #25D366;
-            margin-bottom: 20px;
-            opacity: 0.7;
-        }
-        
-        .empty-title {
-            font-size: 32px;
-            color: #DCF8C6;
-            margin-bottom: 20px;
-        }
-        
-        .empty-description {
-            color: #90EE90;
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
-        }
-        
-        .empty-status {
-            color: #B0E6B0;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
-        
         .footer {
             text-align: center;
             padding: 50px 0;
@@ -1198,9 +1155,6 @@
             <button class="main-tab-btn active" data-tab="scripts">
                 <i class="fas fa-file-code"></i> Скрипты
             </button>
-            <button class="main-tab-btn" data-tab="tutorials">
-                <i class="fas fa-graduation-cap"></i> Туторы
-            </button>
         </div>
         
         <!-- Админ-панель (скрыта по умолчанию) -->
@@ -1313,24 +1267,6 @@
             <!-- Контент Другое -->
             <div class="category-tab-content" id="other-content">
                 <div class="scripts-grid" id="other-grid"></div>
-            </div>
-        </div>
-        
-        <div class="main-tab-content" id="tutorials-content">
-            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Туторы</h2>
-            
-            <div style="text-align: center; padding: 80px 20px;">
-                <div class="empty-icon">
-                    <i class="fas fa-video-slash"></i>
-                </div>
-                <h3 class="empty-title">Пока нету</h3>
-                <p class="empty-description">
-                    Туториалы в разработке. Скоро здесь появятся подробные видео-руководства по использованию скриптов.
-                </p>
-                <div class="empty-status">
-                    <i class="fas fa-sync-alt fa-spin"></i>
-                    <span>Следите за обновлениями</span>
-                </div>
             </div>
         </div>
         
@@ -1704,11 +1640,7 @@ while(!EXIT){
                     const tabId = btn.getAttribute('data-tab');
                     document.getElementById(`${tabId}-content`).classList.add('active');
                     
-                    if(tabId === 'tutorials') {
-                        showNotification('📹 Туториалы пока в разработке');
-                    } else if(tabId === 'scripts') {
-                        showNotification('🚀 Открыты скрипты! Выберите категорию.');
-                    }
+                    showNotification('🚀 Открыты скрипты! Выберите категорию.');
                 });
             });
         }
