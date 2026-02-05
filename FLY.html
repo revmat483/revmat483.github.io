@@ -746,6 +746,253 @@
             display: block;
         }
         
+        /* Стили для админ-панели */
+        .admin-panel {
+            display: none;
+            background: linear-gradient(135deg, 
+                rgba(30, 30, 58, 0.95), 
+                rgba(40, 40, 68, 0.85));
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-top: 30px;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            color: #DCF8C6;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #E8F5E9;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+        
+        .admin-btn {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .admin-btn.secondary {
+            background: linear-gradient(135deg, #4D96FF, #6BCF7F);
+        }
+        
+        .admin-btn.secondary:hover {
+            box-shadow: 0 10px 20px rgba(77, 150, 255, 0.4);
+        }
+        
+        .script-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .action-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            color: #B0E6B0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: rgba(37, 211, 102, 0.2);
+            border-color: #25D366;
+        }
+        
+        .action-btn.delete {
+            background: rgba(255, 107, 107, 0.2);
+            border-color: rgba(255, 107, 107, 0.4);
+        }
+        
+        .action-btn.delete:hover {
+            background: rgba(255, 107, 107, 0.4);
+            border-color: #FF6B6B;
+        }
+        
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-toggle:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+        
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .login-modal.active {
+            display: flex;
+        }
+        
+        .login-form {
+            background: linear-gradient(135deg, 
+                rgba(30, 58, 30, 0.95), 
+                rgba(40, 68, 40, 0.85));
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(37, 211, 102, 0.3);
+            min-width: 400px;
+            max-width: 500px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #DCF8C6;
+            font-size: 28px;
+        }
+        
+        .video-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #FF0000, #FF6B6B);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            justify-content: center;
+        }
+        
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
+        }
+        
+        .video-link i {
+            font-size: 16px;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(135deg, #666, #999);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #888, #aaa);
+            transform: translateY(-2px);
+        }
+        
         @keyframes slideIn {
             from {
                 transform: translateX(100%) translateY(20px);
@@ -779,6 +1026,11 @@
             
             .scripts-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .login-form {
+                min-width: 90%;
+                margin: 20px;
             }
         }
         
@@ -827,6 +1079,20 @@
             .script-title {
                 font-size: 20px;
             }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .admin-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
         
         @media (max-width: 480px) {
@@ -857,12 +1123,46 @@
             .scripts-grid {
                 gap: 20px;
             }
+            
+            .login-form {
+                padding: 30px 20px;
+            }
+            
+            .admin-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="particles" id="particles"></div>
+    
+    <!-- Кнопка доступа к админке -->
+    <button class="admin-toggle" onclick="toggleLoginModal()">
+        <i class="fas fa-cog"></i>
+    </button>
+    
+    <!-- Модальное окно входа -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-form">
+            <h2><i class="fas fa-lock"></i> Вход в админ-панель</h2>
+            <div class="form-group">
+                <label for="adminPassword"><i class="fas fa-key"></i> Пароль администратора</label>
+                <input type="password" id="adminPassword" placeholder="Введите пароль">
+            </div>
+            <div class="form-actions">
+                <button class="admin-btn" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+                <button class="admin-btn secondary" onclick="toggleLoginModal()">
+                    <i class="fas fa-times"></i> Отмена
+                </button>
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="main-title">
@@ -903,6 +1203,88 @@
             </button>
         </div>
         
+        <!-- Админ-панель (скрыта по умолчанию) -->
+        <div class="admin-panel" id="adminPanel">
+            <h2 class="section-title"><i class="fas fa-tools"></i> Панель администратора</h2>
+            
+            <div class="admin-controls">
+                <button class="admin-btn secondary" onclick="toggleAdvancedMode()">
+                    <i class="fas fa-cogs"></i> Расширенный режим
+                </button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+            
+            <div class="admin-form" id="adminForm">
+                <div class="form-group">
+                    <label for="scriptName"><i class="fas fa-heading"></i> Название скрипта</label>
+                    <input type="text" id="scriptName" placeholder="Например: OPR Price">
+                </div>
+                
+                <div class="form-group">
+                    <label for="scriptCategory"><i class="fas fa-folder"></i> Категория</label>
+                    <select id="scriptCategory">
+                        <option value="flyscripts">FlyScripts</option>
+                        <option value="scriptich">Scriptich</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="scriptDescription"><i class="fas fa-align-left"></i> Описание</label>
+                    <textarea id="scriptDescription" placeholder="Описание скрипта..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="scriptCode"><i class="fas fa-code"></i> Код скрипта</label>
+                    <textarea id="scriptCode" placeholder="Вставьте код скрипта здесь..." rows="10"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="scriptFilename"><i class="fas fa-file-alt"></i> Имя файла для скачивания</label>
+                    <input type="text" id="scriptFilename" placeholder="Например: OPR_Price.txt">
+                </div>
+                
+                <!-- Расширенные настройки (скрыты по умолчанию) -->
+                <div id="advancedSettings" style="display: none;">
+                    <div class="form-group">
+                        <label for="videoLink"><i class="fas fa-video"></i> Ссылка на видео (YouTube)</label>
+                        <input type="url" id="videoLink" placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telegramLink"><i class="fab fa-telegram"></i> Ссылка на Telegram</label>
+                        <input type="url" id="telegramLink" placeholder="https://t.me/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="features"><i class="fas fa-star"></i> Особенности (через запятую)</label>
+                        <input type="text" id="features" placeholder="Автопокупка, Наклейки, Быстрая работа">
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="admin-btn" onclick="saveScript()">
+                        <i class="fas fa-save"></i> Сохранить скрипт
+                    </button>
+                    <button class="admin-btn secondary" onclick="clearForm()">
+                        <i class="fas fa-times"></i> Очистить форму
+                    </button>
+                    <button class="admin-btn secondary" onclick="cancelEdit()" id="cancelBtn" style="display: none;">
+                        <i class="fas fa-ban"></i> Отменить редактирование
+                    </button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <h3 style="color: #DCF8C6; margin-bottom: 20px; border-bottom: 2px solid rgba(37, 211, 102, 0.3); padding-bottom: 10px;">
+                    <i class="fas fa-list"></i> Управление скриптами (${scripts.length})
+                </h3>
+                <div id="scriptList"></div>
+            </div>
+        </div>
+        
         <div class="main-tab-content active" id="scripts-content">
             <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
             
@@ -913,384 +1295,24 @@
                 <button class="category-tab-btn" data-category="scriptich">
                     <i class="fab fa-telegram"></i> Scriptich
                 </button>
+                <button class="category-tab-btn" data-category="other">
+                    <i class="fas fa-star"></i> Другое
+                </button>
             </div>
             
             <!-- Контент FlyScripts -->
             <div class="category-tab-content active" id="flyscripts-content">
-                <div class="scripts-grid">
-                    <div class="script-card">
-                        <div class="script-header">
-                            <h3 class="script-title">
-                                <i class="fas fa-dollar-sign"></i> OPR Price
-                            </h3>
-                            <span class="script-badge">script</span>
-                        </div>
-                        
-                        <p class="script-description">
-                            Скрипт определённый прайс - покупает скины по настроенной цене. 
-                            Автоматически проверяет цену и совершает покупку.
-                        </p>
-                        
-                        <div class="script-features">
-                            <div class="feature">
-                                <i class="fas fa-search-dollar"></i>
-                                <span>Проверка цены</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Автоматическая покупка</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-cog"></i>
-                                <span>Настройка скорости</span>
-                            </div>
-                        </div>
-                        
-                        <div class="script-code" id="oprPriceCode">//Скрипт определённый прайс покупает скины по настроенной цене
-
-
-
-pfc.log("OPR price started");
-
-
-//-----Настрока координат-----
-Point r1 = Point.get(1660,457); //Кнопка купить
-Point r2 = Point.get(843,725); //кнопка потвердить
-Point r3 = Point.get(708,365); //Галочка только мои запросы
-Point r4 = Point.get(1819,101); //Крестик в осмотре
-Point r5 = Point.get(935,701); //Кнопка ок
-Point r6 = Point.get(1413,456); //цена
-
-
-//-----Настройка цветов-----
-int t1 = 5723976; //Цвет галочки только мои запросы
-int t2 = 6512736; //Цвет крестика в осмотре
-int t3 = 9994074; //Цвет кнопки ок
-int t4 = 17035; //Цвет проверки цены скорее всего 17035
-
-
-//-----Настройко скорости-----
-int d1 = 15; //Скорость клика настрой под свой телефон
-int d2 = 100; //задержка для оптимальной работы
-int d4 = 50; //задержка если проблемы с интернетом
-
-//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
-//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
-//НИЖЕ НЕ ТРОЖЬ УБЬЁТ
-
-
-
-pfc.startScreenCapture(2);
-
-
-while(!EXIT){
-
-if(pfc.getColor(r4) == t2){
-click(r4);
-sleep(d2);
-click(r3);
-sleep(d2);
-click(r3);
-sleep(d2);
-}
-
-
-if(pfc.getColor(r5) == t3){
-click(r5);  
-sleep(d2);
-click(r3);
-sleep(d2);
-click(r3);
-sleep(d2);
-pfc.log("А не кто быстрее купил");
-} 
-
-
-if(pfc.getColor(r3) == t1){
-click(r3);   
-sleep(d2);
-}
-
-
-if(pfc.getColor(r6) == t4){
-click(r1);
-sleep(d1);
-click(r2);
-sleep(d1);
-click(r2);
-sleep(d1);
-click(r2);
-sleep(d2);
-click(r3);
-sleep(d2);
-click(r3);
-pfc.log("Халява купил скинчик"); 
-}
-continue;
-
-
-sleep(0);
-}</div>
-                        
-                        <button class="download-btn" onclick="downloadScript('OPR_Price.txt', 'oprPriceCode')">
-                            <i class="fas fa-download"></i> Скачать скрипт
-                        </button>
-                    </div>
-                </div>
+                <div class="scripts-grid" id="flyscripts-grid"></div>
             </div>
             
             <!-- Контент Scriptich -->
             <div class="category-tab-content" id="scriptich-content">
-                <div class="scripts-grid">
-                    <div class="script-card">
-                        <div class="script-header">
-                            <h3 class="script-title">
-                                <i class="fas fa-layer-group"></i> 2 в 1 S&F
-                            </h3>
-                            <span class="script-badge">script</span>
-                        </div>
-                        
-                        <p class="script-description">
-                            Скрипт 2-в-1 для автопокупки скинов и с наклейками. 
-                            Поддерживает несколько слотов и имеет оптимизацию для разных устройств.
-                        </p>
-                        
-                        <div class="script-features">
-                            <div class="feature">
-                                <i class="fas fa-boxes"></i>
-                                <span>Мульти-слотовая покупка</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-sticky-note"></i>
-                                <span>Работа с наклейками</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-tachometer-alt"></i>
-                                <span>Оптимизация скорости</span>
-                            </div>
-                        </div>
-                        
-                        <div class="script-code" id="twoInOneCode">pfc.log("aftor scriptich & flyscript");
-//кнопка купить
-Point p1 = Point.get(1664,462);
-//кнопка подтвердить 
-Point p2 = Point.get(840,723);
-//Галочка 
-Point p3 = Point.get(709,363);
-//крестик
-Point p4 = Point.get(1819,99);
-//ок
-Point p5 = Point.get(933,701);
-//наклейки 
-Point n1 = Point.get(1247,437);
-Point n2 = Point.get(1278,476);
-//цена по цвету и кординатам 0.03 - 0.99
-Point s1 = Point.get(1413,456);
-int s2 = 17035;
-//цвета
-int c1 = 5592389; //цвет галочки
-int c2 = 6184542; //цвет крестика
-int c3 = 9994074;   //цвет ок
-//настройки 
-int slot = 7; //кол-во слотов
-int slots = 112;  //высота слотов
-int speed = 8; //скорость покупки ставить зависимо от устройства 
-int ping = 80; //ставить зависимо от пинга(влияет на скорость)
-int CPU = 0; //повышайте если устройства сильно нагревается 
-int refresh = 7000; //скорость обновления галочки
-//дополнительный функция
-Point k1 = Point.get(1278,476); //крестик в меню покупик (очень сильно влияет на скорость покупки)
-
-//настройки завершились ниже не трогай 
-//авторы scriptich & flyscript
-
-long negr = Time.getMillis();
-
-pfc.startScreenCapture(2);
-while(!EXIT){
-
-    if(pfc.getColor(p3) == c1){
-        pfc.click(p3); pfc.sleep(100);
-    }
-    if(pfc.getColor(p4) == c2){
-        pfc.click(p4); pfc.sleep(100);
-    }
-    if(pfc.getColor(p5) == c3){
-        pfc.click(p5); pfc.sleep(100);
-    }
-
-    
-    if(pfc.getColor(s1) == s2){
-        pfc.click(p1); pfc.sleep(speed);
-        pfc.click(p2); pfc.click(p2); pfc.click(p2); pfc.click(p2); pfc.sleep(speed);
-        pfc.click(k1);
-    }
-
-    
-    for(int sukaizaebalsadelat = 0; sukaizaebalsadelat < slot; sukaizaebalsadelat++){
-        Point left  = Point.get(n1.x, n1.y + sukaizaebalsadelat * slots);
-        Point right = Point.get(n2.x, n2.y + sukaizaebalsadelat * slots);
-
-        if(pfc.getContoursCount(left, right) > 2 &&
-           pfc.getColor(p1.x, p1.y + sukaizaebalsadelat * slots) < 100000000){
-            pfc.click(p1.x, p1.y + sukaizaebalsadelat * slots);
-            pfc.sleep(speed);
-            pfc.click(p2.x, p2.y); pfc.click(p2.x, p2.y);
-            pfc.click(p2.x, p2.y); pfc.click(p2.x, p2.y);
-            pfc.sleep(ping);
-        }
-    }
-
-    if((Time.getMillis() - negr) >= refresh){
-        pfc.click(p3); pfc.sleep(5);
-        pfc.click(p3);  
-        negr = Time.getMillis(); 
-    }
-    continue;
-    pfc.sleep(0);
-}</div>
-                        
-                        <button class="download-btn" onclick="downloadScript('2in1_SF.txt', 'twoInOneCode')">
-                            <i class="fas fa-download"></i> Скачать скрипт
-                        </button>
-                        
-                        <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
-                            <i class="fab fa-telegram"></i> 
-                            <span>Телеграм: @Scriptich</span>
-                        </a>
-                    </div>
-                    
-                    <div class="script-card">
-                        <div class="script-header">
-                            <h3 class="script-title">
-                                <i class="fas fa-shield-alt"></i> Barrier
-                            </h3>
-                            <span class="script-badge">script</span>
-                        </div>
-                        
-                        <p class="script-description">
-                            Скрипт для автоматической покупки скинов с наклейками. Оптимизирован для работы с разными пингами 
-                            и устройствами.
-                        </p>
-                        
-                        <div class="script-features">
-                            <div class="feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Автопокупка с наклейками</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-cogs"></i>
-                                <span>Настраиваемая скорость</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Защита от разбагов</span>
-                            </div>
-                        </div>
-                        
-                        <div class="script-code" id="barrierCode">pfc.log("script sticker hunter & aftor scriptich");
-Point p1 = Point.get(); //кнопка купит()     
-Point p2 = Point.get(); //кнопка подтвердить() 
-Point p3 = Point.get(); //кнопка галочка()
-Point p4 = Point.get(); //кнопка крестик(в осмотре)
-Point p5 = Point.get(); //ок(если кто-то купил скин быстрее)
-Point p6 = Point.get(); //крестик(в меню покупки)
-//наклейки
-Point n1 = Point.get();  //левый верхний угол(наклейки)
-Point n2 = Point.get();  //правый нижний угол(наклейки)
-//цвета
-int a1 = 123; //галачка()
-int a2 = 123; //крестик()                                  
-int a3 = 123; //ок()                                   
-//настройки(скрипта)
-int speed_buy = 9; //скорость покупки(ставить зависимо от устройства)
-int ping_save = 90; //ставить зависимо(от пинга)
-int speed_refresh = 7000; //скорость обновления(галочки)
-int speedfix = 100; //скорость(разбагов)
-int slots = 66; //высота слота(обязательно)
-int slot = 9; //сколько слотов видно(полностью)
-//настройка завершились ниже не трогай 
-//это скрипт самый лучшый TG-scriptich
-
-
-
-
-
-
-
-long suka = Time.getMillis();
-var zaebalsa_ito_delat = Point.get(n1.x, n1.y);
-var blyattttttttt = Point.get(n2.x, n2.y);
-zaebalsa_ito_delat.x = n1.x;  
-blyattttttttt.x = n2.x;
-
-pfc.startScreenCapture(2);
-
-while(!EXIT){
-
-    if(pfc.getColor(p3) == a1){
-        pfc.click(p3); 
-        pfc.sleep(speedfix);
-    }  
-
-    if(pfc.getColor(p4) == a2){
-        pfc.click(p4); 
-        pfc.sleep(speedfix);
-        pfc.click(p3); pfc.sleep(5);
-        pfc.click(p3); pfc.sleep(5);
-    } 
-
-    if(pfc.getColor(p5) == a3){
-        pfc.click(p5); 
-        pfc.sleep(speedfix);
-        pfc.click(p3); pfc.sleep(5);
-        pfc.click(p3); pfc.sleep(5); 
-        pfc.log("кто-то купил скин быстрее");
-    }
-
-    for(var ezzzzz = 0; ezzzzz < slot; ezzzzz++){
-
-        zaebalsa_ito_delat.y = n1.y + (ezzzzz * slots);
-        blyattttttttt.y = n2.y + (ezzzzz * slots);
-
-        var negr = pfc.getContoursCount(zaebalsa_ito_delat, blyattttttttt);
-
-        if(
-            negr > 2 &&
-            pfc.getColor(p1.x, p1.y + (ezzzzz * slots)) < 10000000
-        ){
-            pfc.click(p1.x, p1.y + (ezzzzz * slots)); 
-            pfc.sleep(speed_buy); 
-            pfc.click(p2); 
-            pfc.click(p2); 
-            pfc.click(p2); 
-            pfc.click(p2); 
-            pfc.sleep(ping_save); 
-            pfc.click(p6);       
-        }
-
-        var stalker = speed_refresh;
-        if(Time.getMillis() - suka >= speed_refresh){
-            pfc.click(p3); pfc.sleep(5);
-            pfc.click(p3); pfc.sleep(5);  
-            suka = Time.getMillis(); 
-        }
-
-        continue;
-        //хуй а не sleep
-    }
-}</div>
-                        
-                        <button class="download-btn" onclick="downloadScript('Barrier.txt', 'barrierCode')">
-                            <i class="fas fa-download"></i> Скачать скрипт
-                        </button>
-                        
-                        <a href="https://t.me/Scriptich" target="_blank" class="telegram-link">
-                            <i class="fab fa-telegram"></i> 
-                            <span>Телеграм: @Scriptich</span>
-                        </a>
-                    </div>
-                </div>
+                <div class="scripts-grid" id="scriptich-grid"></div>
+            </div>
+            
+            <!-- Контент Другое -->
+            <div class="category-tab-content" id="other-content">
+                <div class="scripts-grid" id="other-grid"></div>
             </div>
         </div>
         
@@ -1323,9 +1345,21 @@ while(!EXIT){
     </div>
 
     <script>
-        // Скрипты в исходном виде с сохранением всех пробелов
-        const originalScripts = {
-            'OPR_Price.txt': `//Скрипт определённый прайс покупает скины по настроенной цене
+        // Система администрирования
+        const ADMIN_PASSWORD = 'admin123'; // Пароль скрыт из интерфейса
+        let isAdmin = false;
+        let currentEditingId = null;
+        let totalDownloads = 0;
+        let advancedMode = false;
+        
+        // Инициализация скриптов из localStorage
+        let scripts = JSON.parse(localStorage.getItem('flyscripts_scripts')) || [
+            {
+                id: 'opr_price',
+                name: 'OPR Price',
+                category: 'flyscripts',
+                description: 'Скрипт определённый прайс - покупает скины по настроенной цене. Автоматически проверяет цену и совершает покупку.',
+                code: `//Скрипт определённый прайс покупает скины по настроенной цене
 
 
 
@@ -1410,8 +1444,19 @@ continue;
 
 sleep(0);
 }`,
-
-            '2in1_SF.txt': `pfc.log("aftor scriptich & flyscript");
+                filename: 'OPR_Price.txt',
+                downloads: 0,
+                date: '2024-01-01',
+                videoLink: '',
+                telegramLink: '',
+                features: ['Проверка цены', 'Автоматическая покупка', 'Настройка скорости']
+            },
+            {
+                id: '2in1_sf',
+                name: '2 в 1 S&F',
+                category: 'scriptich',
+                description: 'Скрипт 2-в-1 для автопокупки скинов и с наклейками. Поддерживает несколько слотов и имеет оптимизацию для разных устройств.',
+                code: `pfc.log("aftor scriptich & flyscript");
 //кнопка купить
 Point p1 = Point.get(1664,462);
 //кнопка подтвердить 
@@ -1490,8 +1535,19 @@ while(!EXIT){
     continue;
     pfc.sleep(0);
 }`,
-
-            'Barrier.txt': `pfc.log("script sticker hunter & aftor scriptich");
+                filename: '2in1_SF.txt',
+                downloads: 0,
+                date: '2024-01-01',
+                videoLink: '',
+                telegramLink: 'https://t.me/Scriptich',
+                features: ['Мульти-слотовая покупка', 'Работа с наклейками', 'Оптимизация скорости']
+            },
+            {
+                id: 'barrier',
+                name: 'Barrier',
+                category: 'scriptich',
+                description: 'Скрипт для автоматической покупки скинов с наклейками. Оптимизирован для работы с разными пингами и устройствами.',
+                code: `pfc.log("script sticker hunter & aftor scriptich");
 Point p1 = Point.get(); //кнопка купит()     
 Point p2 = Point.get(); //кнопка подтвердить() 
 Point p3 = Point.get(); //кнопка галочка()
@@ -1582,8 +1638,15 @@ while(!EXIT){
         continue;
         //хуй а не sleep
     }
-}`
-        };
+}`,
+                filename: 'Barrier.txt',
+                downloads: 0,
+                date: '2024-01-01',
+                videoLink: '',
+                telegramLink: 'https://t.me/Scriptich',
+                features: ['Автопокупка с наклейками', 'Настраиваемая скорость', 'Защита от разбагов']
+            }
+        ];
 
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -1611,18 +1674,20 @@ while(!EXIT){
             }
         }
         
-        let totalDownloads = 0;
-        
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
             updateStats();
             setupMainTabs();
             setupCategoryTabs();
+            renderScripts();
+            updateScriptList();
             
-            // Устанавливаем исходные скрипты в code блоки
-            document.getElementById('oprPriceCode').textContent = originalScripts['OPR_Price.txt'];
-            document.getElementById('twoInOneCode').textContent = originalScripts['2in1_SF.txt'];
-            document.getElementById('barrierCode').textContent = originalScripts['Barrier.txt'];
+            // Загружаем статистику скачиваний
+            const savedDownloads = localStorage.getItem('flyscripts_totalDownloads');
+            if (savedDownloads) {
+                totalDownloads = parseInt(savedDownloads);
+                updateStats();
+            }
         });
         
         function setupMainTabs() {
@@ -1663,16 +1728,19 @@ while(!EXIT){
                     document.getElementById(`${category}-content`).classList.add('active');
                     
                     if(category === 'flyscripts') {
-                        showNotification('🚀 FlyScripts: OPR Price - 1 скрипт');
+                        showNotification('🚀 FlyScripts скрипты');
                     } else if(category === 'scriptich') {
-                        showNotification('📱 Scriptich: 2v1 и Barrier - 2 скрипта');
+                        showNotification('📱 Scriptich скрипты');
+                    } else if(category === 'other') {
+                        showNotification('⭐ Другие скрипты');
                     }
                 });
             });
         }
         
         function updateStats() {
-            document.getElementById('totalFiles').textContent = 3;
+            const totalFiles = scripts.length;
+            document.getElementById('totalFiles').textContent = totalFiles;
             document.getElementById('totalDownloads').textContent = totalDownloads;
         }
         
@@ -1688,22 +1756,125 @@ while(!EXIT){
             }, 4000);
         }
         
-        function downloadScript(filename, elementId) {
-            const codeText = originalScripts[filename];
+        function renderScripts() {
+            // Очищаем все контейнеры
+            document.getElementById('flyscripts-grid').innerHTML = '';
+            document.getElementById('scriptich-grid').innerHTML = '';
+            document.getElementById('other-grid').innerHTML = '';
             
-            if (!codeText) {
+            // Сортируем скрипты по дате (новые сверху)
+            scripts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Рендерим каждый скрипт
+            scripts.forEach(script => {
+                const scriptCard = createScriptCard(script);
+                
+                // Добавляем в соответствующий контейнер
+                if (script.category === 'flyscripts') {
+                    document.getElementById('flyscripts-grid').appendChild(scriptCard);
+                } else if (script.category === 'scriptich') {
+                    document.getElementById('scriptich-grid').appendChild(scriptCard);
+                } else {
+                    document.getElementById('other-grid').appendChild(scriptCard);
+                }
+            });
+            
+            updateStats();
+        }
+        
+        function createScriptCard(script) {
+            const card = document.createElement('div');
+            card.className = 'script-card';
+            card.id = `script-${script.id}`;
+            
+            const icon = script.category === 'flyscripts' ? 'fa-rocket' : 
+                        script.category === 'scriptich' ? 'fa-layer-group' : 'fa-star';
+            
+            // Создаем HTML для особенностей
+            let featuresHTML = '';
+            if (script.features && Array.isArray(script.features)) {
+                featuresHTML = script.features.map(feature => `
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>${feature}</span>
+                    </div>
+                `).join('');
+            }
+            
+            card.innerHTML = `
+                <div class="script-header">
+                    <h3 class="script-title">
+                        <i class="fas ${icon}"></i> ${script.name}
+                    </h3>
+                    <span class="script-badge">script</span>
+                </div>
+                
+                <p class="script-description">
+                    ${script.description}
+                </p>
+                
+                <div class="script-features">
+                    ${featuresHTML || `
+                    <div class="feature">
+                        <i class="fas fa-download"></i>
+                        <span>Скачиваний: ${script.downloads || 0}</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-calendar"></i>
+                        <span>Добавлен: ${script.date}</span>
+                    </div>
+                    `}
+                </div>
+                
+                <div class="script-code">
+                    ${script.code}
+                </div>
+                
+                <button class="download-btn" onclick="downloadScript('${script.id}')">
+                    <i class="fas fa-download"></i> Скачать скрипт
+                </button>
+                
+                ${script.videoLink ? `
+                <a href="${script.videoLink}" target="_blank" class="video-link">
+                    <i class="fab fa-youtube"></i> 
+                    <span>Видео-инструкция</span>
+                </a>` : ''}
+                
+                ${script.telegramLink ? `
+                <a href="${script.telegramLink}" target="_blank" class="telegram-link">
+                    <i class="fab fa-telegram"></i> 
+                    <span>${script.telegramLink.includes('t.me/Scriptich') ? 'Телеграм: @Scriptich' : 'Telegram'}</span>
+                </a>` : ''}
+                
+                ${isAdmin ? `
+                <div class="script-actions">
+                    <button class="action-btn" onclick="editScript('${script.id}')">
+                        <i class="fas fa-edit"></i> Редактировать
+                    </button>
+                    <button class="action-btn delete" onclick="deleteScript('${script.id}')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                </div>` : ''}
+            `;
+            
+            return card;
+        }
+        
+        function downloadScript(scriptId) {
+            const script = scripts.find(s => s.id === scriptId);
+            if (!script) {
                 showNotification('❌ Ошибка: скрипт не найден');
                 return;
             }
             
-            const blob = new Blob([codeText], { 
+            const blob = new Blob([script.code], { 
                 type: 'text/plain;charset=utf-8',
                 endings: 'native' 
             });
             
             const downloadLink = document.createElement('a');
             downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = filename;
+            downloadLink.download = script.filename;
             downloadLink.style.display = 'none';
             
             document.body.appendChild(downloadLink);
@@ -1711,10 +1882,237 @@ while(!EXIT){
             
             document.body.removeChild(downloadLink);
             
+            // Обновляем статистику
+            script.downloads = (script.downloads || 0) + 1;
             totalDownloads++;
+            
+            // Сохраняем в localStorage
+            saveToLocalStorage();
             updateStats();
             
-            showNotification(`✅ Скрипт "${filename}" скачан!`);
+            showNotification(`✅ Скрипт "${script.name}" скачан!`);
+            
+            // Обновляем отображение
+            const card = document.getElementById(`script-${scriptId}`);
+            if (card) {
+                const feature = card.querySelector('.script-features .feature:first-child');
+                if (feature) {
+                    feature.querySelector('span').textContent = `Скачиваний: ${script.downloads}`;
+                }
+            }
+        }
+        
+        // Админ-функции
+        function toggleLoginModal() {
+            document.getElementById('loginModal').classList.toggle('active');
+        }
+        
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                document.getElementById('adminPanel').classList.add('active');
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('adminPassword').value = '';
+                
+                // Перерисовываем скрипты с кнопками админа
+                renderScripts();
+                updateScriptList();
+                
+                showNotification('🔓 Вы вошли в админ-панель');
+            } else {
+                showNotification('❌ Неверный пароль!');
+            }
+        }
+        
+        function toggleAdvancedMode() {
+            advancedMode = !advancedMode;
+            const advancedSettings = document.getElementById('advancedSettings');
+            const toggleBtn = document.querySelector('[onclick="toggleAdvancedMode()"]');
+            
+            if (advancedMode) {
+                advancedSettings.style.display = 'block';
+                toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Обычный режим';
+                toggleBtn.classList.add('secondary');
+            } else {
+                advancedSettings.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fas fa-cogs"></i> Расширенный режим';
+                toggleBtn.classList.remove('secondary');
+            }
+        }
+        
+        function saveScript() {
+            const name = document.getElementById('scriptName').value.trim();
+            const category = document.getElementById('scriptCategory').value;
+            const description = document.getElementById('scriptDescription').value.trim();
+            const code = document.getElementById('scriptCode').value.trim();
+            const filename = document.getElementById('scriptFilename').value.trim();
+            const videoLink = document.getElementById('videoLink').value.trim();
+            const telegramLink = document.getElementById('telegramLink').value.trim();
+            const featuresInput = document.getElementById('features').value.trim();
+            
+            if (!name || !description || !code || !filename) {
+                showNotification('❌ Заполните обязательные поля!');
+                return;
+            }
+            
+            if (!filename.endsWith('.txt')) {
+                showNotification('⚠️ Рекомендуется использовать расширение .txt для файлов');
+            }
+            
+            // Парсим особенности
+            const features = featuresInput ? featuresInput.split(',').map(f => f.trim()).filter(f => f) : [];
+            
+            if (currentEditingId) {
+                // Редактирование существующего скрипта
+                const index = scripts.findIndex(s => s.id === currentEditingId);
+                if (index !== -1) {
+                    scripts[index] = {
+                        ...scripts[index],
+                        name,
+                        category,
+                        description,
+                        code,
+                        filename,
+                        videoLink,
+                        telegramLink,
+                        features
+                    };
+                    showNotification('✏️ Скрипт обновлен!');
+                }
+            } else {
+                // Добавление нового скрипта
+                const newScript = {
+                    id: generateId(),
+                    name,
+                    category,
+                    description,
+                    code,
+                    filename,
+                    downloads: 0,
+                    date: new Date().toISOString().split('T')[0],
+                    videoLink,
+                    telegramLink,
+                    features
+                };
+                scripts.unshift(newScript);
+                showNotification('✅ Новый скрипт добавлен!');
+            }
+            
+            saveToLocalStorage();
+            renderScripts();
+            updateScriptList();
+            clearForm();
+            currentEditingId = null;
+        }
+        
+        function editScript(scriptId) {
+            const script = scripts.find(s => s.id === scriptId);
+            if (!script) return;
+            
+            currentEditingId = scriptId;
+            
+            document.getElementById('scriptName').value = script.name;
+            document.getElementById('scriptCategory').value = script.category;
+            document.getElementById('scriptDescription').value = script.description;
+            document.getElementById('scriptCode').value = script.code;
+            document.getElementById('scriptFilename').value = script.filename;
+            document.getElementById('videoLink').value = script.videoLink || '';
+            document.getElementById('telegramLink').value = script.telegramLink || '';
+            document.getElementById('features').value = script.features ? script.features.join(', ') : '';
+            
+            // Показываем кнопку отмены
+            document.getElementById('cancelBtn').style.display = 'block';
+            
+            // Прокручиваем к форме
+            document.getElementById('adminForm').scrollIntoView({ behavior: 'smooth' });
+            
+            showNotification('✏️ Редактирование скрипта');
+        }
+        
+        function cancelEdit() {
+            currentEditingId = null;
+            clearForm();
+            document.getElementById('cancelBtn').style.display = 'none';
+            showNotification('❌ Редактирование отменено');
+        }
+        
+        function deleteScript(scriptId) {
+            if (!confirm('Вы уверены, что хотите удалить этот скрипт?')) return;
+            
+            const index = scripts.findIndex(s => s.id === scriptId);
+            if (index !== -1) {
+                scripts.splice(index, 1);
+                saveToLocalStorage();
+                renderScripts();
+                updateScriptList();
+                showNotification('🗑️ Скрипт удален!');
+            }
+        }
+        
+        function clearForm() {
+            document.getElementById('scriptName').value = '';
+            document.getElementById('scriptCategory').value = 'flyscripts';
+            document.getElementById('scriptDescription').value = '';
+            document.getElementById('scriptCode').value = '';
+            document.getElementById('scriptFilename').value = '';
+            document.getElementById('videoLink').value = '';
+            document.getElementById('telegramLink').value = '';
+            document.getElementById('features').value = '';
+            document.getElementById('cancelBtn').style.display = 'none';
+        }
+        
+        function updateScriptList() {
+            const scriptList = document.getElementById('scriptList');
+            scriptList.innerHTML = '';
+            
+            if (scripts.length === 0) {
+                scriptList.innerHTML = '<div class="empty-state" style="padding: 20px;"><p>Нет скриптов</p></div>';
+                return;
+            }
+            
+            scripts.forEach(script => {
+                const item = document.createElement('div');
+                item.className = 'script-card';
+                item.style.marginBottom = '10px';
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <strong>${script.name}</strong>
+                            <div style="font-size: 12px; color: #90EE90;">
+                                ${script.category} • ${script.downloads || 0} скачиваний • ${script.date}
+                            </div>
+                            ${script.videoLink ? '<div style="font-size: 11px; color: #FF6B6B;"><i class="fas fa-video"></i> Есть видео</div>' : ''}
+                        </div>
+                        <div style="display: flex; gap: 5px;">
+                            <button class="action-btn" onclick="editScript('${script.id}')" title="Редактировать">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteScript('${script.id}')" title="Удалить">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                scriptList.appendChild(item);
+            });
+        }
+        
+        function generateId() {
+            return 'script_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        function saveToLocalStorage() {
+            localStorage.setItem('flyscripts_scripts', JSON.stringify(scripts));
+            localStorage.setItem('flyscripts_totalDownloads', totalDownloads.toString());
+        }
+        
+        function logout() {
+            isAdmin = false;
+            document.getElementById('adminPanel').classList.remove('active');
+            renderScripts(); // Перерисовываем без кнопок админа
+            showNotification('🔒 Вы вышли из админ-панели');
         }
     </script>
 </body>
