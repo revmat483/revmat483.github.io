@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyScripts</title>
+    <title>FlyScripts - Скрипты для автоматизации</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -305,84 +305,6 @@
             letter-spacing: 2px;
         }
         
-        .main-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-            position: relative;
-            justify-content: center;
-        }
-        
-        .main-tabs::before {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(37, 211, 102, 0.4) 50%, 
-                transparent 100%);
-        }
-        
-        .main-tab-btn {
-            background: linear-gradient(135deg, 
-                rgba(30, 58, 30, 0.9), 
-                rgba(40, 68, 40, 0.7));
-            border: 2px solid rgba(37, 211, 102, 0.3);
-            padding: 18px 35px;
-            border-radius: 15px;
-            color: #B0E6B0;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .main-tab-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.15), 
-                transparent);
-            transition: 0.5s;
-        }
-        
-        .main-tab-btn:hover::before {
-            left: 100%;
-        }
-        
-        .main-tab-btn:hover {
-            background: linear-gradient(135deg, 
-                rgba(37, 211, 102, 0.25), 
-                rgba(46, 204, 113, 0.15));
-            border-color: #25D366;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-        }
-        
-        .main-tab-btn.active {
-            background: linear-gradient(135deg, #25D366, #2ECC71);
-            color: white;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
-            border-color: #25D366;
-            animation: pulse 2s infinite;
-        }
-        
         .script-category-tabs {
             display: flex;
             gap: 10px;
@@ -442,41 +364,6 @@
             background: linear-gradient(135deg, #FF6B6B, #FF8E53);
             color: white;
             border-color: #FF6B6B;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
-            50% { box-shadow: 0 20px 45px rgba(37, 211, 102, 0.7); }
-            100% { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
-        }
-        
-        .main-tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .main-tab-content.active {
-            display: block;
-        }
-        
-        .category-tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .category-tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.95); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
         }
         
         .scripts-grid {
@@ -630,32 +517,6 @@
             font-size: 16px;
         }
         
-        .section-title {
-            font-size: 36px;
-            color: #DCF8C6;
-            margin-bottom: 40px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                #25D366 50%, 
-                transparent 100%);
-        }
-        
         .footer {
             text-align: center;
             padding: 50px 0;
@@ -708,253 +569,6 @@
             display: block;
         }
         
-        /* Стили для админ-панели */
-        .admin-panel {
-            display: none;
-            background: linear-gradient(135deg, 
-                rgba(30, 30, 58, 0.95), 
-                rgba(40, 40, 68, 0.85));
-            border-radius: 20px;
-            padding: 30px;
-            border: 2px solid rgba(255, 107, 107, 0.3);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            margin-top: 30px;
-        }
-        
-        .admin-panel.active {
-            display: block;
-        }
-        
-        .admin-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .form-group label {
-            color: #DCF8C6;
-            font-weight: bold;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(37, 211, 102, 0.2);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: #E8F5E9;
-            font-family: 'Arial', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #25D366;
-            box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .form-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: flex-end;
-        }
-        
-        .admin-btn {
-            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
-        }
-        
-        .admin-btn.secondary {
-            background: linear-gradient(135deg, #4D96FF, #6BCF7F);
-        }
-        
-        .admin-btn.secondary:hover {
-            box-shadow: 0 10px 20px rgba(77, 150, 255, 0.4);
-        }
-        
-        .script-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .action-btn {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(37, 211, 102, 0.2);
-            color: #B0E6B0;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .action-btn:hover {
-            background: rgba(37, 211, 102, 0.2);
-            border-color: #25D366;
-        }
-        
-        .action-btn.delete {
-            background: rgba(255, 107, 107, 0.2);
-            border-color: rgba(255, 107, 107, 0.4);
-        }
-        
-        .action-btn.delete:hover {
-            background: rgba(255, 107, 107, 0.4);
-            border-color: #FF6B6B;
-        }
-        
-        .admin-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .admin-toggle:hover {
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
-        }
-        
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        .login-modal.active {
-            display: flex;
-        }
-        
-        .login-form {
-            background: linear-gradient(135deg, 
-                rgba(30, 58, 30, 0.95), 
-                rgba(40, 68, 40, 0.85));
-            border-radius: 20px;
-            padding: 40px;
-            border: 2px solid rgba(37, 211, 102, 0.3);
-            min-width: 400px;
-            max-width: 500px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-        
-        .login-form h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #DCF8C6;
-            font-size: 28px;
-        }
-        
-        .video-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #FF0000, #FF6B6B);
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            justify-content: center;
-        }
-        
-        .video-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
-        }
-        
-        .video-link i {
-            font-size: 16px;
-        }
-        
-        .admin-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .logout-btn {
-            background: linear-gradient(135deg, #666, #999);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .logout-btn:hover {
-            background: linear-gradient(135deg, #888, #aaa);
-            transform: translateY(-2px);
-        }
-        
         .loading {
             display: none;
             position: fixed;
@@ -997,7 +611,7 @@
             }
         }
         
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .header {
                 flex-direction: column;
                 gap: 25px;
@@ -1007,124 +621,20 @@
             .stats {
                 width: 100%;
                 max-width: 500px;
-            }
-            
-            .main-tabs {
-                justify-content: center;
-            }
-            
-            .title-gradient {
-                font-size: 3.5rem;
-            }
-            
-            .scripts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .login-form {
-                min-width: 90%;
-                margin: 20px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .logo-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
+                gap: 20px;
+                padding: 15px 20px;
             }
             
             .title-gradient {
                 font-size: 2.8rem;
             }
             
-            .logo-text h1 {
-                font-size: 20px;
-            }
-            
-            .stats {
-                gap: 20px;
-                padding: 15px 20px;
-            }
-            
-            .stat-item::after {
-                right: -10px;
-                height: 20px;
-            }
-            
-            .main-tab-btn {
-                padding: 15px 25px;
-                font-size: 15px;
-            }
-            
-            .section-title {
-                font-size: 28px;
+            .scripts-grid {
+                grid-template-columns: 1fr;
             }
             
             .script-card {
                 padding: 20px;
-            }
-            
-            .script-title {
-                font-size: 20px;
-            }
-            
-            .form-actions {
-                flex-direction: column;
-            }
-            
-            .admin-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .admin-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .title-gradient {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-                padding: 4px 15px;
-            }
-            
-            .stat-number {
-                font-size: 22px;
-            }
-            
-            .main-tab-btn {
-                padding: 12px 20px;
-                font-size: 14px;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .main-tabs {
-                gap: 10px;
-            }
-            
-            .scripts-grid {
-                gap: 20px;
-            }
-            
-            .login-form {
-                padding: 30px 20px;
-            }
-            
-            .admin-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
             }
         }
     </style>
@@ -1136,30 +646,6 @@
     <!-- Загрузка -->
     <div class="loading" id="loading">
         <div class="loader"></div>
-    </div>
-    
-    <!-- Кнопка доступа к админке -->
-    <button class="admin-toggle" onclick="toggleLoginModal()">
-        <i class="fas fa-cog"></i>
-    </button>
-    
-    <!-- Модальное окно входа -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-form">
-            <h2><i class="fas fa-lock"></i> Вход в админ-панель</h2>
-            <div class="form-group">
-                <label for="adminPassword"><i class="fas fa-key"></i> Пароль администратора</label>
-                <input type="password" id="adminPassword" placeholder="Введите пароль">
-            </div>
-            <div class="form-actions">
-                <button class="admin-btn" onclick="login()">
-                    <i class="fas fa-sign-in-alt"></i> Войти
-                </button>
-                <button class="admin-btn secondary" onclick="toggleLoginModal()">
-                    <i class="fas fa-times"></i> Отмена
-                </button>
-            </div>
-        </div>
     </div>
     
     <div class="container">
@@ -1192,130 +678,38 @@
             </div>
         </header>
         
-        <div class="main-tabs">
-            <button class="main-tab-btn active" data-tab="scripts">
-                <i class="fas fa-file-code"></i> Скрипты
+        <div class="script-category-tabs">
+            <button class="category-tab-btn active" data-category="flyscripts">
+                <i class="fas fa-rocket"></i> FlyScripts
+            </button>
+            <button class="category-tab-btn" data-category="scriptich">
+                <i class="fab fa-telegram"></i> Scriptich
+            </button>
+            <button class="category-tab-btn" data-category="other">
+                <i class="fas fa-star"></i> Другое
             </button>
         </div>
         
-        <!-- Админ-панель (скрыта по умолчанию) -->
-        <div class="admin-panel" id="adminPanel">
-            <h2 class="section-title"><i class="fas fa-tools"></i> Панель администратора</h2>
-            
-            <div class="admin-controls">
-                <button class="admin-btn secondary" onclick="toggleAdvancedMode()">
-                    <i class="fas fa-cogs"></i> Расширенный режим
-                </button>
-                <button class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Выйти
-                </button>
-            </div>
-            
-            <div class="admin-form" id="adminForm">
-                <div class="form-group">
-                    <label for="scriptName"><i class="fas fa-heading"></i> Название скрипта</label>
-                    <input type="text" id="scriptName" placeholder="Например: OPR Price">
-                </div>
-                
-                <div class="form-group">
-                    <label for="scriptCategory"><i class="fas fa-folder"></i> Категория</label>
-                    <select id="scriptCategory">
-                        <option value="flyscripts">FlyScripts</option>
-                        <option value="scriptich">Scriptich</option>
-                        <option value="other">Другое</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="scriptDescription"><i class="fas fa-align-left"></i> Описание</label>
-                    <textarea id="scriptDescription" placeholder="Описание скрипта..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="scriptCode"><i class="fas fa-code"></i> Код скрипта</label>
-                    <textarea id="scriptCode" placeholder="Вставьте код скрипта здесь..." rows="10"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="scriptFilename"><i class="fas fa-file-alt"></i> Имя файла для скачивания</label>
-                    <input type="text" id="scriptFilename" placeholder="Например: OPR_Price.txt">
-                </div>
-                
-                <!-- Расширенные настройки (скрыты по умолчанию) -->
-                <div id="advancedSettings" style="display: none;">
-                    <div class="form-group">
-                        <label for="videoLink"><i class="fas fa-video"></i> Ссылка на видео (YouTube)</label>
-                        <input type="url" id="videoLink" placeholder="https://www.youtube.com/watch?v=...">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="telegramLink"><i class="fab fa-telegram"></i> Ссылка на Telegram</label>
-                        <input type="url" id="telegramLink" placeholder="https://t.me/...">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="features"><i class="fas fa-star"></i> Особенности (через запятую)</label>
-                        <input type="text" id="features" placeholder="Автопокупка, Наклейки, Быстрая работа">
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button class="admin-btn" onclick="saveScript()">
-                        <i class="fas fa-save"></i> Сохранить скрипт
-                    </button>
-                    <button class="admin-btn secondary" onclick="clearForm()">
-                        <i class="fas fa-times"></i> Очистить форму
-                    </button>
-                    <button class="admin-btn secondary" onclick="cancelEdit()" id="cancelBtn" style="display: none;">
-                        <i class="fas fa-ban"></i> Отменить редактирование
-                    </button>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px;">
-                <h3 style="color: #DCF8C6; margin-bottom: 20px; border-bottom: 2px solid rgba(37, 211, 102, 0.3); padding-bottom: 10px;">
-                    <i class="fas fa-list"></i> Управление скриптами (<span id="scriptsCount">0</span>)
-                </h3>
-                <div id="scriptList"></div>
-            </div>
+        <!-- Контент FlyScripts -->
+        <div class="category-tab-content active" id="flyscripts-content">
+            <div class="scripts-grid" id="flyscripts-grid"></div>
         </div>
         
-        <div class="main-tab-content active" id="scripts-content">
-            <h2 class="section-title"><i class="fas fa-file-code"></i> Скрипты</h2>
-            
-            <div class="script-category-tabs">
-                <button class="category-tab-btn active" data-category="flyscripts">
-                    <i class="fas fa-rocket"></i> FlyScripts
-                </button>
-                <button class="category-tab-btn" data-category="scriptich">
-                    <i class="fab fa-telegram"></i> Scriptich
-                </button>
-                <button class="category-tab-btn" data-category="other">
-                    <i class="fas fa-star"></i> Другое
-                </button>
-            </div>
-            
-            <!-- Контент FlyScripts -->
-            <div class="category-tab-content active" id="flyscripts-content">
-                <div class="scripts-grid" id="flyscripts-grid"></div>
-            </div>
-            
-            <!-- Контент Scriptich -->
-            <div class="category-tab-content" id="scriptich-content">
-                <div class="scripts-grid" id="scriptich-grid"></div>
-            </div>
-            
-            <!-- Контент Другое -->
-            <div class="category-tab-content" id="other-content">
-                <div class="scripts-grid" id="other-grid"></div>
-            </div>
+        <!-- Контент Scriptich -->
+        <div class="category-tab-content" id="scriptich-content">
+            <div class="scripts-grid" id="scriptich-grid"></div>
+        </div>
+        
+        <!-- Контент Другое -->
+        <div class="category-tab-content" id="other-content">
+            <div class="scripts-grid" id="other-grid"></div>
         </div>
         
         <footer class="footer">
             <p>© 2024 FlyScripts. Все права защищены.</p>
             <p>Сайт для образовательных целей</p>
             <p style="font-size: 12px; color: #6BCF7F; margin-top: 10px;">
-                <i class="fas fa-database"></i> Данные хранятся в Firebase
+                <i class="fas fa-database"></i> Данные синхронизируются в реальном времени
             </p>
         </footer>
     </div>
@@ -1341,188 +735,17 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         
-        // ================== СИСТЕМА АДМИНИСТРИРОВАНИЯ ==================
-        const ADMIN_PASSWORD = 'admin123'; // Пароль скрыт из интерфейса
-        let isAdmin = false;
-        let currentEditingId = null;
-        let advancedMode = false;
+        // ================== ПЕРЕМЕННЫЕ ==================
         let scripts = [];
         let totalDownloads = 0;
         
-        // ================== ФУНКЦИИ ДЛЯ РАБОТЫ С FIREBASE ==================
-        
-        // Загрузить все скрипты из Firebase
-        async function loadScriptsFromFirebase() {
-            showLoading();
-            try {
-                const snapshot = await database.ref('scripts').once('value');
-                const data = snapshot.val();
-                
-                if (data) {
-                    // Конвертируем объект в массив
-                    scripts = Object.entries(data).map(([id, script]) => ({
-                        id,
-                        ...script
-                    }));
-                    
-                    // Загружаем общее количество скачиваний
-                    const downloadsSnapshot = await database.ref('totalDownloads').once('value');
-                    totalDownloads = downloadsSnapshot.val() || 0;
-                    
-                    showNotification(`✅ Загружено ${scripts.length} скриптов`);
-                } else {
-                    scripts = [];
-                    showNotification('📁 База данных пуста. Добавьте первый скрипт!');
-                }
-                
-                renderScripts();
-                updateScriptList();
-                updateStats();
-            } catch (error) {
-                console.error('Ошибка загрузки из Firebase:', error);
-                showNotification('❌ Ошибка загрузки скриптов. Проверьте подключение.');
-                
-                // Пробуем загрузить из localStorage как резерв
-                const localScripts = localStorage.getItem('flyscripts_scripts');
-                if (localScripts) {
-                    scripts = JSON.parse(localScripts);
-                    renderScripts();
-                    updateScriptList();
-                    updateStats();
-                }
-            } finally {
-                hideLoading();
-            }
-        }
-        
-        // Сохранить скрипт в Firebase
-        async function saveScriptToFirebase(script, isNew = true) {
-            showLoading();
-            try {
-                if (isNew) {
-                    // Генерируем новый ID
-                    const newId = generateId();
-                    script.id = newId;
-                    script.date = new Date().toISOString().split('T')[0];
-                    script.downloads = 0;
-                    
-                    // Сохраняем в Firebase
-                    await database.ref(`scripts/${newId}`).set(script);
-                    scripts.unshift(script);
-                    
-                    showNotification('✅ Скрипт добавлен в базу данных!');
-                } else {
-                    // Обновляем существующий скрипт
-                    await database.ref(`scripts/${script.id}`).update(script);
-                    
-                    // Обновляем локальный массив
-                    const index = scripts.findIndex(s => s.id === script.id);
-                    if (index !== -1) {
-                        scripts[index] = script;
-                    }
-                    
-                    showNotification('✏️ Скрипт обновлен в базе данных!');
-                }
-                
-                // Обновляем статистику
-                await updateTotalStats();
-                
-                // Обновляем отображение
-                renderScripts();
-                updateScriptList();
-                clearForm();
-                currentEditingId = null;
-                
-            } catch (error) {
-                console.error('Ошибка сохранения в Firebase:', error);
-                showNotification('❌ Ошибка сохранения скрипта');
-            } finally {
-                hideLoading();
-            }
-        }
-        
-        // Удалить скрипт из Firebase
-        async function deleteScriptFromFirebase(scriptId) {
-            if (!confirm('Вы уверены, что хотите удалить этот скрипт?')) return;
-            
-            showLoading();
-            try {
-                await database.ref(`scripts/${scriptId}`).remove();
-                
-                // Обновляем локальный массив
-                const index = scripts.findIndex(s => s.id === scriptId);
-                if (index !== -1) {
-                    // Вычитаем скачивания этого скрипта из общей статистики
-                    totalDownloads -= (scripts[index].downloads || 0);
-                    scripts.splice(index, 1);
-                }
-                
-                // Обновляем общую статистику в Firebase
-                await database.ref('totalDownloads').set(totalDownloads);
-                
-                // Обновляем отображение
-                renderScripts();
-                updateScriptList();
-                updateStats();
-                
-                showNotification('🗑️ Скрипт удален из базы данных!');
-            } catch (error) {
-                console.error('Ошибка удаления из Firebase:', error);
-                showNotification('❌ Ошибка удаления скрипта');
-            } finally {
-                hideLoading();
-            }
-        }
-        
-        // Обновить статистику скачиваний
-        async function updateDownloadStats(scriptId) {
-            try {
-                // Находим скрипт
-                const script = scripts.find(s => s.id === scriptId);
-                if (!script) return;
-                
-                // Обновляем локально
-                script.downloads = (script.downloads || 0) + 1;
-                totalDownloads++;
-                
-                // Обновляем в Firebase
-                await database.ref(`scripts/${scriptId}/downloads`).set(script.downloads);
-                await database.ref('totalDownloads').set(totalDownloads);
-                
-                // Обновляем отображение
-                updateStats();
-                
-                // Обновляем конкретную карточку
-                const card = document.getElementById(`script-${scriptId}`);
-                if (card) {
-                    const feature = card.querySelector('.script-features .feature:first-child');
-                    if (feature) {
-                        feature.querySelector('span').textContent = `Скачиваний: ${script.downloads}`;
-                    }
-                }
-                
-            } catch (error) {
-                console.error('Ошибка обновления статистики:', error);
-            }
-        }
-        
-        // Обновить общую статистику
-        async function updateTotalStats() {
-            try {
-                // Пересчитываем общее количество скачиваний
-                totalDownloads = scripts.reduce((sum, script) => sum + (script.downloads || 0), 0);
-                
-                // Сохраняем в Firebase
-                await database.ref('totalDownloads').set(totalDownloads);
-                
-                // Обновляем отображение
-                updateStats();
-            } catch (error) {
-                console.error('Ошибка обновления общей статистики:', error);
-            }
-        }
-        
-        // ================== ОСНОВНЫЕ ФУНКЦИИ САЙТА ==================
+        // ================== ИНИЦИАЛИЗАЦИЯ ==================
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            setupCategoryTabs();
+            loadScriptsFromFirebase();
+            setupRealtimeUpdates();
+        });
         
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -1550,32 +773,6 @@
             }
         }
         
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            setupMainTabs();
-            setupCategoryTabs();
-            loadScriptsFromFirebase();
-        });
-        
-        function setupMainTabs() {
-            const mainTabBtns = document.querySelectorAll('.main-tab-btn');
-            const mainTabContents = document.querySelectorAll('.main-tab-content');
-            
-            mainTabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    mainTabBtns.forEach(b => b.classList.remove('active'));
-                    mainTabContents.forEach(c => c.classList.remove('active'));
-                    
-                    btn.classList.add('active');
-                    
-                    const tabId = btn.getAttribute('data-tab');
-                    document.getElementById(`${tabId}-content`).classList.add('active');
-                    
-                    showNotification('🚀 Открыты скрипты! Выберите категорию.');
-                });
-            });
-        }
-        
         function setupCategoryTabs() {
             const categoryTabBtns = document.querySelectorAll('.category-tab-btn');
             const categoryTabContents = document.querySelectorAll('.category-tab-content');
@@ -1590,67 +787,113 @@
                     const category = btn.getAttribute('data-category');
                     document.getElementById(`${category}-content`).classList.add('active');
                     
-                    if(category === 'flyscripts') {
-                        showNotification('🚀 FlyScripts скрипты');
-                    } else if(category === 'scriptich') {
-                        showNotification('📱 Scriptich скрипты');
-                    } else if(category === 'other') {
-                        showNotification('⭐ Другие скрипты');
-                    }
+                    showNotification(category === 'flyscripts' ? '🚀 FlyScripts скрипты' :
+                                  category === 'scriptich' ? '📱 Scriptich скрипты' : '⭐ Другие скрипты');
                 });
             });
         }
         
+        // ================== FIREBASE ФУНКЦИИ ==================
+        
+        async function loadScriptsFromFirebase() {
+            showLoading();
+            try {
+                const snapshot = await database.ref('scripts').once('value');
+                const data = snapshot.val();
+                
+                if (data) {
+                    scripts = Object.entries(data).map(([id, script]) => ({
+                        id,
+                        ...script
+                    }));
+                    
+                    const downloadsSnapshot = await database.ref('totalDownloads').once('value');
+                    totalDownloads = downloadsSnapshot.val() || 0;
+                    
+                    updateStats();
+                    renderScripts();
+                    showNotification(`✅ Загружено ${scripts.length} скриптов`);
+                } else {
+                    scripts = [];
+                    showEmptyState();
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                showNotification('❌ Ошибка загрузки скриптов');
+                showEmptyState();
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function setupRealtimeUpdates() {
+            // Слушаем обновления скриптов в реальном времени
+            database.ref('scripts').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    scripts = Object.entries(data).map(([id, script]) => ({
+                        id,
+                        ...script
+                    }));
+                    renderScripts();
+                    updateStats();
+                }
+            });
+            
+            // Слушаем обновления статистики
+            database.ref('totalDownloads').on('value', (snapshot) => {
+                totalDownloads = snapshot.val() || 0;
+                updateStats();
+            });
+        }
+        
+        async function updateDownloadStats(scriptId) {
+            try {
+                const script = scripts.find(s => s.id === scriptId);
+                if (!script) return;
+                
+                script.downloads = (script.downloads || 0) + 1;
+                totalDownloads++;
+                
+                await database.ref(`scripts/${scriptId}/downloads`).set(script.downloads);
+                await database.ref('totalDownloads').set(totalDownloads);
+                
+                updateStats();
+                
+                // Обновляем отображение конкретного скрипта
+                const card = document.getElementById(`script-${scriptId}`);
+                if (card) {
+                    const feature = card.querySelector('.script-features .feature:first-child');
+                    if (feature) {
+                        feature.querySelector('span').textContent = `Скачиваний: ${script.downloads}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Ошибка обновления статистики:', error);
+            }
+        }
+        
+        // ================== ОТОБРАЖЕНИЕ ==================
+        
         function updateStats() {
-            const totalFiles = scripts.length;
-            document.getElementById('totalFiles').textContent = totalFiles;
+            document.getElementById('totalFiles').textContent = scripts.length;
             document.getElementById('totalDownloads').textContent = totalDownloads;
         }
         
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const text = document.getElementById('notificationText');
-            
-            text.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-        
-        function showLoading() {
-            document.getElementById('loading').classList.add('active');
-        }
-        
-        function hideLoading() {
-            document.getElementById('loading').classList.remove('active');
-        }
-        
         function renderScripts() {
+            const containers = {
+                'flyscripts': document.getElementById('flyscripts-grid'),
+                'scriptich': document.getElementById('scriptich-grid'),
+                'other': document.getElementById('other-grid')
+            };
+            
             // Очищаем все контейнеры
-            document.getElementById('flyscripts-grid').innerHTML = '';
-            document.getElementById('scriptich-grid').innerHTML = '';
-            document.getElementById('other-grid').innerHTML = '';
+            Object.values(containers).forEach(container => {
+                if (container) container.innerHTML = '';
+            });
             
             if (scripts.length === 0) {
-                const emptyHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">
-                            <i class="fas fa-file-code"></i>
-                        </div>
-                        <h3 class="empty-title">Скриптов пока нет</h3>
-                        <p class="empty-description">
-                            Скрипты ещё не добавлены. Будьте первым, кто добавит скрипт!
-                        </p>
-                        ${isAdmin ? `
-                        <button class="download-btn" onclick="document.getElementById('adminForm').scrollIntoView()" style="max-width: 300px; margin: 0 auto;">
-                            <i class="fas fa-plus"></i> Добавить первый скрипт
-                        </button>` : ''}
-                    </div>
-                `;
-                
-                document.getElementById('flyscripts-grid').innerHTML = emptyHTML;
+                showEmptyState();
                 return;
             }
             
@@ -1660,18 +903,12 @@
             // Рендерим каждый скрипт
             scripts.forEach(script => {
                 const scriptCard = createScriptCard(script);
+                const container = containers[script.category] || containers['other'];
                 
-                // Добавляем в соответствующий контейнер
-                if (script.category === 'flyscripts') {
-                    document.getElementById('flyscripts-grid').appendChild(scriptCard);
-                } else if (script.category === 'scriptich') {
-                    document.getElementById('scriptich-grid').appendChild(scriptCard);
-                } else {
-                    document.getElementById('other-grid').appendChild(scriptCard);
+                if (container) {
+                    container.appendChild(scriptCard);
                 }
             });
-            
-            updateStats();
         }
         
         function createScriptCard(script) {
@@ -1681,17 +918,6 @@
             
             const icon = script.category === 'flyscripts' ? 'fa-rocket' : 
                         script.category === 'scriptich' ? 'fa-layer-group' : 'fa-star';
-            
-            // Создаем HTML для особенностей
-            let featuresHTML = '';
-            if (script.features && Array.isArray(script.features)) {
-                featuresHTML = script.features.map(feature => `
-                    <div class="feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>${feature}</span>
-                    </div>
-                `).join('');
-            }
             
             card.innerHTML = `
                 <div class="script-header">
@@ -1706,7 +932,6 @@
                 </p>
                 
                 <div class="script-features">
-                    ${featuresHTML || `
                     <div class="feature">
                         <i class="fas fa-download"></i>
                         <span>Скачиваний: ${script.downloads || 0}</span>
@@ -1715,7 +940,6 @@
                         <i class="fas fa-calendar"></i>
                         <span>Добавлен: ${script.date}</span>
                     </div>
-                    `}
                 </div>
                 
                 <div class="script-code">
@@ -1726,30 +950,41 @@
                     <i class="fas fa-download"></i> Скачать скрипт
                 </button>
                 
-                ${script.videoLink ? `
-                <a href="${script.videoLink}" target="_blank" class="video-link">
-                    <i class="fab fa-youtube"></i> 
-                    <span>Видео-инструкция</span>
-                </a>` : ''}
-                
                 ${script.telegramLink ? `
                 <a href="${script.telegramLink}" target="_blank" class="telegram-link">
                     <i class="fab fa-telegram"></i> 
                     <span>${script.telegramLink.includes('t.me/Scriptich') ? 'Телеграм: @Scriptich' : 'Telegram'}</span>
                 </a>` : ''}
-                
-                ${isAdmin ? `
-                <div class="script-actions">
-                    <button class="action-btn" onclick="editScript('${script.id}')">
-                        <i class="fas fa-edit"></i> Редактировать
-                    </button>
-                    <button class="action-btn delete" onclick="deleteScript('${script.id}')">
-                        <i class="fas fa-trash"></i> Удалить
-                    </button>
-                </div>` : ''}
             `;
             
             return card;
+        }
+        
+        function showEmptyState() {
+            const containers = {
+                'flyscripts': document.getElementById('flyscripts-grid'),
+                'scriptich': document.getElementById('scriptich-grid'),
+                'other': document.getElementById('other-grid')
+            };
+            
+            const emptyHTML = `
+                <div class="script-card" style="text-align: center; padding: 50px;">
+                    <div class="empty-icon" style="font-size: 60px; color: #25D366; opacity: 0.5; margin-bottom: 20px;">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3 style="color: #DCF8C6; margin-bottom: 15px;">Скриптов пока нет</h3>
+                    <p style="color: #90EE90;">
+                        Скоро здесь появятся новые скрипты для автоматизации!
+                    </p>
+                    <div style="margin-top: 30px; color: #6BCF7F; font-size: 12px;">
+                        <i class="fas fa-sync-alt fa-spin"></i> Ожидание данных...
+                    </div>
+                </div>
+            `;
+            
+            Object.values(containers).forEach(container => {
+                if (container) container.innerHTML = emptyHTML;
+            });
         }
         
         function downloadScript(scriptId) {
@@ -1774,222 +1009,31 @@
             
             document.body.removeChild(downloadLink);
             
-            // Обновляем статистику в Firebase
+            // Обновляем статистику
             updateDownloadStats(scriptId);
             
             showNotification(`✅ Скрипт "${script.name}" скачан!`);
         }
         
-        // ================== АДМИН-ФУНКЦИИ ==================
-        
-        function toggleLoginModal() {
-            document.getElementById('loginModal').classList.toggle('active');
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            
+            text.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
         }
         
-        function login() {
-            const password = document.getElementById('adminPassword').value;
-            
-            if (password === ADMIN_PASSWORD) {
-                isAdmin = true;
-                document.getElementById('adminPanel').classList.add('active');
-                document.getElementById('loginModal').classList.remove('active');
-                document.getElementById('adminPassword').value = '';
-                
-                // Перерисовываем скрипты с кнопками админа
-                renderScripts();
-                updateScriptList();
-                
-                showNotification('🔓 Вы вошли в админ-панель');
-            } else {
-                showNotification('❌ Неверный пароль!');
-            }
+        function showLoading() {
+            document.getElementById('loading').classList.add('active');
         }
         
-        function toggleAdvancedMode() {
-            advancedMode = !advancedMode;
-            const advancedSettings = document.getElementById('advancedSettings');
-            const toggleBtn = document.querySelector('[onclick="toggleAdvancedMode()"]');
-            
-            if (advancedMode) {
-                advancedSettings.style.display = 'block';
-                toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Обычный режим';
-                toggleBtn.classList.add('secondary');
-            } else {
-                advancedSettings.style.display = 'none';
-                toggleBtn.innerHTML = '<i class="fas fa-cogs"></i> Расширенный режим';
-                toggleBtn.classList.remove('secondary');
-            }
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('active');
         }
-        
-        function saveScript() {
-            const name = document.getElementById('scriptName').value.trim();
-            const category = document.getElementById('scriptCategory').value;
-            const description = document.getElementById('scriptDescription').value.trim();
-            const code = document.getElementById('scriptCode').value.trim();
-            const filename = document.getElementById('scriptFilename').value.trim();
-            const videoLink = document.getElementById('videoLink').value.trim();
-            const telegramLink = document.getElementById('telegramLink').value.trim();
-            const featuresInput = document.getElementById('features').value.trim();
-            
-            if (!name || !description || !code || !filename) {
-                showNotification('❌ Заполните обязательные поля!');
-                return;
-            }
-            
-            if (!filename.endsWith('.txt')) {
-                showNotification('⚠️ Рекомендуется использовать расширение .txt для файлов');
-            }
-            
-            // Парсим особенности
-            const features = featuresInput ? featuresInput.split(',').map(f => f.trim()).filter(f => f) : [];
-            
-            const scriptData = {
-                name,
-                category,
-                description,
-                code,
-                filename,
-                videoLink,
-                telegramLink,
-                features
-            };
-            
-            if (currentEditingId) {
-                // Редактирование существующего скрипта
-                const existingScript = scripts.find(s => s.id === currentEditingId);
-                if (existingScript) {
-                    const updatedScript = {
-                        ...existingScript,
-                        ...scriptData
-                    };
-                    saveScriptToFirebase(updatedScript, false);
-                }
-            } else {
-                // Добавление нового скрипта
-                saveScriptToFirebase(scriptData, true);
-            }
-        }
-        
-        function editScript(scriptId) {
-            const script = scripts.find(s => s.id === scriptId);
-            if (!script) return;
-            
-            currentEditingId = scriptId;
-            
-            document.getElementById('scriptName').value = script.name;
-            document.getElementById('scriptCategory').value = script.category;
-            document.getElementById('scriptDescription').value = script.description;
-            document.getElementById('scriptCode').value = script.code;
-            document.getElementById('scriptFilename').value = script.filename;
-            document.getElementById('videoLink').value = script.videoLink || '';
-            document.getElementById('telegramLink').value = script.telegramLink || '';
-            document.getElementById('features').value = script.features ? script.features.join(', ') : '';
-            
-            // Показываем кнопку отмены
-            document.getElementById('cancelBtn').style.display = 'block';
-            
-            // Прокручиваем к форме
-            document.getElementById('adminForm').scrollIntoView({ behavior: 'smooth' });
-            
-            showNotification('✏️ Редактирование скрипта');
-        }
-        
-        function cancelEdit() {
-            currentEditingId = null;
-            clearForm();
-            document.getElementById('cancelBtn').style.display = 'none';
-            showNotification('❌ Редактирование отменено');
-        }
-        
-        function deleteScript(scriptId) {
-            deleteScriptFromFirebase(scriptId);
-        }
-        
-        function clearForm() {
-            document.getElementById('scriptName').value = '';
-            document.getElementById('scriptCategory').value = 'flyscripts';
-            document.getElementById('scriptDescription').value = '';
-            document.getElementById('scriptCode').value = '';
-            document.getElementById('scriptFilename').value = '';
-            document.getElementById('videoLink').value = '';
-            document.getElementById('telegramLink').value = '';
-            document.getElementById('features').value = '';
-            document.getElementById('cancelBtn').style.display = 'none';
-        }
-        
-        function updateScriptList() {
-            const scriptList = document.getElementById('scriptList');
-            scriptList.innerHTML = '';
-            
-            if (scripts.length === 0) {
-                scriptList.innerHTML = '<div class="empty-state" style="padding: 20px;"><p>Нет скриптов</p></div>';
-                document.getElementById('scriptsCount').textContent = '0';
-                return;
-            }
-            
-            document.getElementById('scriptsCount').textContent = scripts.length;
-            
-            scripts.forEach(script => {
-                const item = document.createElement('div');
-                item.className = 'script-card';
-                item.style.marginBottom = '10px';
-                item.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div style="flex: 1;">
-                            <strong>${script.name}</strong>
-                            <div style="font-size: 12px; color: #90EE90;">
-                                ${script.category} • ${script.downloads || 0} скачиваний • ${script.date}
-                            </div>
-                            ${script.videoLink ? '<div style="font-size: 11px; color: #FF6B6B;"><i class="fas fa-video"></i> Есть видео</div>' : ''}
-                        </div>
-                        <div style="display: flex; gap: 5px;">
-                            <button class="action-btn" onclick="editScript('${script.id}')" title="Редактировать">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn delete" onclick="deleteScript('${script.id}')" title="Удалить">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                scriptList.appendChild(item);
-            });
-        }
-        
-        function generateId() {
-            return 'script_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
-        
-        function logout() {
-            isAdmin = false;
-            document.getElementById('adminPanel').classList.remove('active');
-            renderScripts(); // Перерисовываем без кнопок админа
-            showNotification('🔒 Вы вышли из админ-панели');
-        }
-        
-        // Реальная синхронизация в реальном времени (опционально)
-        function setupRealtimeUpdates() {
-            database.ref('scripts').on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    scripts = Object.entries(data).map(([id, script]) => ({
-                        id,
-                        ...script
-                    }));
-                    renderScripts();
-                    updateScriptList();
-                    updateStats();
-                }
-            });
-            
-            database.ref('totalDownloads').on('value', (snapshot) => {
-                totalDownloads = snapshot.val() || 0;
-                updateStats();
-            });
-        }
-        
-        // Включить реальную синхронизацию (раскомментируйте если нужно)
-        // setupRealtimeUpdates();
     </script>
 </body>
 </html>
