@@ -371,4 +371,5 @@ window.addEventListener('resize', () => {
 });
 
 // Запуск
+
 init();
