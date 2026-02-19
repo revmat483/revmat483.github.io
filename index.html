@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Black & Green Messenger</title>
-    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -13,7 +12,6 @@
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-
         body {
             background: #0a0f0f;
             height: 100vh;
@@ -22,7 +20,6 @@
             align-items: center;
             padding: 12px;
         }
-
         #app {
             width: 100%;
             height: 100%;
@@ -35,7 +32,6 @@
             flex-direction: column;
             border: 1px solid #2a3a2a;
         }
-
         /* ----- ЭКРАН ВХОДА / РЕГИСТРАЦИИ ----- */
         .login-screen {
             display: flex;
@@ -46,7 +42,6 @@
             padding: 20px;
             background: #121716;
         }
-
         .login-card {
             background: #1e2623;
             padding: 48px 40px;
@@ -57,12 +52,10 @@
             text-align: center;
             animation: fadeIn 0.4s ease-out;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.96); }
             to { opacity: 1; transform: scale(1); }
         }
-
         .login-card h2 {
             color: #4ade80;
             margin-bottom: 32px;
@@ -71,12 +64,10 @@
             letter-spacing: -0.5px;
             text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
         }
-
         .login-card h2 i {
             color: #4ade80;
             margin-right: 10px;
         }
-
         .login-card input {
             width: 100%;
             padding: 16px 20px;
@@ -89,20 +80,17 @@
             background: #1e2623;
             color: #e0e0e0;
         }
-
         .login-card input:focus {
             border-color: #4ade80;
             background: #1e2a26;
             box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.15);
             color: white;
         }
-
         .login-actions {
             display: flex;
             gap: 12px;
             margin-top: 30px;
         }
-
         .btn {
             flex: 1;
             padding: 14px;
@@ -114,35 +102,29 @@
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
-
         .btn-primary {
             background: #4ade80;
             color: #0a0f0f;
         }
-
         .btn-primary:hover {
             background: #22c55e;
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(74, 222, 128, 0.3);
         }
-
         .btn-secondary {
             background: #2a3a2a;
             color: #e0e0e0;
         }
-
         .btn-secondary:hover {
             background: #3a4a3a;
             transform: translateY(-2px);
         }
-
         .error-message {
             color: #f87171;
             margin-top: 20px;
             font-size: 14px;
             font-weight: 500;
         }
-
         /* ----- ОСНОВНОЙ ИНТЕРФЕЙС ЧАТА ----- */
         .chat-interface {
             display: flex;
@@ -150,7 +132,6 @@
             height: 100%;
             background: #1a1e1e;
         }
-
         .chat-header {
             background: #1e2623;
             color: #4ade80;
@@ -161,7 +142,6 @@
             box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
             border-bottom: 1px solid #2a3a2a;
         }
-
         .user-info {
             display: flex;
             align-items: center;
@@ -170,17 +150,14 @@
             font-weight: 500;
             color: #e0e0e0;
         }
-
         .user-info i {
             font-size: 28px;
             color: #4ade80;
         }
-
         .header-actions {
             display: flex;
             gap: 10px;
         }
-
         .header-btn, .logout-btn {
             background: #1e2623;
             border: 1px solid #2a3a2a;
@@ -194,25 +171,21 @@
             align-items: center;
             gap: 8px;
         }
-
         .header-btn:hover, .logout-btn:hover {
             background: #2a3a2a;
             border-color: #4ade80;
             color: #4ade80;
         }
-
         .header-btn.danger:hover {
             background: #4a1e1e;
             border-color: #f87171;
             color: #f87171;
         }
-
         .chat-main {
             flex: 1;
             display: flex;
             overflow: hidden;
         }
-
         /* ----- СПИСОК КОНТАКТОВ ----- */
         .contacts-panel {
             width: 300px;
@@ -222,24 +195,20 @@
             flex-direction: column;
             overflow-y: auto;
         }
-
         .add-contact {
             padding: 20px;
             border-bottom: 1px solid #2a3a2a;
         }
-
         .add-contact h4 {
             margin-bottom: 12px;
             color: #4ade80;
             font-size: 15px;
             font-weight: 600;
         }
-
         .add-contact-input {
             display: flex;
             gap: 8px;
         }
-
         .add-contact-input input {
             flex: 1;
             padding: 12px 16px;
@@ -251,12 +220,10 @@
             background: #1e2623;
             color: #e0e0e0;
         }
-
         .add-contact-input input:focus {
             border-color: #4ade80;
             box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
         }
-
         .add-contact-input button {
             width: 48px;
             height: 48px;
@@ -271,12 +238,10 @@
             align-items: center;
             justify-content: center;
         }
-
         .add-contact-input button:hover {
             background: #22c55e;
             transform: scale(1.05);
         }
-
         .notification {
             margin-top: 12px;
             padding: 8px 12px;
@@ -285,24 +250,20 @@
             font-weight: 500;
             animation: fadeIn 0.2s;
         }
-
         .notification.success {
             background: #1e3a2a;
             color: #4ade80;
             border: 1px solid #4ade80;
         }
-
         .notification.error {
             background: #3a1e1e;
             color: #f87171;
             border: 1px solid #f87171;
         }
-
         .contacts-list {
             flex: 1;
             overflow-y: auto;
         }
-
         .contacts-list h3 {
             padding: 16px 20px 8px;
             color: #6b8c6b;
@@ -310,7 +271,6 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
-
         .contact-item {
             display: flex;
             align-items: center;
@@ -320,22 +280,18 @@
             border-bottom: 1px solid #2a3a2a;
             transition: 0.2s;
         }
-
         .contact-item:hover {
             background: #1e2623;
         }
-
         .contact-item.active {
             background: #1e3a2a;
             border-left: 4px solid #4ade80;
         }
-
         .contact-info {
             display: flex;
             align-items: center;
             gap: 16px;
         }
-
         .contact-avatar {
             width: 42px;
             height: 42px;
@@ -349,13 +305,11 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-
         .contact-name {
             font-weight: 500;
             font-size: 15px;
             color: #e0e0e0;
         }
-
         .delete-contact-btn {
             background: transparent;
             border: none;
@@ -366,16 +320,13 @@
             transition: 0.2s;
             opacity: 0.5;
         }
-
         .contact-item:hover .delete-contact-btn {
             opacity: 1;
         }
-
         .delete-contact-btn:hover {
             color: #f87171;
             background: #3a1e1e;
         }
-
         /* ----- ОБЛАСТЬ ЧАТА ----- */
         .chat-panel {
             flex: 1;
@@ -383,7 +334,6 @@
             flex-direction: column;
             background: #1a1e1e;
         }
-
         .chat-placeholder {
             flex: 1;
             display: flex;
@@ -393,7 +343,6 @@
             font-size: 16px;
             background: #1a1e1e;
         }
-
         .chat-with-bar {
             background: #1e2623;
             padding: 16px 24px;
@@ -404,14 +353,12 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .chat-title {
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 18px;
         }
-
         .delete-chat-btn {
             background: transparent;
             border: none;
@@ -427,12 +374,10 @@
             align-items: center;
             justify-content: center;
         }
-
         .delete-chat-btn:hover {
             background: #3a1e1e;
             color: #f87171;
         }
-
         .messages-container {
             flex: 1;
             overflow-y: auto;
@@ -442,17 +387,14 @@
             gap: 8px;
             background: #1a1e1e;
         }
-
         .message-wrapper {
             position: relative;
             max-width: 70%;
             align-self: flex-start;
         }
-
         .message-wrapper.own {
             align-self: flex-end;
         }
-
         .message {
             padding: 12px 18px;
             border-radius: 24px;
@@ -460,20 +402,17 @@
             animation: messageAppear 0.2s ease-out;
             position: relative;
         }
-
         .message.own {
             background: #1e3a2a;
             color: #e0e0e0;
             border-bottom-right-radius: 4px;
         }
-
         .message.other {
             background: #1e2623;
             color: #e0e0e0;
             border-bottom-left-radius: 4px;
             border: 1px solid #2a3a2a;
         }
-
         .message-info {
             display: flex;
             justify-content: space-between;
@@ -482,50 +421,41 @@
             color: #6b8c6b;
             margin-top: 6px;
         }
-
         .message-sender {
             font-weight: 600;
             margin-right: 8px;
         }
-
         .message-time {
             font-size: 10px;
         }
-
         .file-message {
             display: flex;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .file-message i {
             font-size: 24px;
             color: #4ade80;
         }
-
         .file-message .file-info {
             display: flex;
             flex-direction: column;
         }
-
         .file-message .file-name {
             font-size: 14px;
             font-weight: 500;
             word-break: break-word;
         }
-
         .file-message .file-size {
             font-size: 11px;
             color: #6b8c6b;
         }
-
         .file-message audio, .file-message video {
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
         }
-
         .file-download {
             background: #2a3a2a;
             color: #e0e0e0;
@@ -539,24 +469,20 @@
             align-items: center;
             gap: 6px;
         }
-
         .file-download:hover {
             background: #3a4a3a;
         }
-
         .voice-message {
             display: flex;
             align-items: center;
             gap: 12px;
             min-width: 200px;
         }
-
         .voice-message audio {
             height: 40px;
             width: 100%;
             filter: invert(1) hue-rotate(90deg);
         }
-
         .message-actions {
             position: absolute;
             top: -10px;
@@ -570,11 +496,9 @@
             opacity: 0;
             transition: 0.2s;
         }
-
         .message-wrapper:hover .message-actions {
             opacity: 1;
         }
-
         .message-actions button {
             background: none;
             border: none;
@@ -584,49 +508,44 @@
             border-radius: 16px;
             font-size: 12px;
         }
-
         .message-actions button:hover {
             background: #2a3a2a;
             color: #4ade80;
         }
-
         .edited-tag {
             font-size: 10px;
             color: #6b8c6b;
             margin-left: 8px;
             font-style: italic;
         }
-
         .message-input-area {
             display: flex;
             padding: 16px 24px;
             background: #1e2623;
             gap: 12px;
             border-top: 1px solid #2a3a2a;
+            align-items: center;
         }
-
         .message-input-area input {
             flex: 1;
             padding: 16px 20px;
             border: 2px solid #2a3a2a;
             border-radius: 50px;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
             transition: 0.2s;
             background: #1a1e1e;
             color: #e0e0e0;
+            -webkit-appearance: none;
         }
-
         .message-input-area input:focus {
             border-color: #4ade80;
             box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1);
         }
-
         .input-actions {
             display: flex;
             gap: 8px;
         }
-
         .input-actions button {
             width: 56px;
             height: 56px;
@@ -641,33 +560,27 @@
             align-items: center;
             justify-content: center;
         }
-
         .input-actions button:hover {
             background: #3a4a3a;
             transform: scale(1.05);
         }
-
         .input-actions button.recording {
             background: #dc2626;
             color: white;
             animation: pulse 1s infinite;
         }
-
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
             100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
-
         .input-actions button.send-btn {
             background: #4ade80;
             color: #0a0f0f;
         }
-
         .input-actions button.send-btn:hover {
             background: #22c55e;
         }
-
         .back-btn {
             background: none;
             border: none;
@@ -677,28 +590,48 @@
             display: none;
             margin-right: 8px;
         }
-
         /* ----- АДАПТИВНОСТЬ ----- */
         @media (max-width: 700px) {
             .contacts-panel {
-                width: 100%;
+                width: 100% !important;
                 border-right: none;
+                flex: 1;
             }
-
             .chat-panel {
-                width: 100%;
+                width: 100% !important;
+                flex: 1;
             }
-
             .back-btn {
-                display: inline-block;
+                display: inline-block !important;
+                font-size: 28px;
+                padding: 8px 12px;
             }
-
             .chat-main {
                 flex-direction: column;
             }
-
+            .message-input-area {
+                padding: 12px;
+            }
+            .message-input-area input {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+            .input-actions button {
+                width: 48px;
+                height: 48px;
+            }
+            .message {
+                max-width: 85%;
+            }
             .login-card {
-                padding: 32px 24px;
+                padding: 32px 20px;
+            }
+            .contact-item {
+                padding: 16px 20px;
+            }
+            .delete-contact-btn {
+                opacity: 1;
+                padding: 10px;
             }
         }
     </style>
@@ -750,7 +683,8 @@
             mediaRecorder: null,
             audioChunks: [],
             isRecording: false,
-            recordingStartTime: null
+            recordingStartTime: null,
+            inputValue: '', // для сохранения значения поля ввода
         };
 
         // ========================== РЕНДЕРИНГ ==========================
@@ -887,7 +821,7 @@
             // Обработчики на контакты (кроме кнопок удаления)
             document.querySelectorAll('.contact-item').forEach(el => {
                 el.addEventListener('click', (e) => {
-                    if (e.target.closest('.delete-contact-btn')) return; // игнорируем клик по кнопке удаления
+                    if (e.target.closest('.delete-contact-btn')) return;
                     const contactId = el.dataset.contactid;
                     const contactName = el.dataset.contactname;
                     selectChatUser(contactId, contactName);
@@ -911,9 +845,24 @@
 
                 const input = document.getElementById('messageInput');
                 if (input) {
-                    setTimeout(() => input.focus(), 200);
-                    input.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') sendMessage();
+                    // Восстанавливаем значение и ставим фокус
+                    input.value = App.inputValue;
+                    // Устанавливаем фокус с небольшой задержкой, чтобы клавиатура открылась
+                    setTimeout(() => {
+                        input.focus();
+                        // Если поле пустое, клавиатура всё равно откроется
+                    }, 300);
+
+                    // Обработка ввода для сохранения значения
+                    input.addEventListener('input', (e) => {
+                        App.inputValue = e.target.value;
+                    });
+
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            sendMessage();
+                        }
                     });
                 }
                 document.getElementById('sendBtn')?.addEventListener('click', sendMessage);
@@ -1104,6 +1053,7 @@
             App.contacts = [];
             App.messages = [];
             App.mobileChatVisible = false;
+            App.inputValue = '';
             if (App.mediaRecorder && App.isRecording) {
                 App.mediaRecorder.stop();
             }
@@ -1242,6 +1192,7 @@
         function selectChatUser(userId, userName) {
             stopPolling();
             App.selectedChatUser = { id: userId, name: userName };
+            App.inputValue = ''; // очищаем сохранённое значение при смене чата
             loadMessages();
             startPollingIfNeeded();
         }
@@ -1262,9 +1213,11 @@
 
         async function sendMessage() {
             const input = document.getElementById('messageInput');
+            if (!input) return;
             const text = input.value.trim();
             if (!text || !App.selectedChatUser) return;
             input.value = '';
+            App.inputValue = ''; // сохраняем пустоту
 
             const chatId = getChatId(App.currentUser.id, App.selectedChatUser.id);
             const message = {
@@ -1279,6 +1232,8 @@
             } catch (e) {
                 console.error('Send error', e);
             }
+            // после отправки фокус останется на поле, т.к. мы не перерендериваем всё принудительно,
+            // но следующий polling может обновить интерфейс. Фокус восстановится при рендере.
         }
 
         // ========================== ОТПРАВКА ФАЙЛА ==========================
@@ -1286,7 +1241,6 @@
             const file = event.target.files[0];
             if (!file || !App.selectedChatUser) return;
 
-            // Проверка размера (Firebase ограничение ~ 10 МБ на строку, но base64 увеличивает размер)
             if (file.size > 5 * 1024 * 1024) {
                 alert('Файл слишком большой (максимум 5 МБ)');
                 return;
@@ -1294,7 +1248,7 @@
 
             const reader = new FileReader();
             reader.onload = async (e) => {
-                const fileUrl = e.target.result; // base64
+                const fileUrl = e.target.result;
                 const chatId = getChatId(App.currentUser.id, App.selectedChatUser.id);
                 const message = {
                     senderId: App.currentUser.id,
@@ -1313,8 +1267,6 @@
                 }
             };
             reader.readAsDataURL(file);
-
-            // Очистить input, чтобы можно было выбрать тот же файл снова
             event.target.value = '';
         }
 
@@ -1323,13 +1275,11 @@
             if (!App.selectedChatUser) return;
 
             if (App.isRecording) {
-                // Остановить запись
                 App.mediaRecorder.stop();
                 App.isRecording = false;
                 const voiceBtn = document.getElementById('voiceBtn');
                 if (voiceBtn) voiceBtn.classList.remove('recording');
             } else {
-                // Начать запись
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     App.mediaRecorder = new MediaRecorder(stream);
@@ -1342,7 +1292,7 @@
 
                     App.mediaRecorder.onstop = async () => {
                         const audioBlob = new Blob(App.audioChunks, { type: 'audio/webm' });
-                        const duration = (Date.now() - App.recordingStartTime) / 1000; // секунды
+                        const duration = (Date.now() - App.recordingStartTime) / 1000;
 
                         const reader = new FileReader();
                         reader.readAsDataURL(audioBlob);
