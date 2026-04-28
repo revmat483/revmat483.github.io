@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>0.03 Spectral — Персональные уведомления</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'SF Pro Text', -apple-system, 'Roboto', monospace;
+        }
+
+        body {
+            background: #1a0b14;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard {
+            max-width: 850px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(233, 30, 99, 0.3);
+        }
+
+        .glow-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff80ab, #e91e63, #ff4081);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(233, 30, 99, 0.4);
+            letter-spacing: -0.5px;
+        }
+
+        .spectral-badge {
+            font-size: 0.7rem;
+            background: rgba(233, 30, 99, 0.2);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin-top: 6px;
+            color: #ff80ab;
+            font-weight: 500;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2d1424;
+            padding: 6px 16px;
+            border-radius: 60px;
+            margin-top: 12px;
+            border: 1px solid #4a2a3a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #f5c2d8;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.8);
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 64, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
+        }
+
+        /* секция пользователя */
+        .user-section {
+            background: #2d1424;
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #4a2a3a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .user-avatar {
+            background: linear-gradient(145deg, #e91e63, #ff4081);
+            width: 42px;
+            height: 42px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 0 12px rgba(255,64,129,0.5);
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-label {
+            font-size: 0.7rem;
+            color: #a06b82;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #ff80ab;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .user-id {
+            font-family: monospace;
+            background: #1a0b14;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #f5c2d8;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-id-btn {
+            background: #4a2a3a;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 60px;
+            color: #f5c2d8;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .copy-id-btn:hover {
+            background: #e91e63;
+            color: white;
+        }
+
+        /* панель уведомлений */
+        .notifications-panel {
+            background: #0f060b;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #3a1f2c;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0.5rem 0.8rem 0.5rem;
+            border-bottom: 1px solid #4a2a3a;
+            margin-bottom: 1rem;
+        }
+
+        .panel-header span:first-child {
+            font-weight: 700;
+            color: #ff4081;
+            font-size: 1rem;
+        }
+
+        .new-counter {
+            background: #e91e63;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 40px;
+            box-shadow: 0 0 4px #ff4081;
+        }
+
+        .notif-list {
+            max-height: 380px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 4px;
+        }
+
+        .notif-item {
+            background: #2d1424;
+            padding: 0.9rem 1rem;
+            border-radius: 1rem;
+            transition: all 0.2s ease;
+            border-left: 4px solid #8e5a70;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .notif-item.new {
+            background: #401a2c;
+            border-left: 4px solid #ff4081;
+            box-shadow: 0 0 10px rgba(255, 64, 129, 0.3);
+            animation: fadeSlide 0.3s ease;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(-12px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .notif-text {
+            font-size: 1rem;
+            color: #f5c2d8;
+            font-weight: 500;
+            word-break: break-word;
+            margin-bottom: 8px;
+        }
+
+        .notif-time {
+            font-size: 0.7rem;
+            color: #a06b82;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .new-tag {
+            background: #e91e63;
+            border-radius: 30px;
+            padding: 2px 10px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #8e5a70;
+            font-style: italic;
+        }
+
+        /* блок управления */
+        .action-card {
+            background: #2d1424;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #4a2a3a;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            background: #1f0e17;
+            border: 1px solid #4a2a3a;
+            padding: 12px 18px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #f5c2d8;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff4081;
+            box-shadow: 0 0 0 2px rgba(255, 64, 129, 0.3);
+        }
+
+        .btn {
+            border: none;
+            padding: 0 26px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #4a2a3a;
+            color: #f5c2d8;
+            font-size: 0.9rem;
+            height: 48px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #e91e63, #ff4081);
+            color: white;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+            box-shadow: 0 0 16px #ff4081;
+        }
+
+        .btn-secondary {
+            background: #2a1521;
+            border: 1px solid #6a3e52;
+        }
+
+        .btn-secondary:hover {
+            background: #4a2a3a;
+            border-color: #ff4081;
+            color: #ffb6d0;
+        }
+
+        .flex-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* код и инструкция (без ссылки на базу) */
+        .code-block {
+            margin-top: 1.8rem;
+            background: #0b060f;
+            border-radius: 1.2rem;
+            border: 1px solid #3a1f2c;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #20111a;
+            padding: 0.8rem 1rem;
+            font-weight: bold;
+            color: #ff80ab;
+            border-bottom: 1px solid #4a2a3a;
+            font-size: 0.85rem;
+        }
+
+        pre {
+            background: #0b060f;
+            padding: 1rem;
+            overflow-x: auto;
+            color: #f8d9e5;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .instruction-text {
+            padding: 1rem;
+            background: #140a10;
+            color: #d99eb8;
+            font-size: 0.85rem;
+            border-top: 1px solid #301c26;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e91e63;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 550px) {
+            body { padding: 12px; }
+            .dashboard { padding: 1rem; }
+            .btn { padding: 0 16px; height: 44px; }
+            h1 { font-size: 1.6rem; }
+            .user-section { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="glow-header">
+        <h1>◈ 0.03 Spectral ◈</h1>
+        <div class="spectral-badge">персональные уведомления • приватный канал</div>
+        <div class="live-badge">
+            <div class="pulse-dot" id="livePulse"></div>
+            <span>твоя приватная лента</span>
+        </div>
+    </div>
+
+    <!-- Блок пользователя: уникальный ID + кнопка копирования (без смены ID) -->
+    <div class="user-section">
+        <div class="user-info">
+            <div class="user-avatar" id="userAvatar">👤</div>
+            <div class="user-details">
+                <span class="user-label">твой персональный идентификатор</span>
+                <div class="user-name">
+                    <span id="displayName">Spectral_User</span>
+                    <span class="user-id" id="userIdHash"></span>
+                    <button class="copy-id-btn" id="copyIdBtn">📋 Копировать ID</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notifications-panel">
+        <div class="panel-header">
+            <span>📬 уведомления · только для тебя</span>
+            <span class="new-counter" id="newCountBadge">0</span>
+        </div>
+        <div id="notificationsList" class="notif-list">
+            <div class="empty-state">✨ загрузка твоих уведомлений...</div>
+        </div>
+    </div>
+
+    <div class="action-card">
+        <div class="input-group">
+            <input type="text" id="testMessageInput" placeholder="Текст уведомления (только для твоего ID)..." value="Привет из 0.03 Spectral!">
+            <button class="btn btn-primary" id="sendTestBtn">📨 Отправить себе</button>
+        </div>
+        <div class="flex-btns">
+            <button class="btn btn-secondary" id="clearAllBtn">🗑 Очистить мои уведомления</button>
+        </div>
+        <div class="instruction-text" style="margin-top: 12px; background: none; padding: 0;">
+            <small>💡 <strong>Твои уведомления видны только тебе</strong> — каждый пользователь имеет уникальный ID. Скопируй ID для настройки Perfect Click.</small>
+        </div>
+    </div>
+
+    <!-- Блок с кодом для Perfect Click (без публичной ссылки на базу) -->
+    <div class="code-block">
+        <div class="code-header">
+            🧬 PERFECT CLICK → ПЕРСОНАЛЬНЫЕ УВЕДОМЛЕНИЯ
+        </div>
+        <pre id="perfectClickScript"><code>// ============================================================
+// 0.03 Spectral — отправка уведомлений ТОЛЬКО ДЛЯ ТВОЕГО ID
+// Perfect Click + Firebase Realtime Database
+// ============================================================
+// 1. Включи "Расширенные возможности Java" в Perfect Click
+// 2. Скопируй свой USER_ID с сайта (кнопка "Копировать ID")
+// 3. Вставь ID в переменную ниже (вместо "СКОПИРУЙ_СВОЙ_ID")
+// ============================================================
+
+import pfc;
+
+// ⚡ ВАЖНО: Вставь сюда свой персональный ID (скопированный с сайта)
+String USER_ID = "СКОПИРУЙ_СВОЙ_ID";   // 🔁 ЗАМЕНИТЕ НА ВАШ ID
+
+void sendPersonalNotification(String text) {
+    // База данных защищена, endpoint известен только скрипту
+    String baseUrl = "https://gamep-79cef-default-rtdb.firebaseio.com/users/" + USER_ID + "/notifications.json";
+    
+    String currentTime = Time.getTime();
+    long uniqueId = System.currentTimeMillis();
+    
+    String safeText = text.replace("\"", "\\\"").replace("\n", " ");
+    
+    String json = "{"
+        + "\"text\":\"" + safeText + "\","
+        + "\"time\":\"" + currentTime + "\","
+        + "\"timestamp\":" + uniqueId
+        + "}";
+    
+    pfc.log("[0.03 Spectral] Отправка для ID: " + USER_ID);
+    pfc.log("Текст: " + text);
+    
+    try {
+        String response = pfc.execJsonPOST(baseUrl, json);
+        pfc.log("✅ Уведомление отправлено в персональный канал!");
+    } catch (Exception e) {
+        pfc.log("❌ Ошибка: " + e.toString());
+        pfc.log("Проверь интернет и правильность USER_ID");
+    }
+}
+
+// ============= ПРИМЕРЫ ВЫЗОВА =============
+sendPersonalNotification("Найдено целевое изображение на экране!");
+
+pfc.sleepRand(1500, 4000);
+
+sendPersonalNotification("Клик выполнен. Скриншот сохранён.");
+
+// Можно передавать динамические данные
+String coordX = "245", coordY = "780";
+sendPersonalNotification("Координаты цели: X=" + coordX + " Y=" + coordY);
+
+pfc.log("Готово! Обнови страницу 0.03 Spectral — увидишь уведомления.");</code></pre>
+        <div class="instruction-text">
+            <strong>🌀 0.03 SPECTRAL — ПЕРСОНАЛЬНЫЕ УВЕДОМЛЕНИЯ</strong><br><br>
+            🔐 <strong>КАК ЭТО РАБОТАЕТ:</strong> Каждый пользователь получает уникальный ID (хранится в браузере). Все уведомления сохраняются в изолированной ветке базы данных — другие пользователи их не видят.<br><br>
+            📌 <strong>ДЛЯ НАЧАЛА:</strong><br>
+            1. Твой ID уже сгенерирован. Нажми <strong>«Копировать ID»</strong> рядом с ним.<br>
+            2. В коде Perfect Click (выше) замени <code>СКОПИРУЙ_СВОЙ_ID</code> на скопированный ID.<br>
+            3. Включи в Perfect Click <strong>«Расширенные возможности Java»</strong> (Настройки → Advanced → Java Extensions).<br>
+            4. Вставь скрипт в задание Perfect Click и запусти.<br><br>
+            🧪 <strong>ТЕСТ БЕЗ PERFECT CLICK:</strong> Введи текст и нажми «Отправить себе» — уведомление появится мгновенно.<br><br>
+            🔄 <strong>Уведомления приходят автоматически</strong> — страница обновляется каждые 1.5 секунды. Новые сообщения подсвечиваются ярким малиновым и имеют метку «НОВОЕ».<br><br>
+            🗑️ <strong>Кнопка «Очистить мои уведомления»</strong> удаляет только твои данные из базы.
+        </div>
+    </div>
+</div>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<script>
+    // --------------------------------------------------------------
+    // 0.03 Spectral — персональные уведомления
+    // Firebase: users/{userId}/notifications
+    // БЕЗ смены ID, БЕЗ публичной ссылки в интерфейсе
+    // --------------------------------------------------------------
+    const FIREBASE_BASE = "https://gamep-79cef-default-rtdb.firebaseio.com/";
+    
+    let currentUserId = "";
+    let currentUserDisplay = "";
+    let notifications = [];
+    let currentFirebaseKeys = new Map();
+    let pollingInterval = null;
+    
+    // DOM элементы
+    const notifContainer = document.getElementById('notificationsList');
+    const newCountBadge = document.getElementById('newCountBadge');
+    const testMessageInput = document.getElementById('testMessageInput');
+    const sendTestBtn = document.getElementById('sendTestBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const livePulse = document.getElementById('livePulse');
+    const copyIdBtn = document.getElementById('copyIdBtn');
+    const displayNameSpan = document.getElementById('displayName');
+    const userIdHashSpan = document.getElementById('userIdHash');
+    const userAvatarDiv = document.getElementById('userAvatar');
+    const toastMsg = document.getElementById('toastMsg');
+    
+    function showToast(text, isError = false) {
+        toastMsg.textContent = text;
+        toastMsg.style.backgroundColor = isError ? '#c2185b' : '#e91e63';
+        toastMsg.style.opacity = '1';
+        setTimeout(() => {
+            toastMsg.style.opacity = '0';
+        }, 2500);
+    }
+    
+    function generateUserName(id) {
+        const prefixes = ["Lyra", "Nova", "Specter", "Echo", "Phantom", "Aura", "Void", "Pixel", "Neon", "Raven", "Luna", "Stellar"];
+        const suffix = id.slice(-6);
+        const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+        return `${randomPrefix}_${suffix}`;
+    }
+    
+    // Инициализация ID (фиксированный навсегда для этого браузера)
+    function initUser() {
+        let storedId = localStorage.getItem("spectral_user_id");
+        if (!storedId) {
+            storedId = "usr_" + Date.now() + "_" + Math.random().toString(36).substring(2, 12);
+            localStorage.setItem("spectral_user_id", storedId);
+        }
+        currentUserId = storedId;
+        
+        let userName = localStorage.getItem("spectral_user_name");
+        if (!userName) {
+            userName = generateUserName(currentUserId);
+            localStorage.setItem("spectral_user_name", userName);
+        }
+        currentUserDisplay = userName;
+        displayNameSpan.innerText = currentUserDisplay;
+        
+        // Показываем полный ID для копирования
+        userIdHashSpan.innerText = currentUserId;
+        userAvatarDiv.innerText = currentUserDisplay.charAt(0).toUpperCase();
+        return currentUserId;
+    }
+    
+    // Копирование ID в буфер обмена
+    copyIdBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(currentUserId);
+            showToast("✅ ID скопирован! Вставь его в скрипт Perfect Click");
+        } catch (err) {
+            // fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = currentUserId;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast("✅ ID скопирован! Вставь его в скрипт Perfect Click");
+        }
+    });
+    
+    function getUserNotificationsUrl() {
+        return `${FIREBASE_BASE}users/${currentUserId}/notifications.json`;
+    }
+    
+    // Загрузка уведомлений с правильным определением новых
+    async function fetchNotificationsFromFirebase() {
+        if (!currentUserId) return;
+        const url = getUserNotificationsUrl();
+        try {
+            const response = await fetch(url + '?orderBy="$key"');
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            
+            const newNotifMap = new Map();
+            const fetchedNotifs = [];
+            
+            if (data && typeof data === 'object') {
+                for (const [key, value] of Object.entries(data)) {
+                    if (value && typeof value === 'object') {
+                        const notifObj = {
+                            firebaseKey: key,
+                            text: value.text || "пустое уведомление",
+                            time: value.time || new Date(value.timestamp).toLocaleTimeString(),
+                            timestamp: value.timestamp || Date.now(),
+                            isNew: false
+                        };
+                        fetchedNotifs.push(notifObj);
+                        newNotifMap.set(key, notifObj);
+                    }
+                }
+            }
+            
+            // Сортируем по timestamp (новые в конце списка по времени добавления, но для определения новых нужно сравнить ключи)
+            // Определяем новые: если ключа не было в прошлой мапе — это новое
+            const newNotificationsList = [];
+            for (const notif of fetchedNotifs) {
+                if (!currentFirebaseKeys.has(notif.firebaseKey)) {
+                    notif.isNew = true;
+                    newNotificationsList.push(notif);
+                } else {
+                    notif.isNew = false;
+                }
+            }
+            
+            currentFirebaseKeys = newNotifMap;
+            notifications = fetchedNotifs;
+            
+            if (newNotificationsList.length > 0) {
+                // Анимация пульса и визуальный эффект
+                const header = document.querySelector('h1');
+                if (header) {
+                    header.style.transform = 'scale(1.02)';
+                    setTimeout(() => { if (header) header.style.transform = ''; }, 200);
+                }
+                livePulse.style.animation = 'none';
+                livePulse.offsetHeight;
+                livePulse.style.animation = 'pulse-ring 0.6s infinite';
+                setTimeout(() => {
+                    if (livePulse) livePulse.style.animation = 'pulse-ring 1.5s infinite';
+                }, 2000);
+                
+                // Показываем тост о новом уведомлении
+                if (newNotificationsList.length === 1) {
+                    showToast(`✨ Новое уведомление: ${newNotificationsList[0].text.substring(0, 40)}`);
+                } else {
+                    showToast(`✨ ${newNotificationsList.length} новых уведомлений!`);
+                }
+            }
+            
+            renderNotifications();
+            updateNewCounter();
+        } catch (err) {
+            console.error("Ошибка загрузки:", err);
+            if (notifContainer && notifications.length === 0) {
+                notifContainer.innerHTML = `<div class="empty-state">⚠️ не удалось загрузить уведомления. проверь интернет.</div>`;
+            }
+        }
+    }
+    
+    async function sendNotificationToFirebase(text) {
+        if (!text || text.trim() === "") return false;
+        const cleanText = text.trim();
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+        const timestampMs = Date.now();
+        
+        const payload = {
+            text: cleanText,
+            time: timeStr,
+            timestamp: timestampMs
+        };
+        
+        try {
+            const response = await fetch(getUserNotificationsUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            // После отправки сразу обновляем, чтобы увидеть своё уведомление
+            await fetchNotificationsFromFirebase();
+            showToast("📨 Уведомление отправлено!");
+            return true;
+        } catch (err) {
+            console.error("Ошибка отправки:", err);
+            showToast("❌ Не удалось отправить", true);
+            return false;
+        }
+    }
+    
+    async function clearMyNotifications() {
+        const confirmClear = confirm("⚠️ Удалить ВСЕ твои уведомления? Это действие необратимо.");
+        if (!confirmClear) return;
+        try {
+            const deleteUrl = `${FIREBASE_BASE}users/${currentUserId}/notifications.json`;
+            const response = await fetch(deleteUrl, { method: 'DELETE' });
+            if (!response.ok) throw new Error("ошибка удаления");
+            notifications = [];
+            currentFirebaseKeys.clear();
+            renderNotifications();
+            updateNewCounter();
+            await fetchNotificationsFromFirebase();
+            showToast("🗑 Все твои уведомления удалены");
+        } catch (err) {
+            console.error("Очистка не удалась:", err);
+            showToast("❌ Не удалось очистить", true);
+        }
+    }
+    
+    function updateNewCounter() {
+        const newCount = notifications.filter(n => n.isNew === true).length;
+        newCountBadge.innerText = newCount;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    function renderNotifications() {
+        if (!notifContainer) return;
+        if (!notifications.length) {
+            notifContainer.innerHTML = `<div class="empty-state">📭 у тебя пока нет уведомлений. отправь тестовое или используй Perfect Click.</div>`;
+            return;
+        }
+        // Сортировка: новые сверху (по timestamp убыванию)
+        const sorted = [...notifications].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        const fragment = document.createDocumentFragment();
+        sorted.forEach(notif => {
+            const div = document.createElement('div');
+            div.className = `notif-item ${notif.isNew ? 'new' : ''}`;
+            div.innerHTML = `
+                <div class="notif-text">${escapeHtml(notif.text)}</div>
+                <div class="notif-time">
+                    <span>🕒 ${escapeHtml(notif.time)}</span>
+                    ${notif.isNew ? '<span class="new-tag">НОВОЕ</span>' : ''}
+                </div>
+            `;
+            fragment.appendChild(div);
+        });
+        notifContainer.innerHTML = '';
+        notifContainer.appendChild(fragment);
+        if (notifContainer.firstChild) notifContainer.scrollTop = 0;
+    }
+    
+    function startRealtimeSync() {
+        if (pollingInterval) clearInterval(pollingInterval);
+        fetchNotificationsFromFirebase();
+        pollingInterval = setInterval(() => {
+            if (currentUserId) fetchNotificationsFromFirebase();
+        }, 1500); // обновление каждые 1.5 секунды
+    }
+    
+    // Обработчики
+    sendTestBtn.addEventListener('click', async () => {
+        let msg = testMessageInput.value.trim();
+        if (!msg) msg = "тестовое уведомление (0.03 Spectral)";
+        await sendNotificationToFirebase(msg);
+        testMessageInput.value = "";
+        testMessageInput.placeholder = "отправлено!";
+        setTimeout(() => { 
+            testMessageInput.placeholder = "Текст уведомления (только для твоего ID)..."; 
+        }, 1500);
+    });
+    
+    clearAllBtn.addEventListener('click', clearMyNotifications);
+    
+    // Инициализация
+    initUser();
+    startRealtimeSync();
+</script>
+</body>
+</html>
