@@ -78,7 +78,7 @@ String getValue(String key) {
 String HWID = getValue(keySystem);
 
 if(HWID.equals(PreChel)){
-
+    pfc.log("Успешный запуск скрипта");
 }
 else{
 pfc.log("Купите оригинальный скрипт или");
@@ -98,9 +98,6 @@ balanceRight = Point.get(0,0),
      
 nameLeft = Point.get(0,0),
 nameRight = Point.get(0,0),
-      
-collectionLeft = Point.get(0,0),
-collectionRight = Point.get(0,0),
  
 order = Point.get(0,0),
 input = Point.get(0,0),
@@ -113,17 +110,72 @@ outOfSale = Point.get(0,0);
 
 int wight=pfc.getWidth();
 int hight=pfc.getHeight();
-double kWidth=W/1600.;
-double kHeight=H/900.;
+double kWidth=wight/1600.;
+double kHeight=hight/900.;
 
 order = Point.get((int)(kWidth * 1476),(int)(kHeight * 125));
-input = percent((int)(kWidth * 767),(int)(kHeight * 386));
-order2 = percent((int)(kWidth * 794),(int)(kHeight * 594));
-cancel = percent((int)(kWidth * 1474),(int)(kHeight * 200));
-cross2 = percent((int)(kWidth * 1203),(int)(kHeight * 279));
-ok = percent((int)(kWidth * 800),(int)(kHeight * 564));
-sell = percent((int)(kWidth * 224),(int)(kHeight * 628));
-outOfSale = percent((int)(kWidth * 44),(int)(kHeight * 40));
+input = Point.get((int)(kWidth * 767),(int)(kHeight * 386));
+order2 = Point.get((int)(kWidth * 794),(int)(kHeight * 594));
+cancel = Point.get((int)(kWidth * 1474),(int)(kHeight * 200));
+cross2 = Point.get((int)(kWidth * 1203),(int)(kHeight * 279));
+ok = Point.get((int)(kWidth * 800),(int)(kHeight * 564));
+sell = Point.get((int)(kWidth * 224),(int)(kHeight * 628));
+outOfSale = Point.get((int)(kWidth * 44),(int)(kHeight * 40));
+nameLeft = Point.get((int)(kWidth * 25),(int)(kHeight * 323));
+nameRight = Point.get((int)(kWidth * 432),(int)(kHeight * 361));
+
+pfc.startCapture(2);
+pfc.setOCRLang("eng");
+
+
+void autoSetup(int left, int top, int right, int bottom, String zoneName) {
+    int step = Math.max(1, Math.min(right - left, bottom - top) / 20);
+    if (step < 1) step = 1;
+    
+    int curLeft = left, curTop = top;
+    String lastText = "";
+    
+    for (int x = curLeft; x <= right; x += step) {
+        String txt = pfc.getText(Point.get(x, curTop), Point.get(right, bottom)).replaceAll("[^0-9.]", "").trim();
+        if (txt.length() > 0 && txt.matches(".*\\d.*")) { curLeft = x; lastText = txt; break; }
+        curLeft = x;
+        pfc.sleep(5);
+    }
+    
+    for (int y = curTop; y <= bottom; y += step) {
+        String txt = pfc.getText(Point.get(curLeft, y), Point.get(right, bottom)).replaceAll("[^0-9.]", "").trim();
+        if (txt.length() > 0 && txt.matches(".*\\d.*")) { curTop = y; lastText = txt; break; }
+        curTop = y;
+        pfc.sleep(5);
+    }
+    
+    for (int x = curLeft + step; x <= right; x += step) {
+        String txt = pfc.getText(Point.get(x, curTop), Point.get(right, bottom)).replaceAll("[^0-9.]", "").trim();
+        if (txt.isEmpty() || !txt.matches(".*\\d.*") || !txt.equals(lastText)) break;
+        curLeft = x;
+        pfc.sleep(5);
+    }
+    
+    for (int y = curTop + step; y <= bottom; y += step) {
+        String txt = pfc.getText(Point.get(curLeft, y), Point.get(right, bottom)).replaceAll("[^0-9.]", "").trim();
+        if (txt.isEmpty() || !txt.matches(".*\\d.*") || !txt.equals(lastText)) break;
+        curTop = y;
+        pfc.sleep(5);
+    }
+    
+    if (zoneName.equals("request")) {
+        requestLeft = Point.get(curLeft, curTop);
+        requestRight = Point.get(right, bottom);
+    } else if (zoneName.equals("lot")) {
+        lotLeft = Point.get(curLeft, curTop);
+        lotRight = Point.get(right, bottom);
+    } else if (zoneName.equals("balance")) {
+        balanceLeft = Point.get(curLeft, curTop);
+        balanceRight = Point.get(right, bottom);
+    }
+}
+
+
 
 
 void openWindow(){
@@ -144,41 +196,6 @@ void makeRequest(){
     pfc.click(order2);
     pfc.sleep(cancelDelay);pfc.click(cancel);
     pfc.sleep(requestDelay);
-}
-
-void CheckKk(){
-    if(!checkKk) return;
-    request = request1 + 0.02
-    if(request < lot && request > 0 && balance1 > request){
-        pfc.pushToCb(String.valueOf(request));
-        pfc.sleep(pasteDelay);pfc.click(paste);pfc.sleep(pasteBeforeDelay);
-        pfc.click(order2);
-        pfc.sleep(600);pfc.click(cancel);
-        pfc.sleep(100);
-    }
-    readRequest();
-    if(request1 <= request){
-        String kkMsg =
-        "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
-        "━━━━━━━━━━━━━━━━━━━━━\n\n" +
-        "<blockquote expandable>" +
-        "конкурент не найден" +
-        "</blockquote>" + 
-        ;
-        sendTg(kkMsg, "HTML");
-    }
-    if(request1 > request){
-        String kkMsg =
-        "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
-        "━━━━━━━━━━━━━━━━━━━━━\n\n" +
-        "<blockquote expandable>" +
-        "конкурент найден\n" +
-        "его перебив" + (request1 - request) +
-        "</blockquote>" + 
-        ;
-        sendTg(kkMsg, "HTML");
-    }
-    checkKk = false;
 }
 
 void requestCheck(){
@@ -625,13 +642,6 @@ void checkErorr(){
         hasErrors = true;
     }
     
-    if(collectionLeft.x <= 0 || collectionLeft.y <= 0 || collectionRight.x <= 0 || collectionRight.y <= 0){
-        errors.append(crossEmoji + "Зона коллекции (collection) не настроена!\n");
-        errors.append("left(").append(collectionLeft.x).append(",").append(collectionLeft.y);
-        errors.append(") right(").append(collectionRight.x).append(",").append(collectionRight.y).append(")\n\n");
-        hasErrors = true;
-    }
-    
     if(order.x <= 0 || order.y <= 0){
         errors.append(crossEmoji + "Кнопка ORDER не настроена!\n");
         errors.append("Координаты: ").append(order.x).append(",").append(order.y).append("\n\n");
@@ -697,7 +707,6 @@ void checkErorr(){
     }
 }
 
-checkErorr();
 openWindow();
 
 void readRequest(){
@@ -727,6 +736,12 @@ void readBalance(){
         balance1 = 0f;
     }
 }
+Point RequestAuto = Point.get((int)(kWidth * 1185),(int)(kHeight * 88));
+Point LotAuto = Point.get((int)(kWidth * 669),(int)(kHeight * 354));
+Point BalanceAuto = Point.get((int)(kWidth * 1345),(int)(kHeight * 15));
+autoSetup((int)(kWidth * 1185),(int)(kHeight * 88),(int)(kWidth * 1335),(int)(kHeight * 137), "request");  
+autoSetup((int)(kWidth * 669),(int)(kHeight * 354),(int)(kWidth * 869),(int)(kHeight * 411), "lot");
+autoSetup((int)(kWidth * 1345),(int)(kHeight * 15),(int)(kWidth * 1519) ,(int)(kHeight * 57), "balance");      
 readRequest();
 readLot();
 readBalance();
@@ -750,7 +765,6 @@ infoEmoji + "<b>данные:</b>" + "\n" +
 infoEmoji + "<b>инфо о скине:</b>" + "\n" +
 "<blockquote expandable>" + 
 "Имя:" + pfc.getText(nameLeft,nameRight) + "\n" +
-"коллекция:" + pfc.getText(collectionLeft,collectionRight) + "\n" +
 "</blockquote>" + 
 
 
@@ -772,8 +786,7 @@ activeModes + "\n" +
 
 "дополнительная инфорамация /help"
 ;
-
-
+checkErorr();
 sendTg(Startmsg, "HTML");
 new Thread(new Runnable(){
     public void run(){
@@ -789,12 +802,45 @@ new Thread(new Runnable(){
                     if(pfc.getColor(ok) < 11000000){
                         pfc.click(ok);
                     }
+                    if(checkKk){
+                        request = request1 + 0.02;
+                        if(request < lot && request > 0 && balance1 > request){
+                        pfc.pushToCb(String.valueOf(request));
+                        pfc.sleep(pasteDelay);pfc.click(paste);pfc.sleep(pasteBeforeDelay);
+                        pfc.click(order2);
+                        pfc.sleep(600);pfc.click(cancel);
+                        pfc.sleep(100);
+                        }
+                        readRequest();
+                        if(request1 <= request){
+                            String kkMsg =
+                            "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
+                            "━━━━━━━━━━━━━━━━━━━━━\n\n" +
+                            "<blockquote expandable>" +
+                            "конкурент не найден" +
+                            "</blockquote>"
+                            ;
+                            sendTg(kkMsg, "HTML");
+                        }
+                        if(request1 > request){
+                            String kkMsg =
+                            "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
+                            "━━━━━━━━━━━━━━━━━━━━━\n\n" +
+                            "<blockquote expandable>" +
+                            "конкурент найден\n" +
+                            "его перебив" + (request1 - request) +
+                            "</blockquote>" 
+                            ;
+                            sendTg(kkMsg, "HTML");
+                        }
+                        checkKk = false;
+                    }
+    
                     switcherMod();
                     checkGuard();
                     pfc.click(cancel);
                     pfc.click(cross2);
                     openWindow();
-                    CheckKk();
                     readLot();
                     check = Time.getMillis();
                 }
@@ -815,9 +861,8 @@ new Thread(new Runnable(){
                         pfc.sleep(pasteBeforeDelay);
                         pfc.click(order2);
                     }
-                    int apiCheck = Math.round(cancelDelay/150);
-                    for(int i = 0; i < 12; i++){
-                        pfc.sleep(cancelDelay/apiCheck);
+                    for(int i = 0; i < 15; i++){
+                        pfc.sleep(cancelDelay/15);
                         readRequest();
                         float checkBid = request;
                         requestCheck();
@@ -833,6 +878,8 @@ new Thread(new Runnable(){
                             pfc.click(paste);
                             pfc.sleep(pasteBeforeDelay);
                             pfc.click(order2);
+                            pfc.sleep(cancelDelay);
+                            pfc.click(cancel);
                         }                   
                     }
                     pfc.click(cancel);
@@ -908,7 +955,6 @@ new Thread(new Runnable(){
                     infoEmoji + "<b>инфо о скине:</b>" + "\n" +
                     "<blockquote expandable>" +
                     "Имя:" + pfc.getText(nameLeft,nameRight) + "\n" +
-                    "коллекция:" + pfc.getText(collectionLeft,collectionRight) + "\n" +
                     "</blockquote>" + 
 
 
