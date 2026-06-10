@@ -687,9 +687,15 @@ void readBalance(){
         balance1 = 0f;
     }
 }
-autoSetup((int)(kWidth * 1185),(int)(kHeight * 88),(int)(kWidth * 1335),(int)(kHeight * 137), "request");  
-autoSetup((int)(kWidth * 669),(int)(kHeight * 354),(int)(kWidth * 869),(int)(kHeight * 411), "lot");
-autoSetup((int)(kWidth * 1345),(int)(kHeight * 15),(int)(kWidth * 1519) ,(int)(kHeight * 57), "balance");      
+if(settings){
+    int wight=pfc.getWidth();
+    int hight=pfc.getHeight();
+    double kWidth=wight/1600.;
+    double kHeight=hight/900.;
+    autoSetup((int)(kWidth * 1185),(int)(kHeight * 88),(int)(kWidth * 1335),(int)(kHeight * 137), "request");  
+    autoSetup((int)(kWidth * 669),(int)(kHeight * 354),(int)(kWidth * 869),(int)(kHeight * 411), "lot");
+    autoSetup((int)(kWidth * 1345),(int)(kHeight * 15),(int)(kWidth * 1519) ,(int)(kHeight * 57), "balance");      
+}
 readRequest();
 readLot();
 readBalance();
