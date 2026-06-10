@@ -775,7 +775,7 @@ new Thread(new Runnable(){
                             float diff = request1 - newRequest;
                             sendTg("⚠️ Конкурент найден!\nЕго перебив: " + String.format("%.2f", diff), "HTML");
                         }
-                        heckKk = false; 
+                        checkKk = false; 
                     }
                 readLot();
                 }
