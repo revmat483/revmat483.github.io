@@ -55,74 +55,23 @@ if(antiFull2) tgmod.append(mods3[5]+"\n");
 String activeModes = tgmod.length() > 0 ? tgmod.toString() : "Моды защиты не включены\n";
 
 String token = "8900463965:AAGfJalO6uVnGci_wg3W_7QdPMr7GMqtvaQ";
-String PreChel = android.provider.Settings.Secure.getString(android.app.ActivityThread.currentApplication().getApplicationContext().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-pfc.log(PreChel);
-this.interpreter.eval("imp" + "ort android.util.Base64;");
-String dataBase = "aHR0cHM6Ly9nYXJyeS1lYjE5MC1kZWZhdWx0LXJ0ZGIuZmlyZWJhc2Vpby5jb20=";
-byte[] decodedBytes = Base64.decode(dataBase, Base64.DEFAULT);
-String decodedUrl = new String(decodedBytes);
-
-String getValue(String key) {
-    String url = decodedUrl + "/" + key + ".json";
-    String response = pfc.GET(url);        
-    if (response.equals("null")) {
-        return "";
-    }
-    
-    if (response.startsWith("\"") && response.endsWith("\"")) {
-        response = response.substring(1, response.length() - 1);
-    }
-    
-    return response;
-}
-String HWID = getValue(keySystem);
-
-if(HWID.equals(PreChel)){
-    pfc.log("Успешный запуск скрипта");
-}
-else{
-pfc.log("Купите оригинальный скрипт или");
-pfc.log("попросите автора добавить ваш HWID");
-pfc.log("@PreChel");
-}
-
-var        
-requestLeft = Point.get(0,0),
-requestRight = Point.get(0,0),
-      
-lotLeft = Point.get(0,0),
-lotRight = Point.get(0,0),
      
-balanceLeft = Point.get(0,0),
-balanceRight = Point.get(0,0),
-     
-nameLeft = Point.get(0,0),
-nameRight = Point.get(0,0),
- 
-order = Point.get(0,0),
-input = Point.get(0,0),
-order2 = Point.get(0,0),
-cancel = Point.get(0,0),
-cross2 = Point.get(0,0),
-ok = Point.get(0,0),
-sell = Point.get(0,0),
-outOfSale = Point.get(0,0);
-
-int wight=pfc.getWidth();
-int hight=pfc.getHeight();
-double kWidth=wight/1600.;
-double kHeight=hight/900.;
-
-order = Point.get((int)(kWidth * 1476),(int)(kHeight * 125));
-input = Point.get((int)(kWidth * 767),(int)(kHeight * 386));
-order2 = Point.get((int)(kWidth * 794),(int)(kHeight * 594));
-cancel = Point.get((int)(kWidth * 1474),(int)(kHeight * 200));
-cross2 = Point.get((int)(kWidth * 1203),(int)(kHeight * 279));
-ok = Point.get((int)(kWidth * 800),(int)(kHeight * 564));
-sell = Point.get((int)(kWidth * 224),(int)(kHeight * 628));
-outOfSale = Point.get((int)(kWidth * 44),(int)(kHeight * 40));
-nameLeft = Point.get((int)(kWidth * 25),(int)(kHeight * 323));
-nameRight = Point.get((int)(kWidth * 432),(int)(kHeight * 361));
+if(settings){
+    int wight=pfc.getWidth();
+    int hight=pfc.getHeight();
+    double kWidth=wight/1600.;
+    double kHeight=hight/900.;
+    order = Point.get((int)(kWidth * 1476),(int)(kHeight * 125));
+    input = Point.get((int)(kWidth * 767),(int)(kHeight * 386));
+    order2 = Point.get((int)(kWidth * 794),(int)(kHeight * 594));
+    cancel = Point.get((int)(kWidth * 1474),(int)(kHeight * 200));
+    cross2 = Point.get((int)(kWidth * 1203),(int)(kHeight * 279));
+    ok = Point.get((int)(kWidth * 800),(int)(kHeight * 564));
+    sell = Point.get((int)(kWidth * 224),(int)(kHeight * 628));
+    outOfSale = Point.get((int)(kWidth * 44),(int)(kHeight * 40));
+    nameLeft = Point.get((int)(kWidth * 25),(int)(kHeight * 323));
+    nameRight = Point.get((int)(kWidth * 432),(int)(kHeight * 361));
+}
 
 pfc.startCapture(2);
 pfc.setOCRLang("eng");
@@ -346,6 +295,7 @@ void switcherMod(){
 
 
 void sendTg(String text, String parse_mode) {
+    if(!telegram) return;
     String escaped = text.replace("\\", "\\\\").replace("\"", "\\\"");
     String json = "{\"chat_id\":" + id + ",\"text\":\"" + escaped + "\",\"parse_mode\":\"" + parse_mode + "\"}";
     pfc.execJsonPOST("https://api.telegram.org/bot" + token + "/sendMessage", json);
@@ -354,6 +304,7 @@ void sendTg(String text, String parse_mode) {
 
 
 void PhotoTg(String caption, String mode) {
+    if(!telegram) return;
     java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
     pfc.takeBitmap().compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, baos);
     String[][] data = {{"key","6d207e02198a847aa98d0a2a901485a5"},{"action","upload"},{"source",android.util.Base64.encodeToString(baos.toByteArray(), android.util.Base64.NO_WRAP)},{"format","json"}};
@@ -736,9 +687,6 @@ void readBalance(){
         balance1 = 0f;
     }
 }
-Point RequestAuto = Point.get((int)(kWidth * 1185),(int)(kHeight * 88));
-Point LotAuto = Point.get((int)(kWidth * 669),(int)(kHeight * 354));
-Point BalanceAuto = Point.get((int)(kWidth * 1345),(int)(kHeight * 15));
 autoSetup((int)(kWidth * 1185),(int)(kHeight * 88),(int)(kWidth * 1335),(int)(kHeight * 137), "request");  
 autoSetup((int)(kWidth * 669),(int)(kHeight * 354),(int)(kWidth * 869),(int)(kHeight * 411), "lot");
 autoSetup((int)(kWidth * 1345),(int)(kHeight * 15),(int)(kWidth * 1519) ,(int)(kHeight * 57), "balance");      
@@ -802,53 +750,37 @@ new Thread(new Runnable(){
                     if(pfc.getColor(ok) < 11000000){
                         pfc.click(ok);
                     }
-                    if(checkKk){
-                        request = request1 + 0.02;
-                        if(request < lot && request > 0 && balance1 > request){
-                        pfc.pushToCb(String.valueOf(request));
-                        pfc.sleep(pasteDelay);pfc.click(paste);pfc.sleep(pasteBeforeDelay);
-                        pfc.click(order2);
-                        pfc.sleep(600);pfc.click(cancel);
-                        pfc.sleep(100);
-                        }
-                        readRequest();
-                        if(request1 <= request){
-                            String kkMsg =
-                            "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━\n\n" +
-                            "<blockquote expandable>" +
-                            "конкурент не найден" +
-                            "</blockquote>"
-                            ;
-                            sendTg(kkMsg, "HTML");
-                        }
-                        if(request1 > request){
-                            String kkMsg =
-                            "<tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5341425344547160909\">🔠</tg-emoji><tg-emoji emoji-id=\"5447644880824181073\">⚠️</tg-emoji>\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━\n\n" +
-                            "<blockquote expandable>" +
-                            "конкурент найден\n" +
-                            "его перебив" + (request1 - request) +
-                            "</blockquote>" 
-                            ;
-                            sendTg(kkMsg, "HTML");
-                        }
-                        checkKk = false;
-                    }
-    
                     switcherMod();
                     checkGuard();
                     pfc.click(cancel);
                     pfc.click(cross2);
                     openWindow();
-                    readLot();
-                    check = Time.getMillis();
+                    if(checkKk){
+                        float newRequest = request1 + 0.02f;
+                        if(newRequest < lot && newRequest > 0 && balance1 > newRequest){
+                            pfc.pushToCb(String.valueOf(newRequest));
+                            pfc.sleep(pasteDelay);
+                            pfc.click(paste);
+                            pfc.sleep(pasteBeforeDelay);
+                            pfc.click(order2);
+                            pfc.sleep(600);
+                            pfc.click(cancel);
+                            pfc.sleep(100);
+                        }
+                        readRequest();
+                        if(request1 <= newRequest){
+                            sendTg("❌ Конкурент не найден", "HTML");
+                        }
+                        else {
+                            float diff = request1 - newRequest;
+                            sendTg("⚠️ Конкурент найден!\nЕго перебив: " + String.format("%.2f", diff), "HTML");
+                        }
+                        heckKk = false; 
+                    }
+                readLot();
                 }
                 readRequest();
                 requestCheck();
-
-
-
                 if(apiMode){
                     if(request1 < request2){
                         request2 = request1;
@@ -885,9 +817,6 @@ new Thread(new Runnable(){
                     pfc.click(cancel);
                     pfc.sleep(requestDelay);
                 }
-
-
-
 
                 if(multiReqMode){
                     if(request1 < request2){
@@ -996,6 +925,9 @@ new Thread(new Runnable(){
 
 
 void utility(String comm){
+
+    if(!telegram) return;
+    if(!utility) return;
 
     if(comm == null || comm.isEmpty()) return;
 
